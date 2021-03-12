@@ -51,6 +51,7 @@ fs.nfs.nlm_tcpport = 2001
 fs.nfs.nlm_udpport = 2002
 EOF
 
+sysctl --system
 systemctl restart nfs-server.service
 
 # Add NFS to iptables
