@@ -9,24 +9,6 @@ EOF
 
 sudo apt update -y
 
-# Wait for devices to appear
-sleep 30s
-
-# Partition and Format Block Volumes
-
-echo 'type=83' | sudo sfdisk /dev/oracleoci/oraclevdb >> /tmp/bootstrap.log
-echo 'type=83' | sudo sfdisk /dev/oracleoci/oraclevdc >> /tmp/bootstrap.log
-
-sudo mkfs -t ext3 /dev/oracleoci/oraclevdb1 >> /tmp/boostrap.log
-sudo mkfs -t ext3 /dev/oracleoci/oraclevdc1 >> /tmp/boostrap.log
-
-# Mount the volumes
-
-sudo mkdir /data /work
-
-sudo mount /dev/oracleoci/oraclevdb1 /data
-sudo mount /dev/oracleoci/oraclevdc1 /work
-
 # Install OCI-CLI
 
 sudo su - ubuntu
@@ -40,6 +22,25 @@ exit
 sudo apt-get install nfs-server -y
 
 # Add NFS to iptables
+
+####### TODO
+
+# Partition and Format Block Volumes
+# No Sleep before this assuming CLI install and NFS take > 30s.
+# PV Block vols are not available immediately
+
+echo 'type=83' | sudo sfdisk /dev/oracleoci/oraclevdb >> /tmp/bootstrap.log
+echo 'type=83' | sudo sfdisk /dev/oracleoci/oraclevdc >> /tmp/bootstrap.log
+
+sudo mkfs -t ext3 /dev/oracleoci/oraclevdb1 >> /tmp/boostrap.log
+sudo mkfs -t ext3 /dev/oracleoci/oraclevdc1 >> /tmp/boostrap.log
+
+# Mount the volumes
+
+sudo mkdir /data /work
+
+sudo mount /dev/oracleoci/oraclevdb1 /data
+sudo mount /dev/oracleoci/oraclevdc1 /work
 
 
 
