@@ -5,6 +5,7 @@ cat << EOF > /etc/motd
  
 I have been modified by cloud-init at $(date)
 Ben Haworth
+
 EOF
 
 sudo apt update -y
