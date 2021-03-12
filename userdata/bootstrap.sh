@@ -7,6 +7,8 @@ I have been modified by cloud-init at $(date)
 Ben Haworth
 EOF
 
+sudo apt update -y
+
 # Wait for devices to appear
 sleep 30s
 
@@ -32,3 +34,12 @@ wget -O ociinstall_wget.sh https://raw.githubusercontent.com/oracle/oci-cli/mast
 chmod 755 ociinstall_wget.sh
 ./ociinstall.sh --accept-all-defaults
 exit
+
+# Install NFS Server
+
+sudo apt-get install nfs-server -y
+
+# Add NFS to iptables
+
+
+
