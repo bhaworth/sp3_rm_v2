@@ -270,7 +270,7 @@ resource "oci_core_instance" "Sp3Bastion" {
 #    }
     metadata = {
         ssh_authorized_keys = local.Sp3_ssh_key
-        user_data           = base64encode(file("./userdata/bootstrap_bastion.sh"))
+        user_data           = base64encode("")
     }
     
     source_details {
@@ -337,7 +337,7 @@ resource "oci_core_instance" "Sp3Headnode" {
 #    }
     metadata = {
         ssh_authorized_keys = local.Sp3_ssh_key
-        user_data           = base64encode(file("./userdata/bootstrap_headnode.sh"))
+        user_data           = base64encode(file("./userdata/bootstrap.sh"))
     }
     
     source_details {
