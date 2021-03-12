@@ -14,11 +14,11 @@ apt update -y
 
 # Partition and Format Block Volumes
 
-echo 'type=83' | sfdisk /dev/oracleoci/oraclevdb >> /tmp/bootstrap.log
-echo 'type=83' | sfdisk /dev/oracleoci/oraclevdc >> /tmp/bootstrap.log
+echo 'type=83' | sudo sfdisk /dev/oracleoci/oraclevdb
+echo 'type=83' | sudo sfdisk /dev/oracleoci/oraclevdc
 
-mkfs -t ext3 /dev/oracleoci/oraclevdb1 >> /tmp/bootstrap.log
-mkfs -t ext3 /dev/oracleoci/oraclevdc1 >> /tmp/bootstrap.log
+sudo mkfs -t ext3 /dev/oracleoci/oraclevdb1
+sudo mkfs -t ext3 /dev/oracleoci/oraclevdc1
 
 # Mount the volumes
 
