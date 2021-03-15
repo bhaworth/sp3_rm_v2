@@ -14,17 +14,19 @@ locals {
     Sp3_cid             = var.compartment_ocid
     Sp3_ssh_key         = var.ssh_pub_key
     Sp3_bastion_shape   = var.bastion_shape
+    Sp3_bastion_image   = var.bastion_image
     Sp3_headnode_shape  = var.headnode_shape
+    Sp3_headnode_image  = var.headnode_image
     Sp3_ad              = var.ad
 }
 
 # ------ Get List Images
-data "oci_core_images" "Sp3BastionImages" {
-    compartment_id           = var.compartment_ocid
-    operating_system         = "Canonical Ubuntu"
-    operating_system_version = "18.04"
-    shape                    = local.Sp3_bastion_shape
-}
+#data "oci_core_images" "Sp3BastionImages" {
+    #compartment_id           = var.compartment_ocid
+    #operating_system         = "Canonical Ubuntu"
+    #operating_system_version = "18.04"
+    #shape                    = local.Sp3_bastion_shape
+#}
 
 # ------ Create Instance
 resource "oci_core_instance" "Sp3Bastion" {
@@ -57,7 +59,8 @@ resource "oci_core_instance" "Sp3Bastion" {
     
     source_details {
         # Required
-        source_id               = data.oci_core_images.Sp3BastionImages.images[0]["id"]
+        #source_id               = data.oci_core_images.Sp3BastionImages.images[0]["id"]
+        source_id               = local.Sp3_bastion_image
         source_type             = "image"
         # Optional
         boot_volume_size_in_gbs = "50"
@@ -81,12 +84,12 @@ output "sp3bastionPrivateIP" {
 }
 
 # ------ Get List Images
-data "oci_core_images" "Sp3HeadnodeImages" {
-    compartment_id           = var.compartment_ocid
-    operating_system         = "Canonical Ubuntu"
-    operating_system_version = "18.04"
-    shape                    = local.Sp3_headnode_shape
-}
+#data "oci_core_images" "Sp3HeadnodeImages" {
+#    compartment_id           = var.compartment_ocid
+#    operating_system         = "Canonical Ubuntu"
+#    operating_system_version = "18.04"
+#    shape                    = local.Sp3_headnode_shape
+#}
 
 # ------ Create Instance
 resource "oci_core_instance" "Sp3Headnode" {
@@ -115,7 +118,8 @@ resource "oci_core_instance" "Sp3Headnode" {
     
     source_details {
         # Required
-        source_id               = data.oci_core_images.Sp3HeadnodeImages.images[0]["id"]
+        #source_id               = data.oci_core_images.Sp3HeadnodeImages.images[0]["id"]
+        source_id               = local.Sp3_headnode_image
         source_type             = "image"
         # Optional
         boot_volume_size_in_gbs = "120"

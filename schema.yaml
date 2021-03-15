@@ -14,7 +14,9 @@ variableGroups:
       - ${ad}
       - ${ssh_pub_key}
       - ${bastion_shape}
+      - ${bastion_image}
       - ${headnode_shape}
+      - ${headnode_image}
   - title: "Optional Settings"
     variables:
       - ${env_name}   
@@ -45,6 +47,13 @@ variables:
     required: true
     description: "Compute shape for the Bastion server"
     title: "Bastion Server Shape"
+  bastion_image:
+    type: oci:core:image:id
+    dependsOn:
+      compartmentId: ${compartment_ocid}
+    required: true
+    description: "Compute image for the Bastion server"
+    title: "Bastion Server Image"
   headnode_shape:
     type: oci:core:instanceshape:name
     dependsOn:
@@ -52,6 +61,13 @@ variables:
     required: true
     description: "Compute shape for the Head Node"
     title: "Head Node Server Shape"
+  headnode_image:
+    type: oci:core:image:id
+    dependsOn:
+      compartmentId: ${compartment_ocid}
+    required: true
+    description: "Compute image for the Head Node server"
+    title: "Head Node Server Image"
   env_name:
     type: string
     title: "Environment Name"
@@ -59,4 +75,5 @@ variables:
   name_prefix:
     type: string
     title: "Display/Host Name Prefix"
-    description: "Optional prefix for all Display Names and Hostnames"
+    description: "Optional prefix for all Display Names and Hostnames - letters and digits only"
+    pattern: "^[a-zA-Z0-9]+$"
