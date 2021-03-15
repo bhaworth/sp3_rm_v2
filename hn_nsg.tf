@@ -1,6 +1,6 @@
 # Network Security Group for the Head Node
 
-# Allows Public and Private Network to mount NFS shares from Head Node
+# Allows Public and Private Network to mount NFS shares from Head Node and access port 80
 
 resource "oci_core_network_security_group" "headnode_nsg" {
   display_name   = "${local.Sp3_env_name}-hn-nsg"
@@ -120,6 +120,22 @@ resource "oci_core_network_security_group_security_rule" "hn-nsg-rule7" {
     destination_port_range {
       min = "2049"
       max = "2049"
+    }
+  }
+}
+
+resource "oci_core_network_security_group_security_rule" "hn-nsg-rule8" {
+  network_security_group_id = local.hn_nsg_id
+
+  direction   = "INGRESS"
+  protocol    = "6"
+  source      = local.lb_nsg_id
+  source_type = "NETWORK_SECURITY_GROUP"
+  stateless   = false
+  tcp_options {
+    destination_port_range {
+      min = "80"
+      max = "80"
     }
   }
 }
