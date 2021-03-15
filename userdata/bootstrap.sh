@@ -17,6 +17,12 @@ apt update -y
 echo 'type=83' | sfdisk /dev/oracleoci/oraclevdb
 echo 'type=83' | sfdisk /dev/oracleoci/oraclevdc
 
+lsblk
+
+sleep 15
+
+lsblk
+
 mkfs -t ext3 /dev/oracleoci/oraclevdb1
 mkfs -t ext3 /dev/oracleoci/oraclevdc1
 
