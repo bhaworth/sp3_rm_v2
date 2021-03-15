@@ -33,4 +33,4 @@ variables:
   name_prefix:
     type: string
     title: "Display/Host Name Prefix"
-    descitpion: "Optional prefix for all Display Names and Hostnames"
+    description: "Optional prefix for all Display Names and Hostnames"
