@@ -9,8 +9,8 @@ resource oci_load_balancer_load_balancer sp3_loadbalancer {
 
   shape = "flexible"
   shape_details {
-    maximum_bandwidth_in_mbps = "100"
-    minimum_bandwidth_in_mbps = "50"
+    maximum_bandwidth_in_mbps = "10"
+    minimum_bandwidth_in_mbps = "10"
   }
   subnet_ids = [
     local.Pubsn001_id,

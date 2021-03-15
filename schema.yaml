@@ -76,6 +76,7 @@ variables:
     type: string
     title: "Environment Name"
     description: "Name for the environment - e.g. sp3"
+    default: "sp3"
   name_prefix:
     type: string
     title: "Display/Host Name Prefix"
