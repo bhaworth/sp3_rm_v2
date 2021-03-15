@@ -10,7 +10,7 @@ provider "oci" {
 }
 
 locals {
-  Sp3_name           = "${var.name_prefix}_${var.env_name}"
+  Sp3_env_name       = "${var.name_prefix}-${var.env_name}"
   Sp3_cid            = var.compartment_ocid
   Sp3_ssh_key        = var.ssh_pub_key
   Sp3_bastion_shape  = var.bastion_shape
@@ -34,7 +34,7 @@ resource "oci_core_instance" "Sp3Bastion" {
   compartment_id = local.Sp3_cid
   shape          = local.Sp3_bastion_shape
   # Optional
-  display_name        = "${local.Sp3_name}-bastion"
+  display_name        = "${local.Sp3_env_name}-bastion"
   availability_domain = local.Sp3_ad
   agent_config {
     # Optional
@@ -97,7 +97,7 @@ resource "oci_core_instance" "Sp3Headnode" {
   compartment_id = local.Sp3_cid
   shape          = local.Sp3_headnode_shape
   # Optional
-  display_name        = "${local.Sp3_name}-headnode"
+  display_name        = "${local.Sp3_env_name}-headnode"
   availability_domain = local.Sp3_ad
   agent_config {
     # Optional
@@ -107,8 +107,8 @@ resource "oci_core_instance" "Sp3Headnode" {
     subnet_id = local.Privsn001_id
     # Optional
     assign_public_ip       = false
-    display_name           = "${local.Sp3_name}headnode vnic 00"
-    hostname_label         = "${local.Sp3_name}headnode"
+    display_name           = "${local.Sp3_env_name}headnode vnic 00"
+    hostname_label         = "${local.Sp3_env_name}headnode"
     skip_source_dest_check = "false"
     nsg_ids                = [local.hn_nsg_id]
   }
@@ -149,7 +149,7 @@ resource "oci_core_volume" "Data" {
   compartment_id      = local.Sp3_cid
   availability_domain = local.Sp3_ad
   # Optional
-  display_name = "${local.Sp3_name}_data"
+  display_name = "${local.Sp3_env_name}_data"
   size_in_gbs  = var.hn_data_size
   vpus_per_gb  = "10"
 }
@@ -164,7 +164,7 @@ resource "oci_core_volume" "Work" {
   compartment_id      = local.Sp3_cid
   availability_domain = local.Sp3_ad
   # Optional
-  display_name = "${local.Sp3_name}_work"
+  display_name = "${local.Sp3_env_name}_work"
   size_in_gbs  = var.hn_work_size
   vpus_per_gb  = "10"
 }
@@ -177,7 +177,7 @@ locals {
 resource "oci_core_volume_attachment" "Sp3HeadnodeDataVolumeAttachment" {
   attachment_type                     = "paravirtualized"
   device                              = "/dev/oracleoci/oraclevdb"
-  display_name                        = "${local.Sp3_name}-HeadnodeDataVolumeAttachment"
+  display_name                        = "${local.Sp3_env_name}-HeadnodeDataVolumeAttachment"
   instance_id                         = local.Sp3Headnode_id
   is_pv_encryption_in_transit_enabled = "false"
   is_read_only                        = "false"
@@ -188,7 +188,7 @@ resource "oci_core_volume_attachment" "Sp3HeadnodeDataVolumeAttachment" {
 resource "oci_core_volume_attachment" "Sp3HeadnodeWorkVolumeAttachment" {
   attachment_type                     = "paravirtualized"
   device                              = "/dev/oracleoci/oraclevdc"
-  display_name                        = "${local.Sp3_name}-HeadnodeDataVolumeAttachment"
+  display_name                        = "${local.Sp3_env_name}-HeadnodeDataVolumeAttachment"
   instance_id                         = local.Sp3Headnode_id
   is_pv_encryption_in_transit_enabled = "false"
   is_read_only                        = "false"
