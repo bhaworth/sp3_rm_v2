@@ -78,7 +78,7 @@ resource oci_load_balancer_listener sp3_loadbalancer_listener_1 {
   }
 }
 
-resource oci_load_balancer_rule_set URL_Redirect {
+resource oci_load_balancer_rule_set url_redirect {
   items {
     action = "REDIRECT"
     conditions {
