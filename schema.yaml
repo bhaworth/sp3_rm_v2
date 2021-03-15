@@ -9,13 +9,19 @@ locale: "en"
 variableGroups:
   - title: "Base configuration"
     variables:
+      - ${region}
       - ${compartment_ocid}
       - ${ad}
-      - ${ssh_pub_key}   
+      - ${ssh_pub_key}
+      - ${bastion_shape}
+      - ${headnode_shape}
   - title: "Optional Settings"
     variables:
-      - ${name_prefix}   
+      - ${env_name}   
+      - ${name_prefix}
 variables:
+  region:
+    title: "Region"
   compartment_ocid:
     title: "Target Compartment"
     type: oci:identity:compartment:id
@@ -31,6 +37,24 @@ variables:
     type: string
     title: "Public SSH key"
     required: true
+  bastion_shape:
+    type: oci:core:instanceshape:name
+    dependsOn:
+      compartmentId: ${compartment_ocid}
+    required: true
+    description: "Compute shape for the Bastion server"
+    title: "Bastion Server Shape"
+  headnode_shape:
+    type: oci:core:instanceshape:name
+    dependsOn:
+      compartmentId: ${compartment_ocid}
+    required: true
+    description: "Compute shape for the Head Node"
+    title: "Head Node Server Shape"
+  env_name:
+    type: string
+    title: "Environment Name"
+    description: "Name for the environment - e.g. sp3"
   name_prefix:
     type: string
     title: "Display/Host Name Prefix"
