@@ -7,7 +7,7 @@ I have been modified by cloud-init at $(date)
 
 EOF
 
-sleep 30
+sleep 60
 
 apt update -y
 
@@ -16,11 +16,7 @@ apt update -y
 echo 'type=83' | sfdisk /dev/oracleoci/oraclevdb
 echo 'type=83' | sfdisk /dev/oracleoci/oraclevdc
 
-lsblk
-
-sleep 15
-
-lsblk
+sleep 10
 
 mkfs -t ext3 /dev/oracleoci/oraclevdb1
 mkfs -t ext3 /dev/oracleoci/oraclevdc1
@@ -43,8 +39,8 @@ sudo -H -u ubuntu ~ubuntu/ociinstall_wget.sh --accept-all-defaults
 apt-get install nfs-server -y
 
 # Edit exports file
-echo '/work     10.0.0.0/16' >> /etc/exports
-echo '/data     10.0.0.0/16' >> /etc/exports
+echo '/work     10.0.1.0/24(rw,no_root_squash)' >> /etc/exports
+echo '/data     10.0.1.0/24(rw,no_root_squash)' >> /etc/exports
 
 # Set mountd and nlockmgr port numbers
 

@@ -10,6 +10,7 @@ provider "oci" {
 }
 
 locals {
+  # Name all resources with the prefix-name
   Sp3_env_name       = "${var.name_prefix}-${var.env_name}"
   Sp3_cid            = var.compartment_ocid
   Sp3_ssh_key        = var.ssh_pub_key
@@ -149,7 +150,7 @@ resource "oci_core_volume" "Data" {
   compartment_id      = local.Sp3_cid
   availability_domain = local.Sp3_ad
   # Optional
-  display_name = "${local.Sp3_env_name}_data"
+  display_name = "${local.Sp3_env_name}-data"
   size_in_gbs  = var.hn_data_size
   vpus_per_gb  = "10"
 }
@@ -164,7 +165,7 @@ resource "oci_core_volume" "Work" {
   compartment_id      = local.Sp3_cid
   availability_domain = local.Sp3_ad
   # Optional
-  display_name = "${local.Sp3_env_name}_work"
+  display_name = "${local.Sp3_env_name}-work"
   size_in_gbs  = var.hn_work_size
   vpus_per_gb  = "10"
 }
