@@ -35,7 +35,7 @@ variables:
     description: "Availability Domain"
     title: "Availability Domain"
   ssh_pub_key:
-    type: string
+    type: oci:core:ssh:publickey
     title: "Public SSH key"
     required: true
   bastion_shape:
