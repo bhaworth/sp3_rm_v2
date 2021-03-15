@@ -1,4 +1,3 @@
-variable "tenancy_ocid" {}
 variable "region" {}
 variable "compartment_ocid" {}
 variable "ssh_pub_key" {}
