@@ -112,6 +112,6 @@ resource oci_load_balancer_rule_set url_redirect {
     response_code = "301"
   }
   load_balancer_id = local.Sp3_lb_id
-  name             = "${local.Sp3_env_name}-URL_Redirect"
+  name             = "URL_Redirect"
 }
 
