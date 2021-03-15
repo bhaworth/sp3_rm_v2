@@ -1,5 +1,4 @@
 locals {
-  Sp3_vcn_name                     = "${var.name_prefix}_${var.env_name}"
   Sp3_vcn_id                       = oci_core_vcn.Sp3_VCN.id
   Sp3_VCN_dhcp_options_id          = oci_core_vcn.Sp3_VCN.default_dhcp_options_id
   Sp3_VCN_domain_name              = oci_core_vcn.Sp3_VCN.vcn_domain_name
@@ -15,7 +14,7 @@ resource "oci_core_vcn" "Sp3_VCN" {
   cidr_block     = "10.0.0.0/16"
   # Optional
   dns_label    = "${var.name_prefix}${var.env_name}"
-  display_name = local.Sp3_vcn_name
+  display_name = local.Sp3_env_name
 }
 
 # ------ Create Internet Gateway
@@ -25,7 +24,7 @@ resource "oci_core_internet_gateway" "Sp3_Igw" {
   vcn_id         = local.Sp3_vcn_id
   # Optional
   enabled      = true
-  display_name = "${local.Sp3_vcn_name}-igw"
+  display_name = "${local.Sp3_env_name}-igw"
 }
 
 locals {
@@ -38,7 +37,7 @@ resource "oci_core_nat_gateway" "Sp3Ng001" {
   compartment_id = local.Sp3_cid
   vcn_id         = local.Sp3_vcn_id
   # Optional
-  display_name  = "${local.Sp3_vcn_name}-ngw"
+  display_name  = "${local.Sp3_env_name}-ngw"
   block_traffic = false
 }
 
@@ -71,7 +70,7 @@ resource "oci_core_default_security_list" "Pubsl001" {
   }
 
   # Optional
-  display_name = "${local.Sp3_vcn_name}-pubsl001"
+  display_name = "${local.Sp3_env_name}-pubsl001"
 }
 
 locals {
@@ -104,7 +103,7 @@ resource "oci_core_security_list" "Privsl001" {
   }
 
   # Optional
-  display_name = "${local.Sp3_vcn_name}-privsl001"
+  display_name = "${local.Sp3_env_name}-privsl001"
 }
 
 locals {
@@ -124,7 +123,7 @@ resource "oci_core_default_route_table" "Pubrt001" {
     description       = ""
   }
   # Optional
-  display_name = "${local.Sp3_vcn_name}-pubrt001"
+  display_name = "${local.Sp3_env_name}-pubrt001"
 }
 
 locals {
@@ -144,7 +143,7 @@ resource "oci_core_route_table" "Privrt001" {
     description       = ""
   }
   # Optional
-  display_name = "${local.Sp3_vcn_name}-privrt001"
+  display_name = "${local.Sp3_env_name}-privrt001"
 }
 
 locals {
@@ -160,7 +159,7 @@ resource "oci_core_subnet" "Pubsn001" {
   vcn_id         = local.Sp3_vcn_id
   cidr_block     = "10.0.0.0/24"
   # Optional
-  display_name               = "${local.Sp3_vcn_name}-pubsn001"
+  display_name               = "${local.Sp3_env_name}-pubsn001"
   dns_label                  = "pubsn01"
   security_list_ids          = [local.Pubsl001_id]
   route_table_id             = local.Pubrt001_id
@@ -181,7 +180,7 @@ resource "oci_core_subnet" "Privsn001" {
   vcn_id         = local.Sp3_vcn_id
   cidr_block     = "10.0.1.0/24"
   # Optional
-  display_name               = "${local.Sp3_vcn_name}-privsn001"
+  display_name               = "${local.Sp3_env_name}-privsn001"
   dns_label                  = "privsn001"
   security_list_ids          = [local.Privsl001_id]
   route_table_id             = local.Privrt001_id
