@@ -52,31 +52,31 @@ resource oci_load_balancer_backend be_1 {
   weight           = "1"
 }
 
-# resource oci_load_balancer_listener sp3_loadbalancer_listener_1 {
-#   connection_configuration {
-#     backend_tcp_proxy_protocol_version = "0"
-#     idle_timeout_in_seconds            = "60"
-#   }
-#   default_backend_set_name = oci_load_balancer_backend_set.sp3_backendset_1.name
-#   hostname_names = [
-#   ]
-#   load_balancer_id = local.Sp3_lb_id
-#   name             = "${local.Sp3_env_name}-loadbalancer_listener_1"
-#   port     = "443"
-#   protocol = "HTTP"
-#   rule_set_names = [
-#   ]
-#   ssl_configuration {
-#     certificate_name  = oci_load_balancer_certificate.sp3_loadbalancer_certificate_1.certificate_name
-#     cipher_suite_name = "oci-default-ssl-cipher-suite-v1"
-#     protocols = [
-#       "TLSv1.2",
-#     ]
-#     server_order_preference = "ENABLED"
-#     verify_depth            = "1"
-#     verify_peer_certificate = "false"
-#   }
-# }
+/* resource oci_load_balancer_listener sp3_loadbalancer_listener_1 {
+  connection_configuration {
+    backend_tcp_proxy_protocol_version = "0"
+    idle_timeout_in_seconds            = "60"
+  }
+  default_backend_set_name = oci_load_balancer_backend_set.sp3_backendset_1.name
+  hostname_names = [
+  ]
+  load_balancer_id = local.Sp3_lb_id
+  name             = "${local.Sp3_env_name}-loadbalancer_listener_1"
+  port     = "443"
+  protocol = "HTTP"
+  rule_set_names = [
+  ]
+  ssl_configuration {
+    certificate_name  = oci_load_balancer_certificate.sp3_loadbalancer_certificate_1.certificate_name
+    cipher_suite_name = "oci-default-ssl-cipher-suite-v1"
+    protocols = [
+      "TLSv1.2",
+    ]
+    server_order_preference = "ENABLED"
+    verify_depth            = "1"
+    verify_peer_certificate = "false"
+  }
+} */
 
 resource oci_load_balancer_listener sp3_loadbalancer_listener_1 {
   connection_configuration {
@@ -94,7 +94,7 @@ resource oci_load_balancer_listener sp3_loadbalancer_listener_1 {
   ]
 }
 
-resource oci_load_balancer_rule_set url_redirect {
+/* resource oci_load_balancer_rule_set url_redirect {
   items {
     action = "REDIRECT"
     conditions {
@@ -113,5 +113,5 @@ resource oci_load_balancer_rule_set url_redirect {
   }
   load_balancer_id = local.Sp3_lb_id
   name             = "URLRedirect"
-}
+} */
 
