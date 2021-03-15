@@ -17,8 +17,8 @@ apt update -y
 echo 'type=83' | sudo sfdisk /dev/oracleoci/oraclevdb
 echo 'type=83' | sudo sfdisk /dev/oracleoci/oraclevdc
 
-sudo mkfs -t ext3 /dev/oracleoci/oraclevdb1
-sudo mkfs -t ext3 /dev/oracleoci/oraclevdc1
+sudo mkfs -t ext3 /dev/sdb1
+sudo mkfs -t ext3 /dev/sdc1
 
 # Mount the volumes
 
