@@ -24,6 +24,7 @@ variableGroups:
       - ${hn_boot_size}
       - ${hn_data_size}
       - ${hn_work_size}
+      - ${deploy_web}
 variables:
   region:
     title: "Region"
@@ -98,3 +99,7 @@ variables:
     description: "Size in GB.  Size must be between 50 GB and 32,768 GB (32 TB)."
     minimum: 50
     maximum: 32768
+  deploy_web:
+    type: boolean
+    title: Deploy test web server to head node
+    default: false

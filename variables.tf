@@ -11,3 +11,4 @@ variable "hn_work_size" { default = 1024 }
 variable "ad" {}
 variable "name_prefix" {}
 variable "env_name" { default = "sp3" }
+variable "deploy_web" { default = false }
