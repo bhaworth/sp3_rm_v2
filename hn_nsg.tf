@@ -1,7 +1,7 @@
 # Network Security Group for the Head Node
 
 resource "oci_core_network_security_group" "headnode_nsg" {
-  display_name   = "${local.Sp3_vcn_name}-hn-nsg"
+  display_name   = "${local.Sp3_env_name}-hn-nsg"
   vcn_id         = local.Sp3_vcn_id
   compartment_id = local.Sp3_cid
 }
