@@ -44,8 +44,8 @@ resource "oci_core_instance" "Sp3Bastion" {
     subnet_id = local.Pubsn001_id
     # Optional
     assign_public_ip       = true
-    display_name           = "${local.Sp3_vcn_name}-bastion vnic 00"
-    hostname_label         = "${local.Sp3_vcn_name}-bastion"
+    display_name           = "${local.Sp3_env_name}-bastion vnic 00"
+    hostname_label         = "${local.Sp3_env_name}-bastion"
     skip_source_dest_check = "false"
   }
   #    extended_metadata {
