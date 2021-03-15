@@ -19,8 +19,11 @@ variableGroups:
       - ${headnode_image}
   - title: "Optional Settings"
     variables:
-      - ${env_name}   
+      - ${env_name}
       - ${name_prefix}
+      - ${hn_boot_size}
+      - ${hn_data_size}
+      - ${hn_work_size}
 variables:
   region:
     title: "Region"
@@ -77,3 +80,15 @@ variables:
     title: "Display/Host Name Prefix"
     description: "Optional prefix for all Display Names and Hostnames - letters and digits only"
     pattern: "^[a-zA-Z0-9]+$"
+  hn_boot_size:
+    type: integer
+    title: "Head Node Server Boot Volume Size"
+    description: "Size in GB"
+  hn_data_size:
+    type: integer
+    title: "Head Node Server Data Volume Size"
+    description: "Size in GB"
+  hn_work_size:
+    type: integer
+    title: "Head Node Server Work Volume Size"
+    description: "Size in GB"

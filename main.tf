@@ -122,7 +122,7 @@ resource "oci_core_instance" "Sp3Headnode" {
         source_id               = local.Sp3_headnode_image
         source_type             = "image"
         # Optional
-        boot_volume_size_in_gbs = "120"
+        boot_volume_size_in_gbs = var.hn_boot_size
 #        kms_key_id              = 
     }
     preserve_boot_volume = false
@@ -149,7 +149,7 @@ resource "oci_core_volume" "Data" {
     availability_domain = local.Sp3_ad
     # Optional
     display_name   = "${local.Sp3_name}_data"
-    size_in_gbs    = "1024"
+    size_in_gbs    = var.hn_data_size
     vpus_per_gb    = "10"
 }
 
@@ -164,7 +164,7 @@ resource "oci_core_volume" "Work" {
     availability_domain = local.Sp3_ad
     # Optional
     display_name   = "${local.Sp3_name}_work"
-    size_in_gbs    = "1024"
+    size_in_gbs    = var.hn_work_size
     vpus_per_gb    = "10"
 }
 
