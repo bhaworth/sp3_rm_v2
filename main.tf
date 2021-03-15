@@ -110,7 +110,7 @@ resource "oci_core_instance" "Sp3Headnode" {
     display_name           = "${local.Sp3_name}headnode vnic 00"
     hostname_label         = "${local.Sp3_name}headnode"
     skip_source_dest_check = "false"
-    nsg_ids                = local.hn_nsg_id
+    nsg_ids                = [local.hn_nsg_id]
   }
   metadata = {
     ssh_authorized_keys = local.Sp3_ssh_key
