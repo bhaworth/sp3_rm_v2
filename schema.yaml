@@ -83,12 +83,18 @@ variables:
   hn_boot_size:
     type: integer
     title: "Head Node Server Boot Volume Size"
-    description: "Size in GB"
+    description: "Size in GB.  Size must be between 50 GB and 32,768 GB (32 TB)."
+    minimum: 50
+    maximum: 32768
   hn_data_size:
     type: integer
     title: "Head Node Server Data Volume Size"
-    description: "Size in GB"
+    description: "Size in GB.  Size must be between 50 GB and 32,768 GB (32 TB)."
+    minimum: 50
+    maximum: 32768
   hn_work_size:
     type: integer
     title: "Head Node Server Work Volume Size"
-    description: "Size in GB"
+    description: "Size in GB.  Size must be between 50 GB and 32,768 GB (32 TB)."
+    minimum: 50
+    maximum: 32768
