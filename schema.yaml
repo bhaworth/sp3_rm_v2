@@ -22,6 +22,7 @@ variableGroups:
 variables:
   region:
     title: "Region"
+    type: oci:identity:region:name
   compartment_ocid:
     title: "Target Compartment"
     type: oci:identity:compartment:id
