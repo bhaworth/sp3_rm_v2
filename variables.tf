@@ -10,6 +10,4 @@ variable "hn_data_size" { default = 1024 }
 variable "hn_work_size" { default = 1024 }
 variable "ad" {}
 variable "name_prefix" {}
-variable "env_name" {
-    default = "sp3"
-}
+variable "env_name" { default = "sp3" }
