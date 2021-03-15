@@ -11,9 +11,9 @@ variableGroups:
       - ${compartment_ocid}
       - ${ad}
       - ${ssh_pub_key}   
-  -title: "Optional Settings"
-    variables:
-      - ${name_prefix}   
+  #-title: "Optional Settings"
+  #  variables:
+  #    - ${name_prefix}   
 variables:
   compartment_ocid:
     title: "Target Compartment"
@@ -30,7 +30,7 @@ variables:
     type: string
     title: "Public SSH key"
     required: true
-  name_prefix:
-    type: string
-    title: "Display/Host Name Prefix"
-    description: "Optional prefix for all Display Names and Hostnames"
+  #name_prefix:
+  #  type: string
+  #  title: "Display/Host Name Prefix"
+  #  description: "Optional prefix for all Display Names and Hostnames"
