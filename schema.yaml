@@ -12,7 +12,7 @@ variableGroups:
       - ${compartment_ocid}
       - ${ad}
       - ${ssh_pub_key}   
-  -title: "Optional Settings"
+  - title: "Optional Settings"
     variables:
       - ${name_prefix}   
 variables:
