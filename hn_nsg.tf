@@ -1,11 +1,13 @@
 # Network Security Group for the Head Node
 
 resource "oci_core_network_security_group" "headnode_nsg" {
-  display_name = "${local.Sp3_vcn_name}-hn-nsg"
+  display_name   = "${local.Sp3_vcn_name}-hn-nsg"
+  vcn_id         = local.Sp3_VCN_id
+  compartment_id = local.Sp3_cid
 }
 
 locals {
-  hn_nsg_id = oci_core_network_security_group.test_network_security_group.id
+  hn_nsg_id = oci_core_network_security_group.headnode_nsg.id
 }
 
 resource "oci_core_network_security_group_security_rule" "hn-nsg-rule1" {
