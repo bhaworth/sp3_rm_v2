@@ -1,27 +1,4 @@
 
-# ------ Retrieve Regional / Cloud Data
-# -------- Get a list of Availability Domains
-data "oci_identity_availability_domains" "AvailabilityDomains" {
-    compartment_id = var.compartment_ocid
-}
-data "template_file" "AvailabilityDomainNames" {
-    count    = length(data.oci_identity_availability_domains.AvailabilityDomains.availability_domains)
-    template = data.oci_identity_availability_domains.AvailabilityDomains.availability_domains[count.index]["name"]
-}
-# -------- Get a list of Fault Domains
-data "oci_identity_fault_domains" "FaultDomainsAD1" {
-    availability_domain = element(data.oci_identity_availability_domains.AvailabilityDomains.availability_domains, 0)["name"]
-    compartment_id = var.compartment_ocid
-}
-data "oci_identity_fault_domains" "FaultDomainsAD2" {
-    availability_domain = element(data.oci_identity_availability_domains.AvailabilityDomains.availability_domains, 1)["name"]
-    compartment_id = var.compartment_ocid
-}
-data "oci_identity_fault_domains" "FaultDomainsAD3" {
-    availability_domain = element(data.oci_identity_availability_domains.AvailabilityDomains.availability_domains, 2)["name"]
-    compartment_id = var.compartment_ocid
-}
-
 # ------ Get List Images
 data "oci_core_images" "InstanceImages" {
     compartment_id           = var.compartment_ocid
@@ -33,14 +10,12 @@ provider "oci" {
 }
 
 locals {
-    Sp3_id              = var.compartment_ocid
+    Sp3_name            = "${var.prefix_name}_${var.env_name}"
+    Sp3_cid              = var.compartment_ocid
     Sp3_ssh_key         = var.ssh_pub_key
     Sp3_bastion_shape   = var.bastion_shape
     Sp3_headnode_shape  = var.headnode_shape
-}
-
-output "Sp3Id" {
-    value = local.Sp3_id
+    Sp3_ad              = var.ad
 }
 
 # ------ Get List Images
@@ -54,11 +29,11 @@ data "oci_core_images" "Sp3BastionImages" {
 # ------ Create Instance
 resource "oci_core_instance" "Sp3Bastion" {
     # Required
-    compartment_id      = local.Sp3_id
+    compartment_id      = local.Sp3_cid
     shape               = local.Sp3_bastion_shape
     # Optional
-    display_name        = "sp3bastion"
-    availability_domain = data.oci_identity_availability_domains.AvailabilityDomains.availability_domains["1" - 1]["name"]
+    display_name        = "${local.Sp3_name}-bastion"
+    availability_domain = local.Sp3_ad
     agent_config {
         # Optional
     }
@@ -67,8 +42,8 @@ resource "oci_core_instance" "Sp3Bastion" {
         subnet_id        = local.Pubsn001_id
         # Optional
         assign_public_ip = true
-        display_name     = "sp3bastion vnic 00"
-        hostname_label   = "sp3bastion"
+        display_name     = "${local.Sp3_vcn_name}-bastion vnic 00"
+        hostname_label   = "${local.Sp3_vcn_name}-bastion"
         skip_source_dest_check = "false"
     }
 #    extended_metadata {
@@ -105,11 +80,6 @@ output "sp3bastionPrivateIP" {
     value = local.Sp3Bastion_private_ip
 }
 
-# ------ Create Block Storage Attachments
-
-# ------ Create VNic Attachments
-
-
 # ------ Get List Images
 data "oci_core_images" "Sp3HeadnodeImages" {
     compartment_id           = var.compartment_ocid
@@ -121,11 +91,11 @@ data "oci_core_images" "Sp3HeadnodeImages" {
 # ------ Create Instance
 resource "oci_core_instance" "Sp3Headnode" {
     # Required
-    compartment_id      = local.Sp3_id
+    compartment_id      = local.Sp3_cid
     shape               = local.Sp3_headnode_shape
     # Optional
-    display_name        = "sp3headnode"
-    availability_domain = data.oci_identity_availability_domains.AvailabilityDomains.availability_domains["1" - 1]["name"]
+    display_name        = "${local.Sp3_name}-headnode"
+    availability_domain = local.Sp3_ad
     agent_config {
         # Optional
     }
@@ -134,14 +104,10 @@ resource "oci_core_instance" "Sp3Headnode" {
         subnet_id        = local.Privsn001_id
         # Optional
         assign_public_ip = false
-        display_name     = "sp3headnode vnic 00"
-        hostname_label   = "sp3headnode"
+        display_name     = "${local.Sp3_name}headnode vnic 00"
+        hostname_label   = "${local.Sp3_name}headnode"
         skip_source_dest_check = "false"
     }
-#    extended_metadata {
-#        some_string = "stringA"
-#        nested_object = "{\"some_string\": \"stringB\", \"object\": {\"some_string\": \"stringC\"}}"
-#    }
     metadata = {
         ssh_authorized_keys = local.Sp3_ssh_key
         user_data           = base64encode(file("./userdata/bootstrap.sh"))
@@ -175,10 +141,10 @@ output "sp3headnodePrivateIP" {
 # ------ Create Block Storage Volume
 resource "oci_core_volume" "Data" {
     # Required
-    compartment_id = local.Sp3_id
-    availability_domain = data.oci_identity_availability_domains.AvailabilityDomains.availability_domains["1" - 1]["name"]
+    compartment_id = local.Sp3_cid
+    availability_domain = local.Sp3_ad
     # Optional
-    display_name   = "data"
+    display_name   = "${local.Sp3_name}_data"
     size_in_gbs    = "1024"
     vpus_per_gb    = "10"
 }
@@ -191,9 +157,9 @@ locals {
 resource "oci_core_volume" "Work" {
     # Required
     compartment_id = local.Sp3_id
-    availability_domain = data.oci_identity_availability_domains.AvailabilityDomains.availability_domains["1" - 1]["name"]
+    availability_domain = local.Sp3_ad
     # Optional
-    display_name   = "work"
+    display_name   = "${local.Sp3_name}_work"
     size_in_gbs    = "1024"
     vpus_per_gb    = "10"
 }
@@ -206,7 +172,7 @@ locals {
 resource oci_core_volume_attachment "Sp3HeadnodeDataVolumeAttachment" {
   attachment_type                     = "paravirtualized"
   device                              = "/dev/oracleoci/oraclevdb"
-  display_name                        = "Sp3HeadnodeDataVolumeAttachment"
+  display_name                        = "${local.Sp3_name}-HeadnodeDataVolumeAttachment"
   instance_id                         = local.Sp3Headnode_id
   is_pv_encryption_in_transit_enabled = "false"
   is_read_only                        = "false"
@@ -217,7 +183,7 @@ resource oci_core_volume_attachment "Sp3HeadnodeDataVolumeAttachment" {
 resource oci_core_volume_attachment "Sp3HeadnodeWorkVolumeAttachment" {
   attachment_type                     = "paravirtualized"
   device                              = "/dev/oracleoci/oraclevdc"
-  display_name                        = "Sp3HeadnodeDataVolumeAttachment"
+  display_name                        = "${local.Sp3_name}-HeadnodeDataVolumeAttachment"
   instance_id                         = local.Sp3Headnode_id
   is_pv_encryption_in_transit_enabled = "false"
   is_read_only                        = "false"

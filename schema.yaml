@@ -1,0 +1,36 @@
+title: SP3 Build
+description: SP3 Base Build
+schemaVersion: 1.1.0
+version: "20210315"
+logoUrl: >
+  https://cloudmarketplace.oracle.com/marketplace/content?contentId=80357668
+locale: "en"
+variableGroups:
+  - title: "Base configuration"
+    variables:
+      - ${compartment_ocid}
+      - ${ad}
+      - ${ssh_pub_key}   
+  -title: "Optional Settings"
+    variables:
+      - ${name_prefix}   
+variables:
+  compartment_ocid:
+    title: "Target Compartment"
+    type: oci:identity:compartment:id
+    required: true
+  ad:
+    type: oci:identity:availabilitydomain:name
+    dependsOn:
+      compartmentId: ${compartment_ocid}
+    required: true
+    description: "Availability Domain"
+    title: "Availability Domain"
+  ssh_pub_key:
+    type: string
+    title: "Public SSH key"
+    required: true
+  name_prefix:
+    type: string
+    title: "Display/Host Name Prefix"
+    descitpion: "Optional prefix for all Display Names and Hostnames"
