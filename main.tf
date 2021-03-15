@@ -160,7 +160,7 @@ locals {
 # ------ Create Block Storage Volume
 resource "oci_core_volume" "Work" {
     # Required
-    compartment_id = local.Sp3_id
+    compartment_id = local.Sp3_cid
     availability_domain = local.Sp3_ad
     # Optional
     display_name   = "${local.Sp3_name}_work"
