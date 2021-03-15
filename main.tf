@@ -10,8 +10,8 @@ provider "oci" {
 }
 
 locals {
-    Sp3_name            = "${var.prefix_name}_${var.env_name}"
-    Sp3_cid              = var.compartment_ocid
+    Sp3_name            = "${var.name_prefix}_${var.env_name}"
+    Sp3_cid             = var.compartment_ocid
     Sp3_ssh_key         = var.ssh_pub_key
     Sp3_bastion_shape   = var.bastion_shape
     Sp3_headnode_shape  = var.headnode_shape

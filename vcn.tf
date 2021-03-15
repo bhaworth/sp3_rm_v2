@@ -14,8 +14,8 @@ resource "oci_core_vcn" "Sp3_Sandbox" {
     compartment_id = local.Sp3_cid
     cidr_block     = "10.0.0.0/16"
     # Optional
-    dns_label      = "${var.name+prefix}${var.name}"
-    display_name   = locals.Sp3_vcn_name
+    dns_label      = "${var.name_prefix}${var.name}"
+    display_name   = local.Sp3_vcn_name
 }
 
 # ------ Create Internet Gateway
