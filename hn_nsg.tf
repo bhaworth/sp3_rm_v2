@@ -2,7 +2,7 @@
 
 resource "oci_core_network_security_group" "headnode_nsg" {
   display_name   = "${local.Sp3_vcn_name}-hn-nsg"
-  vcn_id         = local.Sp3_VCN_id
+  vcn_id         = local.Sp3_vcn_id
   compartment_id = local.Sp3_cid
 }
 
