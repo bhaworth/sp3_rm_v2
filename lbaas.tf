@@ -19,6 +19,10 @@ resource oci_load_balancer_load_balancer sp3_loadbalancer {
 
 locals {Sp3_lb_id = oci_load_balancer_load_balancer.sp3_loadbalancer.id }
 
+output "sp3_loadbalancer" {
+  value = oci_load_balancer_load_balancer.sp3_loadbalancer.public_ip
+}
+
 resource oci_load_balancer_certificate sp3_loadbalancer_certificate_1 {
   certificate_name = "${local.Sp3_env_name}-lbcert1"
   load_balancer_id = local.Sp3_lb_id
