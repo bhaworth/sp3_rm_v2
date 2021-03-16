@@ -63,4 +63,4 @@ iptables -I INPUT 8 -s 10.0.0.0/16 -p tcp -m state --state NEW -m tcp --dport 80
 iptables-save > /etc/iptables/rules.v4
 
 # Install Nginx
-apt install nginx
+apt install nginx -y
