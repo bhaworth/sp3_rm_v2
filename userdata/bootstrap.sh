@@ -39,8 +39,8 @@ sudo -H -u ubuntu ~ubuntu/ociinstall_wget.sh --accept-all-defaults
 apt-get install nfs-server -y
 
 # Edit exports file
-echo '/work     10.0.0.0/23(rw,no_root_squash)' >> /etc/exports
-echo '/data     10.0.0.0/23(rw,no_root_squash)' >> /etc/exports
+# echo '/work     10.0.0.0/23(rw,no_root_squash)' >> /etc/exports
+# echo '/data     10.0.0.0/23(rw,no_root_squash)' >> /etc/exports
 
 # Set mountd and nlockmgr port numbers
 
