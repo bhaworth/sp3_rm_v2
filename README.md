@@ -7,15 +7,14 @@ The `schema.yaml` file defines the Variable Input/Capture screen within the Reso
 Upon completion of the deployment, an Application Information tab will be shown within the Stack.  The Public IP of the Bastion as well as the Private IP of the Head Node will be displayed here.  The deployment ID will also be shown - this is included in almost all resource names and is a random 4 digit string to help people identify differing stack deployments, beyond the optional environment name and user defined name prefix.
 ## Terraform Files
 
-`vcn.tf` creates the Virtual Cloud network with CIDR 10.0/16, a public subnet (10.0.0.0/24) with route table and security list with an Internet Gateway and a private subnet (10.0.1.0/24) with route table and security list with a NAT Gateway.
+- `vcn.tf` creates the Virtual Cloud network with CIDR 10.0/16, a public subnet (10.0.0.0/24) with route table and security list with an Internet Gateway and a private subnet (10.0.1.0/24) with route table and security list with a NAT Gateway.
+- `main.tf` creates the Compute Instances and Storage Volumes.  A Bastion server is connected to the Public Subnet and a Head Node server for the SP3 Cluster is attached to the Private Network.  The Head Node has two balanced tier Block Volumes attached via para-virtualisation.
+- `lbaas.tf` creates the Load Balancer service.
+- `lb_nsg.tf` creates the Network Security Group for the Load Balancer
+- `hn_nsg.tf` creates the Network Security Group for the Head Node
+- `datasources.tf` is used for specific functions and data sources within Terraform
+- `iam.tf` creates a dynamic group and policy to allow OCI CLI operations from the Head Node
 
-`main.tf` creates the Compute Instances and Storage Volumes.  A Bastion server is connected to the Public Subnet and a Head Node server for the SP3 Cluster is attached to the Private Network.  The Head Node has two balanced tier Block Volumes attached via para-virtualisation.
-
-`lbaas.tf` creates the Load Balancer service.
-
-`lb_nsg.tf` creates the Network Security Group for the Load Balancer
-
-`hn_nsg.tf` creates the Network Security Group for the Head Node
 
 ## User Data Files
 The shell scripts within the the `userdata` directory are used to configure the Head Node Compute Instance once it has booted for the first time.
