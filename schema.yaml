@@ -121,3 +121,9 @@ variables:
     type: boolean
     title: Deploy test web server to head node and NFS export (BenH TESTING ONLY)
     default: false
+outputs:
+  bastion_pub_ip:
+    title: "Bastion Public IP Address"
+    type: copyableString
+    visible: true
+    displayText: "IP would go here"
