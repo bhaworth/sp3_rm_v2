@@ -105,6 +105,7 @@ variables:
     minimum: 50
     maximum: 32768
   show_testing_others:
+    title: "Display all other settings / testing options"
     type: boolean
     default: false
   deploy_web:
