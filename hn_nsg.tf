@@ -20,6 +20,7 @@ resource "oci_core_network_security_group_security_rule" "hn-nsg-rule1" {
   source      = "10.0.0.0/23"
   source_type = "CIDR_BLOCK"
   stateless   = false
+  description = "TCP/111 for NFS"
   tcp_options {
     destination_port_range {
       min = "111"
@@ -36,6 +37,7 @@ resource "oci_core_network_security_group_security_rule" "hn-nsg-rule2" {
   source      = "10.0.0.0/23"
   source_type = "CIDR_BLOCK"
   stateless   = false
+  description = "TCP/2000-2001 for NFS"
   tcp_options {
     destination_port_range {
       min = "2000"
@@ -52,6 +54,7 @@ resource "oci_core_network_security_group_security_rule" "hn-nsg-rule3" {
   source      = "10.0.0.0/23"
   source_type = "CIDR_BLOCK"
   stateless   = false
+  description = "TCP/2049 for NFS"
   tcp_options {
     destination_port_range {
       min = "2049"
@@ -68,6 +71,7 @@ resource "oci_core_network_security_group_security_rule" "hn-nsg-rule4" {
   source      = "10.0.0.0/23"
   source_type = "CIDR_BLOCK"
   stateless   = false
+  description = "UDP/111 for NFS"
   udp_options {
     destination_port_range {
       min = "111"
@@ -84,6 +88,7 @@ resource "oci_core_network_security_group_security_rule" "hn-nsg-rule5" {
   source      = "10.0.0.0/23"
   source_type = "CIDR_BLOCK"
   stateless   = false
+  description = "UDP/2000 for NFS"
   udp_options {
     destination_port_range {
       min = "2000"
@@ -100,6 +105,7 @@ resource "oci_core_network_security_group_security_rule" "hn-nsg-rule6" {
   source      = "10.0.0.0/23"
   source_type = "CIDR_BLOCK"
   stateless   = false
+  description = "UDP/2002 for NFS"
   udp_options {
     destination_port_range {
       min = "2002"
@@ -116,6 +122,7 @@ resource "oci_core_network_security_group_security_rule" "hn-nsg-rule7" {
   source      = "10.0.0.0/23"
   source_type = "CIDR_BLOCK"
   stateless   = false
+  description = "UDP/2049 for NFS"
   udp_options {
     destination_port_range {
       min = "2049"
@@ -132,6 +139,7 @@ resource "oci_core_network_security_group_security_rule" "hn-nsg-rule8" {
   source      = local.lb_nsg_id
   source_type = "NETWORK_SECURITY_GROUP"
   stateless   = false
+  description = "TCP/80 (HTTP) for Web Service from Load Balancer"
   tcp_options {
     destination_port_range {
       min = "80"

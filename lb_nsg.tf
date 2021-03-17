@@ -20,6 +20,7 @@ resource "oci_core_network_security_group_security_rule" "lb-nsg-rule1" {
   source      = "0.0.0.0/0"
   source_type = "CIDR_BLOCK"
   stateless   = false
+  description = "TCP/80 (HTTP) for Inbound HTTP"
   tcp_options {
     destination_port_range {
       min = "80"
@@ -36,6 +37,7 @@ resource "oci_core_network_security_group_security_rule" "lb-nsg-rule2" {
   source      = "0.0.0.0/0"
   source_type = "CIDR_BLOCK"
   stateless   = false
+  description = "TCP/443 (HTTPS) for Inbound HTTPS"
   tcp_options {
     destination_port_range {
       min = "443"

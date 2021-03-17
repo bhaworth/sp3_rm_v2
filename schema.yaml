@@ -27,6 +27,7 @@ variableGroups:
       - ${show_testing_others}
   - title: "Testing / Other Settings"
     variables:
+    - ${bastion_boot_size}
       - ${deploy_web}
     visible: ${show_testing_others}
 variables:
@@ -108,6 +109,12 @@ variables:
     title: "Display all other settings / testing options"
     type: boolean
     default: false
+  bastion_boot_size:
+    type: integer
+    title: "Bastion Server Boot Volume Size"
+    description: "Size in GB.  Size must be between 50 GB and 32,768 GB (32 TB)."
+    minimum: 50
+    maximum: 32768
   deploy_web:
     type: boolean
     title: Deploy test web server to head node (BEN H TESTING ONLY)
