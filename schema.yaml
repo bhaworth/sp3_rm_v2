@@ -4,7 +4,7 @@ description: Deployment of base SP3 cluster on OCI
 schemaVersion: 1.1.0
 version: "20210315"
 logoUrl: >
-  https://cloudmarketplace.oracle.com/marketplace/content?contentId=80357668
+  https://objectstorage.uk-london-1.oraclecloud.com/p/gcJUrJ8giUwk_51hi_nTN0Dl66R_7jOOAXU3k3kF-4mOrDCwIoanxChzle0ZAIfm/n/lrbvkel2wjot/b/images/o/mmmlogo_small_130_130.png
 locale: "en"
 variableGroups:
   - title: "Base configuration"
