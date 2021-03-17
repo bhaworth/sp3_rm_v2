@@ -9,6 +9,7 @@ locale: "en"
 variableGroups:
   - title: "Base configuration"
     variables:
+      - ${tenancy_ocid}
       - ${region}
       - ${compartment_ocid}
       - ${ad}
@@ -31,6 +32,8 @@ variableGroups:
       - ${deploy_test}
     visible: ${show_testing_others}
 variables:
+  tenancy_ocid:
+    hidden: true
   region:
     title: "Region"
     type: oci:identity:region:name
