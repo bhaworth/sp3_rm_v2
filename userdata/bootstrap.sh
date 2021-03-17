@@ -34,6 +34,10 @@ sudo -H -u ubuntu wget -O ~ubuntu/ociinstall_wget.sh https://raw.githubuserconte
 sudo -H -u ubuntu chmod 755 ~ubuntu/ociinstall_wget.sh
 sudo -H -u ubuntu ~ubuntu/ociinstall_wget.sh --accept-all-defaults
 
+# Populate OCI config file with tenancy ocid
+
+# sudo -H -u ubuntu 
+
 # Install NFS Server
 
 apt-get install nfs-server -y

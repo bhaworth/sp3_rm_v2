@@ -80,14 +80,17 @@ resource "oci_core_instance" "Sp3Headnode" {
     subnet_id = local.Privsn001_id
     # Optional
     assign_public_ip       = false
-    display_name           = "${local.Sp3_env_name}headnode vnic 00"
-    hostname_label         = "${local.Sp3_env_name}headnode"
+    display_name           = "${local.Sp3_env_name}-headnode vnic 00"
+    hostname_label         = "${local.Sp3_env_name}-headnode"
     skip_source_dest_check = "false"
     nsg_ids                = [local.hn_nsg_id]
   }
   metadata = {
     ssh_authorized_keys = local.Sp3_ssh_key
     user_data           = var.deploy_test ? base64encode(file("./userdata/bootstrap_testing.sh")) : base64encode(file("./userdata/bootstrap.sh"))
+  }
+  extended_metadata {
+    tenancy_id = var.tenancy_ocid
   }
 
   source_details {
