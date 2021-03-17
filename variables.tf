@@ -12,4 +12,4 @@ variable "ad" {}
 variable "name_prefix" {}
 variable "env_name" { default = "sp3" }
 variable "deploy_web" { default = false }
-variable "show_testing_others" {}
+variable "show_testing_others" { default = false }
