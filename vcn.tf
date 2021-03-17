@@ -13,7 +13,7 @@ resource "oci_core_vcn" "Sp3_VCN" {
   compartment_id = local.Sp3_cid
   cidr_block     = "10.0.0.0/16"
   # Optional
-  dns_label    = "${var.name_prefix}${var.env_name}"
+  dns_label    = "${var.name_prefix}${var.env_name}${local.Sp3_deploy_id}"
   display_name = local.Sp3_env_name
 }
 

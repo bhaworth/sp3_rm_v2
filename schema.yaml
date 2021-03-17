@@ -132,3 +132,7 @@ outputs:
     visible: true
   sp3_loadbalancer_public_ip:
     visible: false
+  sp3_deploy_id:
+    title: "Deployment ID"
+    type: string
+    visible: true

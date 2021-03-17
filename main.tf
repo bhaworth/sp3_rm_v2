@@ -11,7 +11,6 @@ provider "oci" {
 
 locals {
   # Name all resources with the prefix-name
-  Sp3_env_name       = "${var.name_prefix}-${var.env_name}"
   Sp3_cid            = var.compartment_ocid
   Sp3_ssh_key        = var.ssh_pub_key
   Sp3_bastion_shape  = var.bastion_shape
@@ -19,6 +18,8 @@ locals {
   Sp3_headnode_shape = var.headnode_shape
   Sp3_headnode_image = var.headnode_image
   Sp3_ad             = var.ad
+  Sp3_deploy_id      = random_string.deploy_id.result
+  Sp3_env_name       = "${var.name_prefix}-${var.env_name}-${local.Sp3_deploy_id}"
 }
 
 # ------ Create Instance
@@ -41,7 +42,7 @@ resource "oci_core_instance" "Sp3Bastion" {
     hostname_label         = "${local.Sp3_env_name}-bastion"
     skip_source_dest_check = "false"
   }
-    metadata = {
+  metadata = {
     ssh_authorized_keys = local.Sp3_ssh_key
     user_data           = base64encode("")
   }
@@ -164,3 +165,6 @@ resource "oci_core_volume_attachment" "Sp3HeadnodeWorkVolumeAttachment" {
   volume_id = local.Work_id
 }
 
+output "sp3_deploy_id" {
+  value = local.Sp3_deploy_id
+}
