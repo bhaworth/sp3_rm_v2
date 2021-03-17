@@ -7,7 +7,7 @@ resource "oci_identity_dynamic_group" "HeadNode_DG" {
 }
 
 resource "oci_identity_policy" "HeadNode_Policy" {
-  compartment_id = var.tenancy_ocid
+  compartment_id = local.Sp3_cid
 
   description = "Policy for Head Node in deployment ${local.Sp3_deploy_id}"
   statements = [
