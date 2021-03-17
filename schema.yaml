@@ -126,3 +126,9 @@ outputs:
     title: "Bastion Public IP Address"
     type: copyableString
     visible: true
+  sp3headnodePrivateIP:
+    title: "Head Node Private IP Address"
+    type: copyableString
+    visible: true
+  sp3_loadbalancer_public_ip:
+    visible: false
