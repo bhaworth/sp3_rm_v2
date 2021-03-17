@@ -33,7 +33,7 @@ variableGroups:
     visible: ${show_testing_others}
 variables:
   tenancy_ocid:
-    hidden: true
+    visible: true
   region:
     title: "Region"
     type: oci:identity:region:name
