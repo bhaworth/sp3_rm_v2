@@ -89,7 +89,7 @@ resource "oci_core_instance" "Sp3Headnode" {
     ssh_authorized_keys = local.Sp3_ssh_key
     user_data           = var.deploy_test ? base64encode(file("./userdata/bootstrap_testing.sh")) : base64encode(file("./userdata/bootstrap.sh"))
   }
-  extended_metadata {
+  extended_metadata = {
     tenancy_id = var.tenancy_ocid
   }
 
