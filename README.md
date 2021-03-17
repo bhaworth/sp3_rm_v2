@@ -26,4 +26,6 @@ The shell scripts within the the `userdata` directory are used to configure the 
 - Configures NFS service ports to static mappings
 - Adds the NFS ports as well as TCP/80 to iptables
 
-`bootstrap_web.sh` does the same as `bootstrap.sh` plus it installs the NGINX web service (for testing load balancer configurations).
+`bootstrap_test.sh` does the same as `bootstrap.sh` plus 
+- exports /data and /work for NFS testing
+- installs the NGINX web service (for testing load balancer configurations).
