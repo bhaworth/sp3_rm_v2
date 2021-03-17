@@ -143,3 +143,5 @@ outputs:
     title: "Load Balancer URL"
     type: link
     visible: true
+  sp3_loadbalancer_public_ip:
+    visible: false
