@@ -1,6 +1,6 @@
 ---
-title: SP3 Build
-description: SP3 Base Build
+title: SP3 Build on OCI
+description: Deployment of base SP3 cluster on OCI
 schemaVersion: 1.1.0
 version: "20210315"
 logoUrl: >
@@ -49,13 +49,6 @@ variables:
     type: oci:core:ssh:publickey
     title: "Public SSH key"
     required: true
-  bastion_shape:
-    type: oci:core:instanceshape:name
-    dependsOn:
-      compartmentId: ${compartment_ocid}
-    required: true
-    description: "Compute shape for the Bastion server"
-    title: "Bastion Server Shape"
   bastion_image:
     type: oci:core:image:id
     dependsOn:
@@ -63,13 +56,14 @@ variables:
     required: true
     description: "Compute image for the Bastion server"
     title: "Bastion Server Image"
-  headnode_shape:
+  bastion_shape:
     type: oci:core:instanceshape:name
     dependsOn:
       compartmentId: ${compartment_ocid}
+      imageID: ${bastion_image}
     required: true
-    description: "Compute shape for the Head Node"
-    title: "Head Node Server Shape"
+    description: "Compute shape for the Bastion server"
+    title: "Bastion Server Shape"
   headnode_image:
     type: oci:core:image:id
     dependsOn:
@@ -77,6 +71,14 @@ variables:
     required: true
     description: "Compute image for the Head Node server"
     title: "Head Node Server Image"
+  headnode_shape:
+    type: oci:core:instanceshape:name
+    dependsOn:
+      compartmentId: ${compartment_ocid}
+      imageID: ${headnode_image}
+    required: true
+    description: "Compute shape for the Head Node"
+    title: "Head Node Server Shape"
   env_name:
     type: string
     title: "Environment Name"
