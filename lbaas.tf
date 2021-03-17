@@ -20,6 +20,9 @@ resource oci_load_balancer_load_balancer sp3_loadbalancer {
 output "sp3_loadbalancer_public_ip" {
   value = [oci_load_balancer_load_balancer.sp3_loadbalancer.ip_address_details.0.ip_address]
 }
+output "sp3_loadbalancer_public_ip_element" {
+  value = element([oci_load_balancer_load_balancer.sp3_loadbalancer.ip_address_details.0.ip_address], 0)
+}
 
 locals {Sp3_lb_id = oci_load_balancer_load_balancer.sp3_loadbalancer.id }
 
