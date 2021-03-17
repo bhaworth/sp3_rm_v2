@@ -1,1 +1,29 @@
-# sp3_rm_bootstrap
+# SP3 Bootstrap Resource Manager Stack
+The Terraform and Shell scripts within this repository facilitate the build out of an SP3 cluster using OCI Resource Manager.
+
+## Resource Manager Files
+The `schema.yaml` file defines the Variable Input/Capture screen within the Resource Manager stack.  It is used to allow dropdown selection of compartments, shapes, ADs and so on.  It also applies verification of inputs and optional variables to be set. 
+## Terraform Files
+
+`vcn.tf` creates the Virtual Cloud network with CIDR 10.0/16, a public subnet (10.0.0.0/24) with route table and security list with an Internet Gateway and a private subnet (10.0.1.0/24) with route table and security list with a NAT Gateway.
+
+`main.tf` creates the Compute Instances and Storage Volumes.  A Bastion server is connected to the Public Subnet and a Head Node server for the SP3 Cluster is attached to the Private Network.  The Head Node has two balanced tier Block Volumes attached via para-virtualisation.
+
+`lbaas.tf` creates the Load Balancer service.
+
+`lb_nsg.tf` creates the Network Security Group for the Load Balancer
+
+`hn_nsg.tf` creates the Network Security Group for the Head Node
+
+## User Data Files
+The shell scripts within the the `userdata` directory are used to configure the Head Node Compute Instance once it has booted for the first time.
+
+`bootstrap.sh` is the file used normally.  It performs the following activities:
+- Partitions, formats (with ext3) the two Block Volumes
+- Mounts the Block Volumes to /data and /work
+- Installs the OCI CLI under the ubuntu user
+- Installs NFS Server
+- Configures NFS service ports to static mappings
+- Adds the NFS ports as well as TCP/80 to iptables
+
+`bootstrap_web.sh` does the same as `bootstrap.sh` plus it installs the NGINX web service (for testing load balancer configurations).
