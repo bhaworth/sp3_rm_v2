@@ -34,7 +34,7 @@ sudo -H -u ubuntu wget -O ~ubuntu/ociinstall_wget.sh https://raw.githubuserconte
 sudo -H -u ubuntu chmod 755 ~ubuntu/ociinstall_wget.sh
 sudo -H -u ubuntu ~ubuntu/ociinstall_wget.sh --accept-all-defaults
 
-# Populate OCI config file with tenancy ocid
+# Populate and setup OCI config file with tenancy ocid for use with instance_principal auth
 
 mkdir /home/ubuntu/.oci
 TENANCY_ID=$(curl -s http://169.254.169.254/opc/v1/instance/ | grep -o '"tenancy_id" : "[^"]*' | grep -o '[^"]*$')
@@ -43,6 +43,7 @@ echo "tenancy=${TENANCY_ID}" >> /home/ubuntu/.oci/config
 
 chown ubuntu /home/ubuntu/.oci/config
 chgrp ubuntu /home/ubuntu/.oci/config
+chmod 600 /home/ubuntu/.oci/config
 
 # Install NFS Server
 
