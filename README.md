@@ -3,6 +3,8 @@ The Terraform and Shell scripts within this repository facilitate the build out 
 
 ## Resource Manager Files
 The `schema.yaml` file defines the Variable Input/Capture screen within the Resource Manager stack.  It is used to allow dropdown selection of compartments, shapes, ADs and so on.  It also applies verification of inputs and optional variables to be set. 
+
+Upon completion of the deployment, an Application Information tab will be shown within the Stack.  The Public IP of the Bastion as well as the Private IP of the Head Node will be displayed here.
 ## Terraform Files
 
 `vcn.tf` creates the Virtual Cloud network with CIDR 10.0/16, a public subnet (10.0.0.0/24) with route table and security list with an Internet Gateway and a private subnet (10.0.1.0/24) with route table and security list with a NAT Gateway.
