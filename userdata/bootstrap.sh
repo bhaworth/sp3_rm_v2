@@ -36,7 +36,13 @@ sudo -H -u ubuntu ~ubuntu/ociinstall_wget.sh --accept-all-defaults
 
 # Populate OCI config file with tenancy ocid
 
-# sudo -H -u ubuntu 
+mkdir /home/ubuntu/.oci
+TENANCY_ID=$(curl -s http://169.254.169.254/opc/v1/instance/ | grep -o '"tenancy_id" : "[^"]*' | grep -o '[^"]*$')
+echo "[DEFAULT]" >> /home/ubuntu/.oci/config
+echo "tenancy=${TENANCY_ID}" >> /home/ubuntu/.oci/config
+
+chown ubuntu /home/ubuntu/.oci/config
+chgrp ubuntu /home/ubuntu/.oci/config
 
 # Install NFS Server
 
