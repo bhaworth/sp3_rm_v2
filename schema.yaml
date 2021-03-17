@@ -28,7 +28,7 @@ variableGroups:
   - title: "Testing / Other Settings"
     variables:
       - ${bastion_boot_size}
-      - ${deploy_web}
+      - ${deploy_test}
     visible: ${show_testing_others}
 variables:
   region:
@@ -115,7 +115,7 @@ variables:
     description: "Size in GB.  Size must be between 50 GB and 32,768 GB (32 TB)."
     minimum: 50
     maximum: 32768
-  deploy_web:
+  deploy_test:
     type: boolean
-    title: Deploy test web server to head node (BenH TESTING ONLY)
+    title: Deploy test web server to head node and NFS export (BenH TESTING ONLY)
     default: false
