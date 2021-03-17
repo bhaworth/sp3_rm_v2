@@ -13,10 +13,10 @@ variableGroups:
       - ${compartment_ocid}
       - ${ad}
       - ${ssh_pub_key}
-      - ${bastion_shape}
       - ${bastion_image}
-      - ${headnode_shape}
+      - ${bastion_shape}
       - ${headnode_image}
+      - ${headnode_shape}
   - title: "Optional Settings"
     variables:
       - ${env_name}
