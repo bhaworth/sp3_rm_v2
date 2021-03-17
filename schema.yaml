@@ -27,7 +27,7 @@ variableGroups:
       - ${show_testing_others}
   - title: "Testing / Other Settings"
     variables:
-    - ${bastion_boot_size}
+      - ${bastion_boot_size}
       - ${deploy_web}
     visible: ${show_testing_others}
 variables:
