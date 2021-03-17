@@ -66,10 +66,6 @@ output "sp3bastionPublicIP" {
   value = local.Sp3Bastion_public_ip
 }
 
-output "sp3bastionPrivateIP" {
-  value = local.Sp3Bastion_private_ip
-}
-
 # ------ Create Head Node Instance
 resource "oci_core_instance" "Sp3Headnode" {
   # Required
