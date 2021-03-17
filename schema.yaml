@@ -139,7 +139,7 @@ outputs:
     title: "Deployment ID"
     type: string
     visible: true
-  sp3_loadbalancer_public_ip_element:
-    title: "Load Balancer Public IP"
-    type: copyableString
+  sp3_loadbalancer_url:
+    title: "Load Balancer URL"
+    type: link
     visible: true
