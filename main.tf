@@ -21,14 +21,6 @@ locals {
   Sp3_ad             = var.ad
 }
 
-# ------ Get List Images
-#data "oci_core_images" "Sp3BastionImages" {
-#compartment_id           = var.compartment_ocid
-#operating_system         = "Canonical Ubuntu"
-#operating_system_version = "18.04"
-#shape                    = local.Sp3_bastion_shape
-#}
-
 # ------ Create Instance
 resource "oci_core_instance" "Sp3Bastion" {
   # Required
@@ -49,22 +41,16 @@ resource "oci_core_instance" "Sp3Bastion" {
     hostname_label         = "${local.Sp3_env_name}-bastion"
     skip_source_dest_check = "false"
   }
-  #    extended_metadata {
-  #        some_string = "stringA"
-  #        nested_object = "{\"some_string\": \"stringB\", \"object\": {\"some_string\": \"stringC\"}}"
-  #    }
-  metadata = {
+    metadata = {
     ssh_authorized_keys = local.Sp3_ssh_key
     user_data           = base64encode("")
   }
 
   source_details {
-    # Required
-    #source_id               = data.oci_core_images.Sp3BastionImages.images[0]["id"]
     source_id   = local.Sp3_bastion_image
     source_type = "image"
     # Optional
-    boot_volume_size_in_gbs = "50"
+    boot_volume_size_in_gbs = var.bastion_boot_size
     #        kms_key_id              = 
   }
   preserve_boot_volume = false
@@ -84,15 +70,7 @@ output "sp3bastionPrivateIP" {
   value = local.Sp3Bastion_private_ip
 }
 
-# ------ Get List Images
-#data "oci_core_images" "Sp3HeadnodeImages" {
-#    compartment_id           = var.compartment_ocid
-#    operating_system         = "Canonical Ubuntu"
-#    operating_system_version = "18.04"
-#    shape                    = local.Sp3_headnode_shape
-#}
-
-# ------ Create Instance
+# ------ Create Head Node Instance
 resource "oci_core_instance" "Sp3Headnode" {
   # Required
   compartment_id = local.Sp3_cid
@@ -100,9 +78,6 @@ resource "oci_core_instance" "Sp3Headnode" {
   # Optional
   display_name        = "${local.Sp3_env_name}-headnode"
   availability_domain = local.Sp3_ad
-  agent_config {
-    # Optional
-  }
   create_vnic_details {
     # Required
     subnet_id = local.Privsn001_id
@@ -120,7 +95,6 @@ resource "oci_core_instance" "Sp3Headnode" {
 
   source_details {
     # Required
-    #source_id               = data.oci_core_images.Sp3HeadnodeImages.images[0]["id"]
     source_id   = local.Sp3_headnode_image
     source_type = "image"
     # Optional
@@ -134,10 +108,6 @@ locals {
   Sp3Headnode_id         = oci_core_instance.Sp3Headnode.id
   Sp3Headnode_public_ip  = oci_core_instance.Sp3Headnode.public_ip
   Sp3Headnode_private_ip = oci_core_instance.Sp3Headnode.private_ip
-}
-
-output "sp3headnodePublicIP" {
-  value = local.Sp3Headnode_public_ip
 }
 
 output "sp3headnodePrivateIP" {
