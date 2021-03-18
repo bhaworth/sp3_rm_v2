@@ -16,8 +16,12 @@ variableGroups:
       - ${ssh_pub_key}
       - ${bastion_image}
       - ${bastion_shape}
+      - ${bastion_ocpus}
+      - ${bastion_ram}
       - ${headnode_image}
       - ${headnode_shape}
+      - ${headnode_ocpus}
+      - ${headnode_ram}
   - title: "Optional Settings"
     variables:
       - ${env_name}
