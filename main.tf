@@ -49,6 +49,11 @@ resource "oci_core_instance" "Sp3Bastion" {
     user_data           = base64encode("")
   }
 
+  extended_metadata = {
+    tenancy_id = var.tenancy_ocid
+    deployment_id = local.Sp3_deploy_id
+  }
+
   dynamic "shape_config" {
     for_each = local.is_flexible_bastion_shape ? [1] : []
     content {
@@ -101,6 +106,7 @@ resource "oci_core_instance" "Sp3Headnode" {
   }
   extended_metadata = {
     tenancy_id = var.tenancy_ocid
+    deployment_id = local.Sp3_deploy_id
   }
 
   dynamic "shape_config" {
