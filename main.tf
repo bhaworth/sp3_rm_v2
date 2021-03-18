@@ -20,8 +20,8 @@ locals {
   Sp3_ad                     = var.ad
   Sp3_deploy_id              = random_string.deploy_id.result
   Sp3_env_name               = "${var.name_prefix}-${var.env_name}-${local.Sp3_deploy_id}"
-  is_flexible_bastion_shape  = contains(local.compute_flexible_shapes, local.bastion_shape)
-  is_flexible_headnode_shape = contains(local.compute_flexible_shapes, local.headnode_shape)
+  is_flexible_bastion_shape  = contains(local.compute_flexible_shapes, local.Sp3_bastion_shape)
+  is_flexible_headnode_shape = contains(local.compute_flexible_shapes, local.Sp3_headnode_shape)
 }
 
 # ------ Create Instance
