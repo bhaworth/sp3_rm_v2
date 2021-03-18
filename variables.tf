@@ -4,8 +4,12 @@ variable "compartment_ocid" {}
 variable "ssh_pub_key" {}
 variable "bastion_shape" {}
 variable "bastion_image" {}
+variable "bastion_ocpus" { default = 1 }
+variable "bastion_ram" { default = 16 }
 variable "headnode_shape" {}
 variable "headnode_image" {}
+variable "headnode_ocpus" { default = 1 }
+variable "headnode_ram" { default = 16 }
 variable "bastion_boot_size" { default = 50 }
 variable "hn_boot_size" { default = 120 }
 variable "hn_data_size" { default = 1024 }
@@ -15,3 +19,9 @@ variable "name_prefix" {}
 variable "env_name" { default = "sp3" }
 variable "deploy_test" { default = false }
 variable "show_testing_others" { default = false }
+
+
+
+locals {
+  compute_flexible_shapes = ["Flex"]
+}
