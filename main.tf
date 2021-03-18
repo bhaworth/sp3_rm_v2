@@ -107,6 +107,7 @@ resource "oci_core_instance" "Sp3Headnode" {
   extended_metadata = {
     tenancy_id = var.tenancy_ocid
     deployment_id = local.Sp3_deploy_id
+    subnet_id = local.Privsn001_id
   }
 
   dynamic "shape_config" {
