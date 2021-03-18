@@ -9,6 +9,13 @@ EOF
 
 sleep 60
 
+cp -p /home/ubuntu/.bashrc /home/ubuntu/.bashrc.bkp
+cat << EOF >> /home/ubuntu/.bashrc
+ 
+# Default OCI CLI to use Instance Principal authentication
+export OCI_CLI_AUTH=instance_principal
+EOF
+
 apt update -y
 
 # Partition and Format Block Volumes
@@ -36,19 +43,19 @@ sudo -H -u ubuntu ~ubuntu/ociinstall_wget.sh --accept-all-defaults
 
 # Populate and setup OCI config file with tenancy ocid for use with instance_principal auth
 
-mkdir /home/ubuntu/.oci
+sudo -H -u ubuntu mkdir /home/ubuntu/.oci
+sudo -H -u ubuntu touch /home/ubuntu/.oci/config
 TENANCY_ID=$(curl -s http://169.254.169.254/opc/v1/instance/ | grep -o '"tenancy_id" : "[^"]*' | grep -o '[^"]*$')
 echo "[DEFAULT]" >> /home/ubuntu/.oci/config
 echo "tenancy=${TENANCY_ID}" >> /home/ubuntu/.oci/config
 
-chown ubuntu /home/ubuntu/.oci/config
-chgrp ubuntu /home/ubuntu/.oci/config
 chmod 600 /home/ubuntu/.oci/config
 
 # Put Deployment ID in to ubuntu home directory
 
+sudo -H -u ubuntu touch /home/ubuntu/deployment_id
 DEPLOYMENT_ID=$(curl -s http://169.254.169.254/opc/v1/instance/ | grep -o '"deployment_id" : "[^"]*' | grep -o '[^"]*$')
-echo "Deployment ID: ${DEPLOYMENT_ID}" >> /home/ubuntu/deployment_id
+echo "${DEPLOYMENT_ID}" >> /home/ubuntu/deployment_id
 
 # Install NFS Server
 
