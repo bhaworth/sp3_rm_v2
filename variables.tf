@@ -23,5 +23,5 @@ variable "show_testing_others" { default = false }
 
 
 locals {
-  compute_flexible_shapes = ["Flex"]
+  compute_flexible_shapes = ["VM.Standard.E3.Flex"]
 }
