@@ -67,6 +67,28 @@ variables:
     required: true
     description: "Compute shape for the Bastion server"
     title: "Bastion Server Shape"
+  bastion_ocpus:
+    type: integer
+    minimum: 1
+    maximum: 64
+    title: "Bastion number of CPUs (cores)"
+    description: "You can customize the number of CPU cores to a flexible shape."
+    visible:
+      and:
+        - eq:
+          - bastion_shape 
+          - "VM.Standard.E3.Flex"
+  bastion_ram:
+    type: integer
+    minimum: 1
+    maximum: 1024
+    title: "Bastion Server memory (GB)"
+    description: "You can customize the amount of memory allocated to a flexible shape."
+    visible:
+      and:
+        - eq:
+          - bastion_shape 
+          - "VM.Standard.E3.Flex"
   headnode_image:
     type: oci:core:image:id
     dependsOn:
@@ -82,6 +104,28 @@ variables:
     required: true
     description: "Compute shape for the Head Node"
     title: "Head Node Server Shape"
+  headnode_ocpus:
+    type: integer
+    minimum: 1
+    maximum: 64
+    title: "Head Node number of CPUs (cores)"
+    description: "You can customize the number of CPU cores to a flexible shape."
+    visible:
+      and:
+        - eq:
+          - headnode_shape 
+          - "VM.Standard.E3.Flex"
+  headnode_ram:
+    type: integer
+    minimum: 1
+    maximum: 1024
+    title: "Head Node memory (GB)"
+    description: "You can customize the amount of memory allocated to a flexible shape."
+    visible:
+      and:
+        - eq:
+          - headnode_shape 
+          - "VM.Standard.E3.Flex"
   env_name:
     type: string
     title: "Environment Name"
