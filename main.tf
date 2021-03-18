@@ -11,15 +11,17 @@ provider "oci" {
 
 locals {
   # Name all resources with the prefix-name
-  Sp3_cid            = var.compartment_ocid
-  Sp3_ssh_key        = var.ssh_pub_key
-  Sp3_bastion_shape  = var.bastion_shape
-  Sp3_bastion_image  = var.bastion_image
-  Sp3_headnode_shape = var.headnode_shape
-  Sp3_headnode_image = var.headnode_image
-  Sp3_ad             = var.ad
-  Sp3_deploy_id      = random_string.deploy_id.result
-  Sp3_env_name       = "${var.name_prefix}-${var.env_name}-${local.Sp3_deploy_id}"
+  Sp3_cid                    = var.compartment_ocid
+  Sp3_ssh_key                = var.ssh_pub_key
+  Sp3_bastion_shape          = var.bastion_shape
+  Sp3_bastion_image          = var.bastion_image
+  Sp3_headnode_shape         = var.headnode_shape
+  Sp3_headnode_image         = var.headnode_image
+  Sp3_ad                     = var.ad
+  Sp3_deploy_id              = random_string.deploy_id.result
+  Sp3_env_name               = "${var.name_prefix}-${var.env_name}-${local.Sp3_deploy_id}"
+  is_flexible_bastion_shape  = contains(local.compute_flexible_shapes, local.bastion_shape)
+  is_flexible_headnode_shape = contains(local.compute_flexible_shapes, local.headnode_shape)
 }
 
 # ------ Create Instance
@@ -45,6 +47,14 @@ resource "oci_core_instance" "Sp3Bastion" {
   metadata = {
     ssh_authorized_keys = local.Sp3_ssh_key
     user_data           = base64encode("")
+  }
+
+  dynamic "shape_config" {
+    for_each = local.is_flexible_bastion_shape ? [1] : []
+    content {
+      ocpus         = var.bastion_ocpus
+      memory_in_gbs = var.bastion_ram
+    }
   }
 
   source_details {
@@ -93,6 +103,13 @@ resource "oci_core_instance" "Sp3Headnode" {
     tenancy_id = var.tenancy_ocid
   }
 
+  dynamic "shape_config" {
+    for_each = local.is_flexible_headnode_shape ? [1] : []
+    content {
+      ocpus         = var.headnode_ocpus
+      memory_in_gbs = var.headnode_ram
+    }
+  }
   source_details {
     # Required
     source_id   = local.Sp3_headnode_image
