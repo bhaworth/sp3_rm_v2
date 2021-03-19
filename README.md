@@ -16,21 +16,26 @@ Upon completion of the deployment, an Application Information tab will be shown 
 - `iam.tf` creates a dynamic group and policy to allow OCI CLI operations from the Head Node
 
 
-## User Data Files
-The shell scripts within the the `userdata` directory are used to configure the Head Node Compute Instance once it has booted for the first time.
+## Cloud Init Files
+The `scripts` directory contains the scripts and configuration for Cloud Init.
 
-`bootstrap.sh` is the file used normally.  It performs the following activities:
+`cloud-config.template.yaml` contains the instructions for Cloud Init
+- write `/root/bootstrap_root.sh` and `/tmp/bootstrap_ubuntu.sh`
+- run `/root/bootstrap_root.sh`
+- `write_files:` is performed before users are created, so first run chmod on ubuntu script so that user ubuntu can run the script
+- run `bash /tmp/bootstrap_ubuntu.sh` as ubuntu
+
+`bootstrap_root.sh` is the file containing all the commands that run as root.
 - Installs jq for JSON query
 - Partitions, formats (with ext3) the two Block Volumes
 - Mounts the Block Volumes to /data and /work
-- Installs the OCI CLI under the ubuntu user together with a .oci/profile file suited for using instance_principal authentication
-- Modifies ubuntu .bashrc to export OCI_CLI_AUTH=instance_principal
 - Installs NFS Server
 - Configures NFS service ports to static mappings
 - Adds the NFS ports as well as TCP/80 to iptables
+
+`bootstrap_ubuntu.sh` is the file containing all the commands that run as user ubuntu.  Some Terraform variables are injected in to this files as it is encoded in to the user data
+- Installs the OCI CLI under the ubuntu user together with a .oci/profile file suited for using instance_principal authentication
+- Modifies ubuntu .bashrc to export OCI_CLI_AUTH=instance_principal
+- Writes the deployment_id file in ~ubuntu
 - Pulls GitLab Private SSH Key from OCI Secrets service
 - Clones SP3 GitLab Repo
-
-`bootstrap_test.sh` does the same as `bootstrap.sh` plus 
-- exports /data and /work for NFS testing
-- installs the NGINX web service (for testing load balancer configurations).
