@@ -26,4 +26,5 @@ variable "specify_prefix" { default = false }
 locals {
   compute_flexible_shapes = ["VM.Standard.E3.Flex"]
   Sp3_deploy_id           = random_string.deploy_id.result
+  Sp3_gitrepo_secret_id   = "ocid1.vaultsecret.oc1.uk-london-1.amaaaaaahe4ejdia3ejrsbqkv6iz2ipwngjmteeduitufuu7u35sgxrx7wna"
 }

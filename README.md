@@ -37,5 +37,7 @@ The `scripts` directory contains the scripts and configuration for Cloud Init.
 - Installs the OCI CLI under the ubuntu user together with a .oci/profile file suited for using instance_principal authentication
 - Modifies ubuntu .bashrc to export OCI_CLI_AUTH=instance_principal
 - Writes the deployment_id file in ~ubuntu
+
+`install_sp3.sh` - clones the Git repo for SP3 and begins the intialisation
 - Pulls GitLab Private SSH Key from OCI Secrets service
 - Clones SP3 GitLab Repo

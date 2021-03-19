@@ -1,0 +1,17 @@
+#cloud-config
+
+write_files:
+# setup scripts
+  - path: "/tmp/inject_pub_keys.sh"
+    permissions: "0777"
+    encoding: "gzip+base64"
+    content: |
+      ${inject_pub_keys_sh_content}
+
+runcmd:
+ - echo "Set permissions on scripts to run as ubuntu user."
+ - chown ubuntu:ubuntu /tmp/inject_pub_keys.sh
+ - echo "Finished scripts."
+
+final_message: "The system is finally up, after $UPTIME seconds"
+output: {all: '| tee -a /root/cloud-init-output.log'}

@@ -12,16 +12,31 @@ write_files:
     encoding: "gzip+base64"
     content: |
       ${bootstrap_ubuntu_sh_content}
+  - path: "/tmp/install_sp3.sh"
+    permissions: "0777"
+    encoding: "gzip+base64"
+    content: |
+      ${install_sp3_sh_content}
+  - path: "/tmp/inject_pub_keys.sh"
+    permissions: "0777"
+    encoding: "gzip+base64"
+    content: |
+      ${inject_pub_keys_sh_content}
 
 runcmd:
  - echo "Running root script..."
  - /root/bootstrap_root.sh
  - echo "Finished root script."
- - echo "Set permissions on ubuntu script."
- - chown ubuntu:ubuntu /tmp/bootstrap_ubuntu.sh
+ - echo "Set permissions on scripts to run as ubuntu user."
+ - chown ubuntu:ubuntu /tmp/bootstrap_ubuntu.sh /tmp/install_sp3.sh /tmp/inject_pub_keys.sh
  - echo "Running ubuntu user script..."
  - sudo -i -H -u ubuntu bash /tmp/bootstrap_ubuntu.sh
  - echo "Finished ubuntu user script."
+ - echo "Running inject pub keys script..."
+ - sudo -i -H -u ubuntu bash /tmp/inject_pub_keys.sh
+ - echo "Running install SP3 script..."
+ - sudo -i -H -u ubuntu bash /tmp/install_sp3.sh
+ - echo "Finished SP3 install script."
 
 final_message: "The system is finally up, after $UPTIME seconds"
 output: {all: '| tee -a /root/cloud-init-output.log'}
