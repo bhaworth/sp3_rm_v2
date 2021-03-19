@@ -23,6 +23,7 @@ variableGroups:
       - ${headnode_ocpus}
       - ${headnode_ram}
       - ${env_name}
+      - ${specify_prefix}
       - ${name_prefix}
   - title: "Optional Settings"
     variables:
