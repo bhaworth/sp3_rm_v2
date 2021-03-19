@@ -15,7 +15,7 @@ variable "hn_boot_size" { default = 120 }
 variable "hn_data_size" { default = 1024 }
 variable "hn_work_size" { default = 1024 }
 variable "ad" {}
-variable "name_prefix" {}
+variable "name_prefix" { default = "" }
 variable "env_name" { default = "sp3" }
 variable "deploy_test" { default = false }
 variable "show_testing_others" { default = false }
