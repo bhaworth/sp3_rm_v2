@@ -41,3 +41,5 @@ The `scripts` directory contains the scripts and configuration for Cloud Init.
 `install_sp3.sh` - clones the Git repo for SP3 and begins the intialisation
 - Pulls GitLab Private SSH Key from OCI Secrets service
 - Clones SP3 GitLab Repo
+
+`inject_pub_keys.sh` adds 4 public keys to ~ubuntu/.ssh/authorized_keys
