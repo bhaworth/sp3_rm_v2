@@ -133,13 +133,14 @@ variables:
   env_name:
     type: string
     title: "Environment Name"
-    description: "Name for the environment - e.g. sp3"
+    description: "Name for the environment - e.g. sp3 - lower case and digits only - must start with lower case letter"
+    pattern: "^[a-z][a-z0-9]+$"
     default: "sp3"
   name_prefix:
     type: string
     title: "Display/Host Name Prefix"
-    description: "Optional prefix for all Display Names and Hostnames - letters and digits only"
-    pattern: "^[a-zA-Z0-9]+$"
+    description: "Optional prefix for all Display Names and Hostnames - lower case and digits only - must start with lower case letter"
+    pattern: "^[a-z][a-z0-9]+$"
   hn_boot_size:
     type: integer
     title: "Head Node Server Boot Volume Size"
