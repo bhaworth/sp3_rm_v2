@@ -19,6 +19,7 @@ variable "name_prefix" {}
 variable "env_name" { default = "sp3" }
 variable "deploy_test" { default = false }
 variable "show_testing_others" { default = false }
+variable "specify_prefix" { default = false }
 
 
 
