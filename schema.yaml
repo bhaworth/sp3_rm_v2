@@ -22,10 +22,10 @@ variableGroups:
       - ${headnode_shape}
       - ${headnode_ocpus}
       - ${headnode_ram}
-  - title: "Optional Settings"
-    variables:
       - ${env_name}
       - ${name_prefix}
+  - title: "Optional Settings"
+    variables:
       - ${hn_boot_size}
       - ${hn_data_size}
       - ${hn_work_size}
@@ -75,8 +75,10 @@ variables:
     type: integer
     minimum: 1
     maximum: 64
+    required: true
     title: "Bastion number of CPUs (cores)"
     description: "You can customize the number of CPU cores to a flexible shape."
+    
     visible:
       and:
         - eq:
@@ -86,6 +88,7 @@ variables:
     type: integer
     minimum: 1
     maximum: 1024
+    required: true
     title: "Bastion Server memory (GB)"
     description: "You can customize the amount of memory allocated to a flexible shape."
     visible:
@@ -112,6 +115,7 @@ variables:
     type: integer
     minimum: 1
     maximum: 64
+    required: true
     title: "Head Node number of CPUs (cores)"
     description: "You can customize the number of CPU cores to a flexible shape."
     visible:
@@ -123,6 +127,7 @@ variables:
     type: integer
     minimum: 1
     maximum: 1024
+    required: true
     title: "Head Node memory (GB)"
     description: "You can customize the amount of memory allocated to a flexible shape."
     visible:
@@ -136,6 +141,7 @@ variables:
     description: "Name for the environment - e.g. sp3 - lower case and digits only - must start with lower case letter"
     pattern: "^[a-z][a-z0-9]+$"
     default: "sp3"
+    required: true
   name_prefix:
     type: string
     title: "Display/Host Name Prefix"
