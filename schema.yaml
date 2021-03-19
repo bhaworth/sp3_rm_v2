@@ -79,7 +79,6 @@ variables:
     required: true
     title: "Bastion number of CPUs (cores)"
     description: "You can customize the number of CPU cores to a flexible shape."
-    
     visible:
       and:
         - eq:
@@ -152,10 +151,7 @@ variables:
     title: "Display/Host Name Prefix"
     description: "Optional prefix for all Display Names and Hostnames - lower case and digits only - must start with lower case letter"
     pattern: "^[a-z][a-z0-9]+$"
-    visible:
-      and:
-        - eq:
-          - specify_prefix
+    visible: ${specify_prefix}
   hn_boot_size:
     type: integer
     title: "Head Node Server Boot Volume Size"
