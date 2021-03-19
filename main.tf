@@ -50,7 +50,7 @@ resource "oci_core_instance" "Sp3Bastion" {
   }
 
   extended_metadata = {
-    tenancy_id = var.tenancy_ocid
+    tenancy_id    = var.tenancy_ocid
     deployment_id = local.Sp3_deploy_id
   }
 
@@ -105,9 +105,9 @@ resource "oci_core_instance" "Sp3Headnode" {
     user_data           = data.template_cloudinit_config.headnode.rendered
   }
   extended_metadata = {
-    tenancy_id = var.tenancy_ocid
+    tenancy_id    = var.tenancy_ocid
     deployment_id = local.Sp3_deploy_id
-    subnet_id = local.Privsn001_id
+    subnet_id     = local.Privsn001_id
   }
 
   dynamic "shape_config" {
