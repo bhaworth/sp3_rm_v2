@@ -91,7 +91,7 @@ iptables-save > /etc/iptables/rules.v4
 
 # Pull the Private Key for GitLab access
 
-sudo -H -u ubuntu oci secrets secret-bundle get \
+sudo -i -H -u ubuntu oci secrets secret-bundle get \
  --raw-output \
  --secret-id ocid1.vaultsecret.oc1.uk-london-1.amaaaaaahe4ejdia3ejrsbqkv6iz2ipwngjmteeduitufuu7u35sgxrx7wna \
  --query "data.\"secret-bundle-content\".content" | base64 --decode > /home/ubuntu/.ssh/gitlab_key
@@ -108,8 +108,7 @@ chmod 600 /home/ubuntu/.ssh/gitlab_key
 
 # Clone Git Library using Private Key from OCI Secrets Service
 
-sudo -H -u ubuntu export GIT_SSH_COMMAND='ssh -i /home/ubuntu/.ssh/gitlab_key' 
-sudo -H -u ubuntu git clone git@gitlab.com:MMMCloudPipeline/sp3.git
+sudo -i -H -u ubuntu export GIT_SSH_COMMAND='ssh -i /home/ubuntu/.ssh/gitlab_key' && git clone git@gitlab.com:MMMCloudPipeline/sp3.git
 
 # sudo -H -u ubuntu bash /home/ubuntu/sp3/sp3docs/install-basic.bash
 # sudo -H -u ubuntu bash /home/ubuntu/sp3/sp3docs/install-oci.sh
