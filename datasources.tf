@@ -58,10 +58,10 @@ data "template_file" "bootstrap_ubuntu" {
   }
 }
 
-data "template_file" "install_sp3.sh" {
+data "template_file" "install_sp3" {
   template = file("${path.module}/scripts/install_sp3.sh")
 }
 
-data "template_file" "inject_pub_keys.sh" {
+data "template_file" "inject_pub_keys" {
   template = file("${path.module}/scripts/inject_pub_keys.sh")
 }
