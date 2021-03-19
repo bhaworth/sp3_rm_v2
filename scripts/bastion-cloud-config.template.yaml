@@ -11,6 +11,8 @@ write_files:
 runcmd:
  - echo "Set permissions on scripts to run as ubuntu user."
  - chown ubuntu:ubuntu /tmp/inject_pub_keys.sh
+ - echo "Running inject pub keys script..."
+ - sudo -i -H -u ubuntu bash /tmp/inject_pub_keys.sh
  - echo "Finished scripts."
 
 final_message: "The system is finally up, after $UPTIME seconds"
