@@ -142,11 +142,19 @@ variables:
     pattern: "^[a-z][a-z0-9]+$"
     default: "sp3"
     required: true
+  specify_prefix:
+    title: "Would you like to specify a prefix for the deployment?"
+    type: boolean
+    default: false
   name_prefix:
     type: string
     title: "Display/Host Name Prefix"
     description: "Optional prefix for all Display Names and Hostnames - lower case and digits only - must start with lower case letter"
     pattern: "^[a-z][a-z0-9]+$"
+    visible:
+      and:
+        - eq:
+          - specify_prefix
   hn_boot_size:
     type: integer
     title: "Head Node Server Boot Volume Size"
