@@ -14,7 +14,6 @@ write_files:
       ${bootstrap_ubuntu_sh_content}
 
 runcmd:
- - echo "Sleeping for 2 minutes..."
  - echo "Running root script..."
  - /root/bootstrap_root.sh
  - echo "Finished root script."
