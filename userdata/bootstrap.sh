@@ -113,3 +113,6 @@ sudo -H -u ubuntu git clone git@gitlab.com:MMMCloudPipeline/sp3.git
 
 # sudo -H -u ubuntu bash /home/ubuntu/sp3/sp3docs/install-basic.bash
 # sudo -H -u ubuntu bash /home/ubuntu/sp3/sp3docs/install-oci.sh
+
+# Install Nginx
+# apt install nginx -y
