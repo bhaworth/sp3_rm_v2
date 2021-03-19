@@ -7,7 +7,7 @@ write_files:
     encoding: "gzip+base64"
     content: |
       ${bootstrap_root_sh_content}
-  - path: "/home/ubuntu/bootstrap_ubuntu.sh"
+  - path: "/tmp/bootstrap_ubuntu.sh"
     permissions: "0777"
     encoding: "gzip+base64"
     content: |
@@ -15,12 +15,13 @@ write_files:
 
 runcmd:
  - echo "Sleeping for 2 minutes..."
- - sleep 120
  - echo "Running root script..."
  - /root/bootstrap_root.sh
  - echo "Finished root script."
+ - echo "Set permissions on ubuntu script."
+ - chown ubuntu:ubuntu /tmp/bootstrap_ubuntu.sh
  - echo "Running ubuntu user script..."
- - sudo -i -H -u ubuntu bash /home/ubuntu/bootstrap_ubuntu.sh
+ - sudo -i -H -u ubuntu bash /tmp/bootstrap_ubuntu.sh
  - echo "Finished ubuntu user script."
 
 final_message: "The system is finally up, after $UPTIME seconds"
