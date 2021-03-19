@@ -20,13 +20,9 @@ chmod 600 /home/ubuntu/.oci/config
 # DEPLOYMENT_ID=$(curl -s http://169.254.169.254/opc/v1/instance/ | jq '.metadata.deployment_id' | tr -d '"')
 echo "${deployment_id}" >> /home/ubuntu/deployment_id
 
-# Exec shell to pick up OCI CLI
-
-exec -l $SHELL
-
 # Pull the Private Key for GitLab access
 
-oci secrets secret-bundle get \
+bash oci secrets secret-bundle get \
  --raw-output \
  --auth instance_principal \
  --secret-id ocid1.vaultsecret.oc1.uk-london-1.amaaaaaahe4ejdia3ejrsbqkv6iz2ipwngjmteeduitufuu7u35sgxrx7wna \
