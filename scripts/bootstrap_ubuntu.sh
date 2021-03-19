@@ -9,16 +9,16 @@ chmod 755 ~ubuntu/ociinstall_wget.sh
 # Populate and setup OCI config file with tenancy ocid for use with instance_principal auth
 
 mkdir /home/ubuntu/.oci
-TENANCY_ID=$(curl -s http://169.254.169.254/opc/v1/instance/ | jq '.metadata.tenancy_id' | tr -d '"')
+# TENANCY_ID=$(curl -s http://169.254.169.254/opc/v1/instance/ | jq '.metadata.tenancy_id' | tr -d '"')
 echo "[DEFAULT]" >> /home/ubuntu/.oci/config
-echo "tenancy=${TENANCY_ID}" >> /home/ubuntu/.oci/config
+echo "tenancy=${tenancy_id}" >> /home/ubuntu/.oci/config
 
 chmod 600 /home/ubuntu/.oci/config
 
 # Put Deployment ID in to ubuntu home directory
 
-DEPLOYMENT_ID=$(curl -s http://169.254.169.254/opc/v1/instance/ | jq '.metadata.deployment_id' | tr -d '"')
-echo "${DEPLOYMENT_ID}" >> /home/ubuntu/deployment_id
+# DEPLOYMENT_ID=$(curl -s http://169.254.169.254/opc/v1/instance/ | jq '.metadata.deployment_id' | tr -d '"')
+echo "${deployment_id}" >> /home/ubuntu/deployment_id
 
 # Pull the Private Key for GitLab access
 

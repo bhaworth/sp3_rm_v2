@@ -1,0 +1,25 @@
+#cloud-config
+
+write_files:
+# setup scripts
+  - path: "/root/bootstrap_root.sh"
+    permissions: "0777"
+    encoding: "gzip+base64"
+    content: |
+      ${bootstrap_root_sh_content}
+  - path: "/home/ubuntu/bootstrap_ubuntu.sh"
+    permissions: "0777"
+    encoding: "gzip+base64"
+    content: |
+      ${bootstrap_ubuntu_sh_content}
+
+runcmd:
+ - echo "Running root script..."
+ - /root/bootstrap_root.sh
+ - echo "Finished root script."
+ - echo "Running ubuntu user script..."
+ - sudo -i -H -u ubuntu bash /home/ubuntu/bootstrap_ubuntu.sh
+ - echo "Finished ubuntu user script."
+
+final_message: "The system is finally up, after $UPTIME seconds"
+output: {all: '| tee -a /root/cloud-init-output.log'}
