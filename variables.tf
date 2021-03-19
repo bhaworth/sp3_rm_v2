@@ -25,4 +25,5 @@ variable "specify_prefix" { default = false }
 
 locals {
   compute_flexible_shapes = ["VM.Standard.E3.Flex"]
+  Sp3_deploy_id           = random_string.deploy_id.result
 }

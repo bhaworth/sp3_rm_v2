@@ -32,7 +32,7 @@ data "template_file" "bootstrap_ubuntu" {
 
   # Variables parsed into bootstrap_ubuntu.sh as it is encoded in to Cloud-Init
   vars = {
-    deployment_id = var.deploy_id
+    deployment_id = local.Sp3_deploy_id
     tenancy_id    = var.tenancy_ocid
   }
 }
