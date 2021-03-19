@@ -1,5 +1,7 @@
 # Random string
 resource "random_string" "deploy_id" {
-  length  = 4
+  length  = 5
   special = false
+  upper = false
+  number = false
 }
