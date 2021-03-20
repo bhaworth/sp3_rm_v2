@@ -1,9 +1,3 @@
-
-# ------ Get List Images
-data "oci_core_images" "InstanceImages" {
-  compartment_id = var.compartment_ocid
-}
-
 # ------ Provider
 provider "oci" {
   region = var.region
