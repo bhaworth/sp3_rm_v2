@@ -1,0 +1,13 @@
+{
+    "tenancy_id" : "${tenancy_id",
+    "deployment_id" : "${deployment_id}",
+    "subnet_id" : "${priv_subnet_id}",
+    "load_balancer_id" : "${load_balancer_id}",
+    "worker_node" : {
+        "worker_shape" : "${worker_shape}",    
+        "worker_image" : "${worker_image}",  
+        "worker_ocpus" : "${worker_ocpus}",  
+        "worker_ram" : "${worker_ram}",  
+        "worker_use_scratch" : "${worker_use_scratch}"
+    }
+}
