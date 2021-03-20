@@ -30,5 +30,5 @@ resource "oci_identity_compartment" "sp3_child_comp" {
 
 locals { 
   # If 'create child compartment' is true, use the new compartment otherwise use the parent
-  Sp3_cid = var.create_child_comp ? oci_identity_compartment.sp3_child_comp[count.index].id : var.compartment_ocid
+  Sp3_cid = var.create_child_comp ? oci_identity_compartment.sp3_child_comp[0].id : var.compartment_ocid
 }
