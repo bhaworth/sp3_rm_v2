@@ -19,11 +19,19 @@ Upon completion of the deployment, an Application Information tab will be shown 
 ## Cloud Init Files
 The `scripts` directory contains the scripts and configuration for Cloud Init.
 
-`cloud-config.template.yaml` contains the instructions for Cloud Init
-- write `/root/bootstrap_root.sh` and `/tmp/bootstrap_ubuntu.sh`
-- run `/root/bootstrap_root.sh`
+`bastion_cloud-config.template.yaml` contains the instructions for Cloud Init
+- write `/tmp/inject_pub_keys.sh`
 - `write_files:` is performed before users are created, so first run chmod on ubuntu script so that user ubuntu can run the script
+- run `bash /tmp/inject_pub_keys.sh` as ubuntu
+
+`headnode_cloud-config.template.yaml` contains the instructions for Cloud Init
+- write `/root/bootstrap_root.sh` and `/tmp/bootstrap_ubuntu.sh`, `/tmp/inject_pub_keys.sh`, `/tmp/stack_info.json`, `/tmp/install_sp3.sh`
+- run `/root/bootstrap_root.sh`
+- `write_files:` is performed before users are created, so first run chmod on scripts to run as user ubuntu
 - run `bash /tmp/bootstrap_ubuntu.sh` as ubuntu
+- run `mv /tmp/stack_info.json ~ubuntu/stack_info.json`
+- run `bash /tmp/inject_pub_keys.sh` as ubuntu
+- run `bash /tmp/install_sp3.sh` as ubuntu
 
 `bootstrap_root.sh` is the file containing all the commands that run as root.
 - Installs jq for JSON query
@@ -43,3 +51,9 @@ The `scripts` directory contains the scripts and configuration for Cloud Init.
 - Clones SP3 GitLab Repo
 
 `inject_pub_keys.sh` adds 4 public keys to ~ubuntu/.ssh/authorized_keys
+
+`stack_info.json` Includes the following information:
+- Deployment ID
+- Head Node subnet OCID
+- Load Balancer OCID
+- Worker Node details captured in Stack Variables screen
