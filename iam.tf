@@ -20,6 +20,7 @@ resource "oci_identity_policy" "HeadNode_Policy" {
 }
 
 resource "oci_identity_compartment" "sp3_child_comp" {
+  # If 'create child compartment' is true, create a new compartment else don't
   count = var.create_child_comp ? 1 : 0
   enable_delete  = true
   compartment_id = var.compartment_ocid
@@ -28,5 +29,6 @@ resource "oci_identity_compartment" "sp3_child_comp" {
 }
 
 locals { 
-  Sp3_cid = oci_identity_compartment.sp3_child_comp.id 
+  # If 'create child compartment' is true, use the new compartment otherwise use the parent
+  Sp3_cid = var.create_child_comp ? oci_identity_compartment.sp3_child_comp.id : var.compartment_ocid
 }

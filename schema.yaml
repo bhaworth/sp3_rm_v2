@@ -181,7 +181,7 @@ variables:
     minimum: 50
     maximum: 32768
   create_child_comp:
-    title: "Create a child compartment for the stack - default = yes"
+    title: "Create a child compartment for the stack"
     type: boolean
   specify_worker_spec:
     title: "Specify Worker Node settings"
