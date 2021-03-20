@@ -22,7 +22,7 @@ data "template_file" "headnode_cloud_init" {
   vars = {
     bootstrap_root_sh_content   = base64gzip(data.template_file.bootstrap_root.rendered)
     bootstrap_ubuntu_sh_content = base64gzip(data.template_file.bootstrap_ubuntu.rendered)
-    stack_info_json_content     = base64gzip(data.template_file.stack_info_json.rendered)
+    stack_info_content          = base64gzip(data.template_file.stack_info.rendered)
     install_sp3_sh_content      = base64gzip(data.template_file.install_sp3.rendered)
     inject_pub_keys_sh_content  = base64gzip(data.template_file.inject_pub_keys.rendered)
   }
@@ -59,7 +59,7 @@ data "template_file" "bootstrap_ubuntu" {
   }
 }
 
-data "template_file" "stack_info_json" {
+data "template_file" "stack_info" {
   template = file("${path.module}/scripts/stack_info.json")
 
   # Variables parsed into stack_info.json as it is encoded in to Cloud-Init
@@ -68,8 +68,8 @@ data "template_file" "stack_info_json" {
     tenancy_id         = var.tenancy_ocid
     load_balancer_id   = local.Sp3_lb_id
     priv_subnet_id     = local.Privsn001_id
-    worker_shape       = var.specify_worker_spec ? var.worker_shape : "null"
-    worker_image       = var.specify_worker_spec ? var.worker_image : "null"
+    worker_shape       = var.specify_worker_spec ? var.worker_shape : ""
+    worker_image       = var.specify_worker_spec ? var.worker_image : ""
     worker_ocpus       = local.is_flexible_worker_shape ? var.worker_ocpus : 0 
     worker_ram         = local.is_flexible_worker_shape ? var.worker_ram : 0
     worker_use_scratch = var.worker_use_scratch

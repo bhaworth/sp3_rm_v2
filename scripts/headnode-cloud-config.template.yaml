@@ -16,7 +16,7 @@ write_files:
     permissions: "0777"
     encoding: "gzip+base64"
     content: |
-      ${stack_info_json_content}
+      ${stack_info_content}
   - path: "/tmp/install_sp3.sh"
     permissions: "0777"
     encoding: "gzip+base64"
