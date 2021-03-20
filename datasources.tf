@@ -22,6 +22,7 @@ data "template_file" "headnode_cloud_init" {
   vars = {
     bootstrap_root_sh_content   = base64gzip(data.template_file.bootstrap_root.rendered)
     bootstrap_ubuntu_sh_content = base64gzip(data.template_file.bootstrap_ubuntu.rendered)
+    stack_info_json_content     = base64gzip(data.template_file.stack_info_json.rendered)
     install_sp3_sh_content      = base64gzip(data.template_file.install_sp3.rendered)
     inject_pub_keys_sh_content  = base64gzip(data.template_file.inject_pub_keys.rendered)
   }
@@ -55,6 +56,23 @@ data "template_file" "bootstrap_ubuntu" {
   vars = {
     deployment_id = local.Sp3_deploy_id
     tenancy_id    = var.tenancy_ocid
+  }
+}
+
+data "template_file" "stack_info_json" {
+  template = file("${path.module}/scripts/stack_info.json")
+
+  # Variables parsed into stack_info.json as it is encoded in to Cloud-Init
+  vars = {
+    deployment_id      = local.Sp3_deploy_id
+    tenancy_id         = var.tenancy_ocid
+    load_balancer_id   = local.Sp3_lb_id
+    priv_subnet_id     = local.Privsn001_id
+    worker_shape       = var.worker_shape
+    worker_image       = var.worker_image
+    worker_ocpus       = var.worker_ocpus
+    worker_ram         = var.worker_ram
+    worker_use_scratch = var.worker_use_scratch
   }
 }
 
