@@ -29,3 +29,7 @@ resource "oci_identity_compartment" "sp3_child_comp" {
 locals { 
   Sp3_cid = oci_identity_compartment.sp3_child_comp.id 
 }
+
+output "sp3_child_compartment" {
+  value = local.Sp3_cid
+}
