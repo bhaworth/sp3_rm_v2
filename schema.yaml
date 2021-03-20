@@ -30,6 +30,7 @@ variableGroups:
       - ${hn_boot_size}
       - ${hn_data_size}
       - ${hn_work_size}
+      - ${create_child_comp}
       - ${specify_worker_spec}
       - ${show_testing_others}
   - title: "Worker Node Configurations"
@@ -179,12 +180,15 @@ variables:
     description: "Size in GB.  Size must be between 50 GB and 32,768 GB (32 TB)."
     minimum: 50
     maximum: 32768
-  show_testing_others:
-    title: "Display all other settings / testing options"
+  create_child_comp:
+    title: "Create a child compartment for the stack - default = yes"
     type: boolean
-    default: false
   specify_worker_spec:
     title: "Specify Worker Node settings"
+    type: boolean
+    default: false
+  show_testing_others:
+    title: "Display all other settings / testing options"
     type: boolean
     default: false
   bastion_boot_size:

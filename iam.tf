@@ -20,6 +20,7 @@ resource "oci_identity_policy" "HeadNode_Policy" {
 }
 
 resource "oci_identity_compartment" "sp3_child_comp" {
+  count = var.create_child_comp ? 1 : 0
   enable_delete  = true
   compartment_id = var.compartment_ocid
   description    = "Compartment for the SP3 Cluster with Deployment ID: ${local.Sp3_deploy_id}"

@@ -26,7 +26,7 @@ variable "worker_image" { default = "" }
 variable "worker_ocpus" { default = 1 }
 variable "worker_ram" { default = 16 }
 variable "worker_use_scratch" { default = false }
-variable "create_child_comp" { default = false }
+variable "create_child_comp" { default = true }
 
 
 locals {
