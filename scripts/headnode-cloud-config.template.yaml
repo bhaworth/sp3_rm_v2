@@ -12,6 +12,11 @@ write_files:
     encoding: "gzip+base64"
     content: |
       ${bootstrap_ubuntu_sh_content}
+  - path: "/tmp/stack_info.json"
+    permissions: "0777"
+    encoding: "gzip+base64"
+    content: |
+      ${stack_info_json_content}
   - path: "/tmp/install_sp3.sh"
     permissions: "0777"
     encoding: "gzip+base64"
@@ -28,10 +33,12 @@ runcmd:
  - /root/bootstrap_root.sh
  - echo "Finished root script."
  - echo "Set permissions on scripts to run as ubuntu user."
- - chown ubuntu:ubuntu /tmp/bootstrap_ubuntu.sh /tmp/install_sp3.sh /tmp/inject_pub_keys.sh
+ - chown ubuntu:ubuntu /tmp/bootstrap_ubuntu.sh /tmp/stack_info.json /tmp/install_sp3.sh /tmp/inject_pub_keys.sh
  - echo "Running ubuntu user script..."
  - sudo -i -H -u ubuntu bash /tmp/bootstrap_ubuntu.sh
  - echo "Finished ubuntu user script."
+ - echo "Move stack_info.json..."
+ - mv /tmp/stack_info.json /home/ubuntu/stack_info.json
  - echo "Running inject pub keys script..."
  - sudo -i -H -u ubuntu bash /tmp/inject_pub_keys.sh
  - echo "Running install SP3 script..."
