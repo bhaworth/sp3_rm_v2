@@ -13,7 +13,7 @@ Upon completion of the deployment, an Application Information tab will be shown 
 - `lb_nsg.tf` creates the Network Security Group for the Load Balancer
 - `hn_nsg.tf` creates the Network Security Group for the Head Node
 - `datasources.tf` is used for specific functions and data sources within Terraform
-- `iam.tf` creates a dynamic group and policy to allow OCI CLI operations from the Head Node
+- `iam.tf` creates a dynamic group and policy to allow OCI CLI operations from the Head Node.  Also creates a new compartment to house all the stack resources with name deployment_<deployment_id>
 
 
 ## Cloud Init Files
