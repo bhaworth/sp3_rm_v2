@@ -7,7 +7,7 @@ resource "oci_identity_dynamic_group" "HeadNode_DG" {
 }
 
 resource "oci_identity_policy" "HeadNode_Policy" {
-  compartment_id = var.compartment_id
+  compartment_id = var.compartment_ocid
 
   description = "Policy for Head Node in deployment ${local.Sp3_deploy_id}"
 
@@ -21,7 +21,7 @@ resource "oci_identity_policy" "HeadNode_Policy" {
 
 resource "oci_identity_compartment" "sp3_child_comp" {
   enable_delete  = true
-  compartment_id = var.compartment_id
+  compartment_id = var.compartment_ocid
   description    = "Compartment for the SP3 Cluster with Deployment ID: ${local.Sp3_deploy_id}"
   name           = "deployment_${local.Sp3_deploy_id}"
 }
