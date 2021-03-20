@@ -30,8 +30,8 @@ variableGroups:
       - ${hn_boot_size}
       - ${hn_data_size}
       - ${hn_work_size}
-      - ${show_testing_others}
       - ${specify_worker_spec}
+      - ${show_testing_others}
   - title: "Worker Node Configurations"
     visible: ${specify_worker_spec}
     variables:
