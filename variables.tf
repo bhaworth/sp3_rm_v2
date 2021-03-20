@@ -20,6 +20,12 @@ variable "env_name" { default = "sp3" }
 variable "deploy_test" { default = false }
 variable "show_testing_others" { default = false }
 variable "specify_prefix" { default = false }
+variable "specify_worker_spec" { default = false }
+variable "worker_shape" {}
+variable "worker_image" {}
+variable "worker_ocpus" { default = 1 }
+variable "worker_ram" { default = 16 }
+variable "worker_use_scratch" { default = false }
 
 
 
