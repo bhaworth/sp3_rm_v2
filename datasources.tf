@@ -64,15 +64,16 @@ data "template_file" "stack_info" {
 
   # Variables parsed into stack_info.json as it is encoded in to Cloud-Init
   vars = {
-    deployment_id      = local.Sp3_deploy_id
-    tenancy_id         = var.tenancy_ocid
-    load_balancer_id   = local.Sp3_lb_id
-    priv_subnet_id     = local.Privsn001_id
-    worker_shape       = var.specify_worker_spec ? var.worker_shape : ""
-    worker_image       = var.specify_worker_spec ? var.worker_image : ""
-    worker_ocpus       = var.specify_worker_spec ? (local.is_flexible_worker_shape ? var.worker_ocpus : "") : ""
-    worker_ram         = var.specify_worker_spec ? (local.is_flexible_worker_shape ? var.worker_ram : "") : ""
-    worker_use_scratch = var.specify_worker_spec ? var.worker_use_scratch : ""
+    deployment_id       = local.Sp3_deploy_id
+    tenancy_id          = var.tenancy_ocid
+    load_balancer_id    = local.Sp3_lb_id
+    priv_subnet_id      = local.Privsn001_id
+    specify_worker_spec = var.specify_worker_spec
+    worker_shape        = var.specify_worker_spec ? var.worker_shape : ""
+    worker_image        = var.specify_worker_spec ? var.worker_image : ""
+    worker_ocpus        = var.specify_worker_spec ? (local.is_flexible_worker_shape ? var.worker_ocpus : 0) : 0
+    worker_ram          = var.specify_worker_spec ? (local.is_flexible_worker_shape ? var.worker_ram : 0) : 0
+    worker_use_scratch  = var.specify_worker_spec ? var.worker_use_scratch : false
   }
 }
 

@@ -4,6 +4,7 @@
     "subnet_id" : "${priv_subnet_id}",
     "load_balancer_id" : "${load_balancer_id}",
     "worker_node" : {
+        "worker_spec" : ${specify_worker_spec}
         "worker_shape" : "${worker_shape}",    
         "worker_image" : "${worker_image}",  
         "worker_ocpus" : ${worker_ocpus},  
