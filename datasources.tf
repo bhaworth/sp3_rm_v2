@@ -66,6 +66,7 @@ data "template_file" "stack_info" {
   # Variables parsed into stack_info.json as it is encoded in to Cloud-Init
   vars = {
     deployment_id       = local.Sp3_deploy_id
+    compartment_id      = local.Sp3_cid
     tenancy_id          = var.tenancy_ocid
     load_balancer_id    = local.Sp3_lb_id
     priv_subnet_id      = local.Privsn001_id
