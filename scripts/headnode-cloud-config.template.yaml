@@ -27,6 +27,11 @@ write_files:
     encoding: "gzip+base64"
     content: |
       ${inject_pub_keys_sh_content}
+  - path: "/tmp/install_nginx.sh"
+    permissions: "0777"
+    encoding: "gzip+base64"
+    content: |
+      ${install_nginx_sh_content}
 
 runcmd:
  - echo "Running root script..."
@@ -44,6 +49,7 @@ runcmd:
  - echo "Running install SP3 script..."
  - sudo -i -H -u ubuntu bash /tmp/install_sp3.sh
  - echo "Finished SP3 install script."
+ - sudo -i -H -u ubuntu bash /tmp/install_nginx.sh
 
 final_message: "The system is finally up, after $UPTIME seconds"
 output: {all: '| tee -a /root/cloud-init-output.log'}
