@@ -33,6 +33,7 @@ variableGroups:
       - ${create_child_comp}
       - ${specify_worker_spec}
       - ${install_nginx}
+      - ${create_dns}
       - ${show_testing_others}
   - title: "Worker Node Configurations"
     visible: ${specify_worker_spec}
@@ -190,6 +191,10 @@ variables:
     default: false
   install_nginx:
     title: "Install nginx for testing?"
+    type: boolean
+    default: false
+  create_dns:
+    title: "Create DNS record in oci.sp3dev.ml?"
     type: boolean
     default: false
   show_testing_others:
