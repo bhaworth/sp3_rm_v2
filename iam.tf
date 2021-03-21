@@ -19,6 +19,19 @@ resource "oci_identity_policy" "HeadNode_Policy" {
   name = "${local.Sp3_env_name}_HeadNode"
 }
 
+resource "oci_identity_policy" "HeadNode_Secrets_Policy" {
+  compartment_id = local.Sp3dev_ml_vault_comp_id
+
+  description = "Policy for Head Node secrets in deployment ${local.Sp3_deploy_id}"
+
+  # Need to know what the correct permissions required are  <<CHANGE_ME>>
+
+  statements = [
+    "Allow dynamic-group ${oci_identity_dynamic_group.HeadNode_DG.name} to use secret-family in compartment sandbox",
+  ]
+  name = "${local.Sp3_env_name}_HeadNode_Secrets"
+}
+
 resource "oci_identity_compartment" "sp3_child_comp" {
   # If 'create child compartment' is true, create a new compartment else don't
   count = var.create_child_comp ? 1 : 0
