@@ -32,6 +32,7 @@ variableGroups:
       - ${hn_work_size}
       - ${create_child_comp}
       - ${specify_worker_spec}
+      - ${install_nginx}
       - ${show_testing_others}
   - title: "Worker Node Configurations"
     visible: ${specify_worker_spec}
@@ -184,11 +185,15 @@ variables:
     title: "Create a child compartment for the stack"
     type: boolean
   specify_worker_spec:
-    title: "Specify Worker Node settings"
+    title: "Specify Worker Node settings?"
+    type: boolean
+    default: false
+  install_nginx:
+    title: "Install nginx for testing?"
     type: boolean
     default: false
   show_testing_others:
-    title: "Display all other settings / testing options"
+    title: "Display all other settings / testing options?"
     type: boolean
     default: false
   bastion_boot_size:
@@ -198,9 +203,7 @@ variables:
     minimum: 50
     maximum: 32768
   deploy_test:
-    type: boolean
-    title: Deploy test web server to head node and NFS export (BenH TESTING ONLY)
-    default: false
+    visible: false
   worker_image:
     type: oci:core:image:id
     dependsOn:
