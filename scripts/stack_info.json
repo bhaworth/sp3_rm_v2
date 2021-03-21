@@ -1,5 +1,6 @@
 {
     "tenancy_id" : "${tenancy_id}",
+    "compartment_id" : "${compartment_id}"
     "deployment_id" : "${deployment_id}",
     "subnet_id" : "${priv_subnet_id}",
     "load_balancer_id" : "${load_balancer_id}",
