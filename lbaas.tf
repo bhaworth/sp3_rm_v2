@@ -73,24 +73,24 @@ resource "oci_load_balancer_listener" "sp3_loadbalancer_listener_1" {
   ]
 }
 
-/* resource oci_load_balancer_rule_set url_redirect {
-  items {
-    action = "REDIRECT"
-    conditions {
-      attribute_name  = "PATH"
-      attribute_value = "/"
-      operator        = "FORCE_LONGEST_PREFIX_MATCH"
-    }
-    redirect_uri {
-      host     = "{host}"
-      path     = "/{path}"
-      port     = "443"
-      protocol = "https"
-      query    = "?{query}"
-    }
-    response_code = "301"
-  }
-  load_balancer_id = local.Sp3_lb_id
-  name             = "URLRedirect"
-} */
+# resource "oci_load_balancer_rule_set" "url_redirect_port80" {
+#   items {
+#     action = "REDIRECT"
+#     conditions {
+#       attribute_name  = "PATH"
+#       attribute_value = "/"
+#       operator        = "FORCE_LONGEST_PREFIX_MATCH"
+#     }
+#     redirect_uri {
+#       host     = "{host}"
+#       path     = "/{path}"
+#       port     = "443"
+#       protocol = "https"
+#       query    = "?{query}"
+#     }
+#     response_code = "301"
+#   }
+#   load_balancer_id = local.Sp3_lb_id
+#   name             = "URLRedirect"
+# } 
 
