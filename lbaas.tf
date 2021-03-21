@@ -21,7 +21,7 @@ locals {
   Sp3_lb_public_ip = lookup(oci_load_balancer_load_balancer.sp3_loadbalancer.ip_address_details[0], "ip_address")
 }
 output "sp3_loadbalancer_url" {
-  value = format("http://%s", local.Sp3_lb_public_ip)
+  value = create_dns ? "http://${Sp3_env_name}.oci.sp3dev.ml" : format("http://%s", local.Sp3_lb_public_ip)
 }
 output "sp3_loadbalancer_public_ip" {
   value = local.Sp3_lb_public_ip
