@@ -1,7 +1,7 @@
 resource "oci_identity_dynamic_group" "HeadNode_DG" {
   compartment_id = var.tenancy_ocid
 
-  description   = "Group for Head Node in deployment ${local.Sp3_deploy_id}"
+  description   = "Group for Head Node in deployment ${local.Sp3_env_name}"
   matching_rule = "Any {Any {instance.id = '${local.Sp3Headnode_id}'}}"
   name          = "${local.Sp3_env_name}_HeadNode"
 }
@@ -9,7 +9,7 @@ resource "oci_identity_dynamic_group" "HeadNode_DG" {
 resource "oci_identity_policy" "HeadNode_Policy" {
   compartment_id = var.compartment_ocid
 
-  description = "Policy for Head Node in deployment ${local.Sp3_deploy_id}"
+  description = "Policy for Head Node in deployment ${local.Sp3_env_name}"
 
   # Need to know what the correct permissions required are  <<CHANGE_ME>>
 
@@ -22,7 +22,7 @@ resource "oci_identity_policy" "HeadNode_Policy" {
 resource "oci_identity_policy" "HeadNode_Secrets_Policy" {
   compartment_id = local.Sp3dev_ml_vault_comp_id
 
-  description = "Policy for Head Node secrets in deployment ${local.Sp3_deploy_id}"
+  description = "Policy for Head Node secrets in deployment ${local.Sp3_env_name}"
 
   # Need to know what the correct permissions required are  <<CHANGE_ME>>
 
@@ -37,8 +37,8 @@ resource "oci_identity_compartment" "sp3_child_comp" {
   count = var.create_child_comp ? 1 : 0
   enable_delete  = true
   compartment_id = var.compartment_ocid
-  description    = "Compartment for the SP3 Cluster with Deployment ID: ${local.Sp3_deploy_id}"
-  name           = "deployment_${local.Sp3_deploy_id}"
+  description    = "Compartment for the SP3 Cluster with Deployment ID: ${local.Sp3_env_name}"
+  name           = "deployment_${local.Sp3_env_name}"
 }
 
 locals { 
