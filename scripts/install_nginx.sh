@@ -1,5 +1,13 @@
 #!/bin/bash
 
+if [[ ${install_nginx} ]]; then
+    echo "Installing nginx..."
+else
+    echo "Exiting - nginx not to be installed"
+    exit
+fi
+
+
 sudo apt install nginx -y
 
 sudo mkdir -p /var/www/oci.sp3dev.ml/html
