@@ -36,8 +36,13 @@ mkfs -t ext3 /dev/oracleoci/oraclevdc1
 
 mkdir /data /work
 
-mount /dev/oracleoci/oraclevdb1 /data
-mount /dev/oracleoci/oraclevdc1 /work
+# Add to fstab
+
+echo '/dev/oracleoci/oraclevdb1 /work ext3 defaults 0 0' >> /etc/fstab
+echo '/dev/oracleoci/oraclevdc1 /data ext3 defaults 0 0' >> /etc/fstab
+
+mount /data
+mount /work
 
 # Install NFS Server
 
