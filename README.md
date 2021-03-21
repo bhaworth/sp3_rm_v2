@@ -39,7 +39,7 @@ The `scripts` directory contains the scripts and configuration for Cloud Init.
 `bootstrap_root.sh` is the file containing all the commands that run as root.
 - Installs jq for JSON query
 - Partitions, formats (with ext4) the two Block Volumes
-- Mounts the Block Volumes to /data and /work
+- Adds to /etc/fstab and mounts the para-virtualisaed Block Volumes to /data and /work
 - Installs NFS Server
 - Configures NFS service ports to static mappings
 - Adds the NFS ports as well as TCP/80 to iptables
