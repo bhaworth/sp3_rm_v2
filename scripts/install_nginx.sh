@@ -17,10 +17,10 @@ sudo chmod 755 /var/www/oci.sp3dev.ml/html
 cat << EOF | sudo tee -a /var/www/oci.sp3dev.ml/html/index.html
 <html>
     <head>
-        <title>Welcome to sp3dev.ml!</title>
+        <title>Welcome to ${Sp3_env_name}.oci.sp3dev.ml!</title>
     </head>
     <body>
-        <h1>Success!  The sp3dev.ml server block is working!</h1>
+        <h1>Success!  The ${Sp3_env_name}.oci.sp3dev.ml server block is working!</h1>
     </body>
 </html>
 EOF
@@ -76,18 +76,18 @@ ssbzSibBsu/6iGtCOGEoXJf//////////wIBAg==
 -----END DH PARAMETERS-----
 EOF
 
-# Pull the Let's Encrypt certificates from Vault
+# Pull the Let's Encrypt certificates for *.oci.sp3dev.ml from Vault
 
 oci secrets secret-bundle get \
  --raw-output \
  --auth instance_principal \
- --secret-id ocid1.vaultsecret.oc1.uk-london-1.amaaaaaahe4ejdiae2k77jlwnvi4h2fh4siah7xmvp724ljzhliireq4xyua \
+ --secret-id ${Sp3dev_ml_ssl_secret_id} \
  --query "data.\"secret-bundle-content\".content" | base64 --decode > /home/ubuntu/.ssh/letsencrypt_fullchain.pem
 
 oci secrets secret-bundle get \
  --raw-output \
  --auth instance_principal \
- --secret-id ocid1.vaultsecret.oc1.uk-london-1.amaaaaaahe4ejdiazs7ixckx2efzk7ew6xttvaglh3t2itzpxsmadrzx5qjq \
+ --secret-id ${Sp3dev_ml_priv_secret_id} \
  --query "data.\"secret-bundle-content\".content" | base64 --decode > /home/ubuntu/.ssh/letsencrypt_privkey.pem
 
 # Put Let's Encrypt certs in place
