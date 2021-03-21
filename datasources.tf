@@ -91,8 +91,8 @@ data "template_file" "install_nginx" {
 
   vars = {
     install_nginx            = var.install_nginx
-    Sp3dev_ml_ssl_secret_id  = var.Sp3dev_ml_ssl_secret_id
-    Sp3dev_ml_priv_secret_id = var.Sp3dev_ml_priv_secret_id
+    Sp3dev_ml_ssl_secret_id  = local.Sp3dev_ml_ssl_secret_id
+    Sp3dev_ml_priv_secret_id = local.Sp3dev_ml_priv_secret_id
     Sp3_env_name             = local.Sp3_env_name
   }
 }
