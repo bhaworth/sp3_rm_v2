@@ -42,7 +42,7 @@ The `scripts` directory contains the scripts and configuration for Cloud Init.
 - Adds to /etc/fstab and mounts the para-virtualisaed Block Volumes to /data and /work
 - Installs NFS Server
 - Configures NFS service ports to static mappings
-- Adds the NFS ports as well as TCP/80 to iptables
+- Adds the NFS ports as well as TCP/80 and 443 to iptables
 
 `bootstrap_ubuntu.sh` is the file containing all the commands that run as user ubuntu.  Some Terraform variables are injected in to this files as it is encoded in to the user data
 - Installs the OCI CLI under the ubuntu user together with a .oci/profile file suited for using instance_principal authentication
