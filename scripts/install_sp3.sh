@@ -40,4 +40,4 @@ sudo chown root:root /data/images/*.sif
 
 # Extract sample data
 
-nohup sudo tar -xf /tmp/210204_M01746_0015_000000000-JHB5M.tar --directory /data/inputs/users/oxforduni/ && rm /tmp/210204_M01746_0015_000000000-JHB5M.tar &
+sudo tar -xf /tmp/210204_M01746_0015_000000000-JHB5M.tar --directory /data/inputs/users/oxforduni/ && rm /tmp/210204_M01746_0015_000000000-JHB5M.tar &
