@@ -28,6 +28,7 @@ resource "oci_identity_policy" "HeadNode_Secrets_Policy" {
 
   statements = [
     "Allow dynamic-group ${oci_identity_dynamic_group.HeadNode_DG.name} to use secret-family in compartment sandbox",
+    "Allow dynamic-group ${oci_identity_dynamic_group.HeadNode_DG.name} to read objects in compartment sandbox",
   ]
   name = "${local.Sp3_env_name}_HeadNode_Secrets"
 }
