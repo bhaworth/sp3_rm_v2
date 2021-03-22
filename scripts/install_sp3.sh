@@ -14,5 +14,5 @@ chmod 600 /home/ubuntu/.ssh/gitlab_key
 
 GIT_SSH_COMMAND='ssh -i /home/ubuntu/.ssh/gitlab_key -o StrictHostKeyChecking=no' git clone git@gitlab.com:MMMCloudPipeline/sp3.git
 
-# bash /home/ubuntu/sp3/sp3docs/install-basic.bash
-# bash /home/ubuntu/sp3/sp3docs/install-oci.sh
+# bash /home/ubuntu/sp3/sp3doc/install-basic.bash
+# bash /home/ubuntu/sp3/sp3doc/install-oci.sh
