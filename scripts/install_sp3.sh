@@ -5,7 +5,7 @@
 oci secrets secret-bundle get \
  --raw-output \
  --auth instance_principal \
- --secret-id ocid1.vaultsecret.oc1.uk-london-1.amaaaaaahe4ejdia3ejrsbqkv6iz2ipwngjmteeduitufuu7u35sgxrx7wna \
+ --secret-id ${Sp3_gitrepo_secret_id} \
  --query "data.\"secret-bundle-content\".content" | base64 --decode > /home/ubuntu/.ssh/gitlab_key
 
 chmod 600 /home/ubuntu/.ssh/gitlab_key

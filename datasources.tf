@@ -81,6 +81,10 @@ data "template_file" "stack_info" {
 
 data "template_file" "install_sp3" {
   template = file("${path.module}/scripts/install_sp3.sh")
+
+  vars = {
+    Sp3_gitrepo_secret_id = local.Sp3_gitrepo_secret_id
+  }
 }
 
 data "template_file" "inject_pub_keys" {
