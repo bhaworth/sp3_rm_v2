@@ -247,7 +247,7 @@ variables:
     title: "Create a child compartment for the stack"
     type: boolean
     default: true
-  install_nginx:
+  install_certs:
     title: "Install sp3dev.ml certificates?"
     type: boolean
     default: true

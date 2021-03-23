@@ -61,4 +61,4 @@ The `scripts` directory contains the scripts and configuration for Cloud Init.
 - Load Balancer OCID
 - Worker Node details captured in Stack Variables screen
 
-`install_nginx.sh` will, if the option is selected in the stack, create a sample HTTPS nginx install and pull the wildcard certificate for .oci.sp3dev.ml from the OCI vault secret store
+`install_certs.sh` will, if the option is selected in the stack, pull the wildcard certificate for .oci.sp3dev.ml from the OCI vault secret store and deploy to the Head Node

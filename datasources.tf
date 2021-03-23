@@ -97,7 +97,7 @@ data "template_file" "install_nginx" {
   template = file("${path.module}/scripts/install_nginx.sh")
 
   vars = {
-    install_certs            = var.install_nginx
+    install_certs            = var.install_certs
     Sp3dev_ml_ssl_secret_id  = local.Sp3dev_ml_ssl_secret_id
     Sp3dev_ml_priv_secret_id = local.Sp3dev_ml_priv_secret_id
     Sp3_env_name             = local.Sp3_env_name
