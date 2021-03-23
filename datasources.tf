@@ -69,13 +69,15 @@ data "template_file" "stack_info" {
     compartment_id      = local.Sp3_cid
     tenancy_id          = var.tenancy_ocid
     load_balancer_id    = local.Sp3_lb_id
+    sp3_url             = local.Sp3_lb_url
     priv_subnet_id      = local.Privsn001_id
-    specify_worker_spec = var.specify_worker_spec
-    worker_shape        = var.specify_worker_spec ? var.worker_shape : ""
-    worker_image        = var.specify_worker_spec ? var.worker_image : ""
-    worker_ocpus        = var.specify_worker_spec ? (local.is_flexible_worker_shape ? var.worker_ocpus : 0) : 0
-    worker_ram          = var.specify_worker_spec ? (local.is_flexible_worker_shape ? var.worker_ram : 0) : 0
-    worker_use_scratch  = var.specify_worker_spec ? var.worker_use_scratch : false
+    worker_shape        = var.worker_shape
+    worker_image        = var.worker_image
+    worker_ocpus        = local.is_flexible_worker_shape ? var.worker_ocpus : 0
+    worker_ram          = local.is_flexible_worker_shape ? var.worker_ram : 0
+    worker_min          = var.worker_min
+    worker_max          = var.worker_max
+    worker_use_scratch  = var.worker_use_scratch : false
   }
 }
 

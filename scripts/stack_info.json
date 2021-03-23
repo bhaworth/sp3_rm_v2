@@ -4,12 +4,14 @@
     "deployment_id" : "${deployment_id}",
     "subnet_id" : "${priv_subnet_id}",
     "load_balancer_id" : "${load_balancer_id}",
+    "sp3_url" : "${sp3_url}",
     "worker_node" : {
-        "worker_spec" : ${specify_worker_spec},
         "worker_shape" : "${worker_shape}",    
         "worker_image" : "${worker_image}",  
         "worker_ocpus" : ${worker_ocpus},  
         "worker_ram" : ${worker_ram},  
+        "worker_min" : ${worker_min},
+        "worker_max" : ${worker_max},
         "worker_use_scratch" : ${worker_use_scratch}
     }
 }
