@@ -107,7 +107,7 @@ resource "oci_load_balancer_listener" "sp3_loadbalancer_listener_80" {
     backend_tcp_proxy_protocol_version = "0"
     idle_timeout_in_seconds            = "300"
   }
-  default_backend_set_name = oci_load_balancer_backend_set.sp3_backendset_90.name
+  default_backend_set_name = oci_load_balancer_backend_set.sp3_backendset_80.name
   hostname_names = [
   ]
   load_balancer_id = local.Sp3_lb_id
