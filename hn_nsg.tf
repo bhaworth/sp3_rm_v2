@@ -147,3 +147,20 @@ resource "oci_core_network_security_group_security_rule" "hn-nsg-rule8" {
     }
   }
 }
+
+resource "oci_core_network_security_group_security_rule" "hn-nsg-rule9" {
+  network_security_group_id = local.hn_nsg_id
+
+  direction   = "INGRESS"
+  protocol    = "6"
+  source      = local.lb_nsg_id
+  source_type = "NETWORK_SECURITY_GROUP"
+  stateless   = false
+  description = "TCP/80 (HTTPS) for Web Service from Load Balancer"
+  tcp_options {
+    destination_port_range {
+      min = "80"
+      max = "80"
+    }
+  }
+}
