@@ -77,7 +77,7 @@ data "template_file" "stack_info" {
     worker_ram          = local.is_flexible_worker_shape ? var.worker_ram : 0
     worker_min          = var.worker_min
     worker_max          = var.worker_max
-    worker_use_scratch  = var.worker_use_scratch : false
+    worker_use_scratch  = var.worker_use_scratch
   }
 }
 
