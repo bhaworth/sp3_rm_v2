@@ -16,11 +16,13 @@ chmod 600 /home/ubuntu/.ssh/gitlab_key
 
 GIT_SSH_COMMAND='ssh -i /home/ubuntu/.ssh/gitlab_key -o StrictHostKeyChecking=no' git clone git@gitlab.com:MMMCloudPipeline/sp3.git
 
+# Create key pair for SSH to self
+
 ssh-keygen -t rsa -f /home/ubuntu/.ssh/self_id_rsa -q -P ""
 cat /home/ubuntu/.ssh/self_id_rsa.pub >> /home/ubuntu/.ssh/authorized_keys
-# sed -i '13s/.*/cd \/home\/ubuntu\/sp3/' /home/ubuntu/sp3/sp3doc/install-basic.bash
+
+# Run first sp3 install script
 ssh -i /home/ubuntu/.ssh/self_id_rsa -o StrictHostKeyChecking=no ubuntu@localhost bash /home/ubuntu/sp3/sp3doc/install-basic.bash
-ssh -i /home/ubuntu/.ssh/self_id_rsa -o StrictHostKeyChecking=no ubuntu@localhost bash /home/ubuntu/sp3/sp3doc/install-oci.sh
 
 # Get data from Object Storage
 
@@ -37,4 +39,10 @@ sudo chown root:root /data/images/*.sif
 
 # Extract sample data
 
-sudo tar -xf /tmp/210204_M01746_0015_000000000-JHB5M.tar --directory /data/inputs/uploads/oxforduni/ && rm /tmp/210204_M01746_0015_000000000-JHB5M.tar &
+sudo tar -xf /tmp/210204_M01746_0015_000000000-JHB5M.tar --directory /data/inputs/uploads/oxforduni/
+rm /tmp/210204_M01746_0015_000000000-JHB5M.tar
+
+# Run second sp3 install script
+ssh -i /home/ubuntu/.ssh/self_id_rsa -o StrictHostKeyChecking=no ubuntu@localhost bash /home/ubuntu/sp3/sp3doc/install-oci.sh
+
+
