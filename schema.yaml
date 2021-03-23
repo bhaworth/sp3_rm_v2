@@ -190,13 +190,13 @@ variables:
     type: boolean
     default: false
   install_nginx:
-    title: "Install nginx for testing?"
+    title: "Install sp3dev.ml certificates?"
     type: boolean
-    default: false
+    default: true
   create_dns:
     title: "Create DNS record in oci.sp3dev.ml?"
     type: boolean
-    default: false
+    default: true
   show_testing_others:
     title: "Display all other settings / testing options?"
     type: boolean
