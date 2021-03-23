@@ -14,35 +14,39 @@ variableGroups:
       - ${compartment_ocid}
       - ${ad}
       - ${ssh_pub_key}
+      - ${env_name}
+      - ${specify_prefix}
+      - ${name_prefix}
+  - title: "Bastion Config"
+    variables:
       - ${bastion_image}
       - ${bastion_shape}
       - ${bastion_ocpus}
       - ${bastion_ram}
+  - title: "Head Node Config"
+    variables:
       - ${headnode_image}
       - ${headnode_shape}
       - ${headnode_ocpus}
       - ${headnode_ram}
-      - ${env_name}
-      - ${specify_prefix}
-      - ${name_prefix}
+  - title: "Worker Config"
+    variables:
+      - ${worker_image}
+      - ${worker_shape}
+      - ${worker_ocpus}
+      - ${worker_ram}
+      - ${worker_min}
+      - ${worker_max}
+      - ${worker_use_scratch}
   - title: "Optional Settings"
     variables:
       - ${hn_boot_size}
       - ${hn_data_size}
       - ${hn_work_size}
       - ${create_child_comp}
-      - ${specify_worker_spec}
       - ${install_nginx}
       - ${create_dns}
       - ${show_testing_others}
-  - title: "Worker Node Configurations"
-    visible: ${specify_worker_spec}
-    variables:
-      - ${worker_image}
-      - ${worker_shape}
-      - ${worker_ocpus}
-      - ${worker_ram}
-      - ${worker_use_scratch}
   - title: "Testing / Other Settings"
     variables:
       - ${bastion_boot_size}
@@ -147,68 +151,6 @@ variables:
         - eq:
           - headnode_shape 
           - "VM.Standard.E3.Flex"
-  env_name:
-    type: string
-    title: "Environment Name"
-    description: "Name for the environment - e.g. sp3 - lower case and digits only - must start with lower case letter"
-    pattern: "^[a-z][a-z0-9]+$"
-    default: "sp3"
-    required: true
-  specify_prefix:
-    title: "Would you like to specify a prefix for the deployment?"
-    type: boolean
-    default: false
-  name_prefix:
-    type: string
-    title: "Display/Host Name Prefix"
-    description: "Optional prefix for all Display Names and Hostnames - lower case and digits only - must start with lower case letter"
-    pattern: "^[a-z][a-z0-9]+$"
-    visible: ${specify_prefix}
-  hn_boot_size:
-    type: integer
-    title: "Head Node Server Boot Volume Size"
-    description: "Size in GB.  Size must be between 50 GB and 32,768 GB (32 TB)."
-    minimum: 50
-    maximum: 32768
-  hn_data_size:
-    type: integer
-    title: "Head Node Server Data Volume Size"
-    description: "Size in GB.  Size must be between 50 GB and 32,768 GB (32 TB)."
-    minimum: 50
-    maximum: 32768
-  hn_work_size:
-    type: integer
-    title: "Head Node Server Work Volume Size"
-    description: "Size in GB.  Size must be between 50 GB and 32,768 GB (32 TB)."
-    minimum: 50
-    maximum: 32768
-  create_child_comp:
-    title: "Create a child compartment for the stack"
-    type: boolean
-  specify_worker_spec:
-    title: "Specify Worker Node settings?"
-    type: boolean
-    default: false
-  install_nginx:
-    title: "Install sp3dev.ml certificates?"
-    type: boolean
-    default: true
-  create_dns:
-    title: "Create DNS record in oci.sp3dev.ml?"
-    type: boolean
-    default: true
-  show_testing_others:
-    title: "Display all other settings / testing options?"
-    type: boolean
-    default: false
-  bastion_boot_size:
-    type: integer
-    title: "Bastion Server Boot Volume Size"
-    description: "Size in GB.  Size must be between 50 GB and 32,768 GB (32 TB)."
-    minimum: 50
-    maximum: 32768
-  deploy_test:
-    visible: false
   worker_image:
     type: oci:core:image:id
     dependsOn:
@@ -248,10 +190,83 @@ variables:
         - eq:
           - worker_shape 
           - "VM.Standard.E3.Flex"
+  worker_min:
+    type: integer
+    minimum: 0
+    maximum: 100
+    required: true
+    title: "Minimum number of worker nodes"
+    description: "Minimum is zero, Maximum 100"
+  worker_max:
+    type: integer
+    minimum: 0
+    maximum: 100
+    required: true
+    title: "Maximum number of worker nodes"
+    description: "Maximum is 100 (Minimum 0 - Max must be >= Min"
   worker_use_scratch:
     title: "Worker Node use local scratch storage - choose DenseIO shape"
     type: boolean
     default: false    
+  env_name:
+    type: string
+    title: "Environment Name"
+    description: "Name for the environment - e.g. sp3 - lower case and digits only - must start with lower case letter"
+    pattern: "^[a-z][a-z0-9]+$"
+    default: "sp3"
+    required: true
+  specify_prefix:
+    title: "Would you like to specify a prefix for the deployment?"
+    type: boolean
+    default: false
+  name_prefix:
+    type: string
+    title: "Display/Host Name Prefix"
+    description: "Optional prefix for all Display Names and Hostnames - lower case and digits only - must start with lower case letter"
+    pattern: "^[a-z][a-z0-9]+$"
+    visible: ${specify_prefix}
+  hn_boot_size:
+    type: integer
+    title: "Head Node Server Boot Volume Size"
+    description: "Size in GB.  Size must be between 50 GB and 32,768 GB (32 TB)."
+    minimum: 50
+    maximum: 32768
+  hn_data_size:
+    type: integer
+    title: "Head Node Server Data Volume Size"
+    description: "Size in GB.  Size must be between 50 GB and 32,768 GB (32 TB)."
+    minimum: 50
+    maximum: 32768
+  hn_work_size:
+    type: integer
+    title: "Head Node Server Work Volume Size"
+    description: "Size in GB.  Size must be between 50 GB and 32,768 GB (32 TB)."
+    minimum: 50
+    maximum: 32768
+  create_child_comp:
+    title: "Create a child compartment for the stack"
+    type: boolean
+    default: true
+  install_nginx:
+    title: "Install sp3dev.ml certificates?"
+    type: boolean
+    default: true
+  create_dns:
+    title: "Create DNS record in oci.sp3dev.ml?"
+    type: boolean
+    default: true
+  show_testing_others:
+    title: "Display all other settings / testing options?"
+    type: boolean
+    default: false
+  bastion_boot_size:
+    type: integer
+    title: "Bastion Server Boot Volume Size"
+    description: "Size in GB.  Size must be between 50 GB and 32,768 GB (32 TB)."
+    minimum: 50
+    maximum: 32768
+  deploy_test:
+    visible: false
 outputs:
   sp3bastionPublicIP:
     title: "Bastion Public IP Address"
