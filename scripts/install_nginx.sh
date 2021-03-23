@@ -1,49 +1,49 @@
 #!/bin/bash
 
-if [[ ${install_nginx} ]]; then
-    echo "Installing nginx..."
-else
-    echo "Exiting - nginx not to be installed"
-    exit
-fi
+# if [[ ${install_nginx} ]]; then
+#     echo "Installing nginx..."
+# else
+#     echo "Exiting - nginx not to be installed"
+#     exit
+# fi
 
 
-sudo apt install nginx -y
+# sudo apt install nginx -y
 
-sudo mkdir -p /var/www/oci.sp3dev.ml/html
-sudo chown -R ubuntu:ubuntu /var/www/oci.sp3dev.ml/html
-sudo chmod 755 /var/www/oci.sp3dev.ml/html
+# sudo mkdir -p /var/www/oci.sp3dev.ml/html
+# sudo chown -R ubuntu:ubuntu /var/www/oci.sp3dev.ml/html
+# sudo chmod 755 /var/www/oci.sp3dev.ml/html
 
-cat << EOF | sudo tee -a /var/www/oci.sp3dev.ml/html/index.html
-<html>
-    <head>
-        <title>Welcome to ${Sp3_env_name}.oci.sp3dev.ml!</title>
-    </head>
-    <body>
-        <h1>Success!  The ${Sp3_env_name}.oci.sp3dev.ml server block is working!</h1>
-    </body>
-</html>
-EOF
+# cat << EOF | sudo tee -a /var/www/oci.sp3dev.ml/html/index.html
+# <html>
+#     <head>
+#         <title>Welcome to ${Sp3_env_name}.oci.sp3dev.ml!</title>
+#     </head>
+#     <body>
+#         <h1>Success!  The ${Sp3_env_name}.oci.sp3dev.ml server block is working!</h1>
+#     </body>
+# </html>
+# EOF
 
-cat << EOF | sudo tee -a /etc/nginx/sites-available/oci.sp3dev.ml
-server {
-  listen 443 ssl;
-  server_name *.oci.sp3dev.ml;
+# cat << EOF | sudo tee -a /etc/nginx/sites-available/oci.sp3dev.ml
+# server {
+#   listen 443 ssl;
+#   server_name *.oci.sp3dev.ml;
 
-  ssl_certificate /etc/letsencrypt/live/oci.sp3dev.ml/fullchain.pem;
-  ssl_certificate_key /etc/letsencrypt/live/oci.sp3dev.ml/privkey.pem;
-  include /etc/letsencrypt/options-ssl-nginx.conf;
-  ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
+#   ssl_certificate /etc/letsencrypt/live/oci.sp3dev.ml/fullchain.pem;
+#   ssl_certificate_key /etc/letsencrypt/live/oci.sp3dev.ml/privkey.pem;
+#   include /etc/letsencrypt/options-ssl-nginx.conf;
+#   ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
 
-  root /var/www/oci.sp3dev.ml/html;
-  index index.html;
-  location / {
-    try_files \$uri \$uri/ =404;
-  }
-}
-EOF
+#   root /var/www/oci.sp3dev.ml/html;
+#   index index.html;
+#   location / {
+#     try_files \$uri \$uri/ =404;
+#   }
+# }
+# EOF
 
-sudo ln -s /etc/nginx/sites-available/oci.sp3dev.ml /etc/nginx/sites-enabled/
+# sudo ln -s /etc/nginx/sites-available/oci.sp3dev.ml /etc/nginx/sites-enabled/
 
 # Let's encrypt
 
