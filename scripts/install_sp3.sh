@@ -18,13 +18,13 @@ GIT_SSH_COMMAND='ssh -i /home/ubuntu/.ssh/gitlab_key -o StrictHostKeyChecking=no
 
 ssh-keygen -t rsa -f /home/ubuntu/.ssh/self_id_rsa -q -P ""
 cat /home/ubuntu/.ssh/self_id_rsa.pub >> /home/ubuntu/.ssh/authorized_keys
-sed -i '13s/.*/cd \/home\/ubuntu\/sp3/' /home/ubuntu/sp3/sp3doc/install-basic.bash
+# sed -i '13s/.*/cd \/home\/ubuntu\/sp3/' /home/ubuntu/sp3/sp3doc/install-basic.bash
 ssh -i /home/ubuntu/.ssh/self_id_rsa -o StrictHostKeyChecking=no ubuntu@localhost bash /home/ubuntu/sp3/sp3doc/install-basic.bash
 ssh -i /home/ubuntu/.ssh/self_id_rsa -o StrictHostKeyChecking=no ubuntu@localhost bash /home/ubuntu/sp3/sp3doc/install-oci.sh
 
 # Get data from Object Storage
 
-sudo mkdir -p /data/inputs/users/oxforduni/
+sudo mkdir -p /data/inputs/uploads/oxforduni/
 
 oci os object get -bn artic_images --name artic-ncov2019-illumina.sif --file /tmp/artic-ncov2019-illumina.sif --auth instance_principal
 oci os object get -bn artic_images --name artic-ncov2019-nanopore.sif --file /tmp/artic-ncov2019-nanopore.sif --auth instance_principal
