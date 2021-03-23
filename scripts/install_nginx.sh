@@ -97,4 +97,4 @@ sudo chmod 644 /etc/letsencrypt/live/oci.sp3dev.ml/*
 sudo mv /etc/letsencrypt/live/oci.sp3dev.ml/letsencrypt_fullchain.pem /etc/letsencrypt/live/oci.sp3dev.ml/fullchain.pem
 sudo mv /etc/letsencrypt/live/oci.sp3dev.ml/letsencrypt_privkey.pem /etc/letsencrypt/live/oci.sp3dev.ml/privkey.pem
 
-sudo systemctl restart nginx.service
+# sudo systemctl restart nginx.service
