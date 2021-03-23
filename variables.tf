@@ -28,7 +28,7 @@ variable "worker_min" { default = 1 }
 variable "worker_max" { default = 1 }
 variable "worker_use_scratch" { default = false }
 variable "create_child_comp" { default = true }
-variable "install_nginx" { default = true }
+variable "install_certs" { default = true }
 variable "create_dns" { default = true }
 
 

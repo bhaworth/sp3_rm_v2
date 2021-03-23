@@ -44,7 +44,7 @@ variableGroups:
       - ${hn_data_size}
       - ${hn_work_size}
       - ${create_child_comp}
-      - ${install_nginx}
+      - ${install_certs}
       - ${create_dns}
       - ${show_testing_others}
   - title: "Testing / Other Settings"
