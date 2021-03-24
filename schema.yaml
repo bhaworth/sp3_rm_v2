@@ -268,8 +268,8 @@ variables:
   deploy_test:
     visible: false
 outputs:
-  sp3bastionPublicIP:
-    title: "Bastion Public IP Address"
+  sp3_bastion:
+    title: "Bastion DNS / Public IP Address"
     type: copyableString
     visible: true
   sp3headnodePrivateIP:

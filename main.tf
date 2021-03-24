@@ -67,10 +67,11 @@ locals {
   Sp3Bastion_id         = oci_core_instance.Sp3Bastion.id
   Sp3Bastion_public_ip  = oci_core_instance.Sp3Bastion.public_ip
   Sp3Bastion_private_ip = oci_core_instance.Sp3Bastion.private_ip
+  sp3_bastion_connect   = var.create_dns ? "bastion.${local.Sp3_env_name}.oci.sp3dev.ml" : local.Sp3Bastion_public_ip
 }
 
-output "sp3bastionPublicIP" {
-  value = local.Sp3Bastion_public_ip
+output "sp3_bastion" {
+  value = local.sp3_bastion_connect
 }
 
 # ------ Create Head Node Instance
