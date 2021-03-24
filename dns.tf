@@ -14,3 +14,20 @@ resource "oci_dns_rrset" "lb_a_record" {
   }
 
 }
+
+resource "oci_dns_rrset" "bastion_a_record" {
+  count = var.create_dns ? 1 : 0
+
+  domain          = "bastion.${local.Sp3_env_name}.oci.sp3dev.ml"
+  rtype           = "A"
+  zone_name_or_id = local.Sp3dev_ml_dns_zone_id
+  #compartment_id = local.Sp3dev_ml_dns_comp_id
+  items {
+    domain = "bastion.${local.Sp3_env_name}.oci.sp3dev.ml"
+    rtype  = "A"
+    rdata  = local.Sp3Bastion_public_ip
+    ttl    = 30
+
+  }
+
+}
