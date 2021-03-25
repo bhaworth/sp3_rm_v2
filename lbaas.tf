@@ -42,7 +42,7 @@ resource "oci_load_balancer_backend_set" "sp3_backendset_443" {
     url_path            = "/"
   }
   load_balancer_id = local.Sp3_lb_id
-  name             = "${local.Sp3_env_name}-backendset_443"
+  name             = "${local.Sp3_deploy_id}-backendset_443"
   policy           = "ROUND_ROBIN"
 }
 
@@ -67,7 +67,7 @@ resource "oci_load_balancer_listener" "sp3_loadbalancer_listener_443" {
   hostname_names = [
   ]
   load_balancer_id = local.Sp3_lb_id
-  name             = "${local.Sp3_env_name}-loadbalancer_listener_443"
+  name             = "${local.Sp3_deploy_id}-loadbalancer_listener_443"
   port             = "443"
   protocol         = "TCP"
   rule_set_names = [
@@ -86,7 +86,7 @@ resource "oci_load_balancer_backend_set" "sp3_backendset_80" {
     url_path            = "/"
   }
   load_balancer_id = local.Sp3_lb_id
-  name             = "${local.Sp3_env_name}-backendset_80"
+  name             = "${local.Sp3_deploy_id}-backendset_80"
   policy           = "ROUND_ROBIN"
 }
 
@@ -111,7 +111,7 @@ resource "oci_load_balancer_listener" "sp3_loadbalancer_listener_80" {
   hostname_names = [
   ]
   load_balancer_id = local.Sp3_lb_id
-  name             = "${local.Sp3_env_name}-loadbalancer_listener_80"
+  name             = "${local.Sp3_deploy_id}-loadbalancer_listener_80"
   port             = "80"
   protocol         = "TCP"
   rule_set_names = [
