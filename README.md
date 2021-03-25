@@ -33,8 +33,9 @@ The `scripts` directory contains the scripts and configuration for Cloud Init.
 - run `bash /tmp/bootstrap_ubuntu.sh` as ubuntu
 - run `mv /tmp/stack_info.json ~ubuntu/stack_info.json`
 - run `bash /tmp/inject_pub_keys.sh` as ubuntu
-- run `bash /tmp/install_sp3.sh` as ubuntu
 - run `bash /tmp/install_nginx.sh` as ubuntu
+- run `bash /tmp/install_sp3.sh` as ubuntu
+
 
 `bootstrap_root.sh` is the file containing all the commands that run as root.
 - Installs jq for JSON query
@@ -61,4 +62,4 @@ The `scripts` directory contains the scripts and configuration for Cloud Init.
 - Load Balancer OCID
 - Worker Node details captured in Stack Variables screen
 
-`install_certs.sh` will, if the option is selected in the stack, pull the wildcard certificate for .oci.sp3dev.ml from the OCI vault secret store and deploy to the Head Node
+`install_nginx.sh` will, if the option is selected in the stack, pull the wildcard certificate for .oci.sp3dev.ml from the OCI vault secret store and deploy to the Head Node
