@@ -12,6 +12,7 @@ variableGroups:
       - ${tenancy_ocid}
       - ${region}
       - ${compartment_ocid}
+      - ${randomise_ad}
       - ${ad}
       - ${ssh_pub_key}
       - ${env_name}
@@ -62,6 +63,11 @@ variables:
     title: "Target Compartment"
     type: oci:identity:compartment:id
     required: true
+  randomise_ad:
+    type: boolean
+    title: "Select random Availability Domain for cluster"
+    description: "All nodes for this cluster and the Bastion will be placed in the same, randomly selected AD."
+    default: true
   ad:
     type: oci:identity:availabilitydomain:name
     dependsOn:
@@ -69,6 +75,9 @@ variables:
     required: true
     description: "Availability Domain"
     title: "Availability Domain"
+    visible: 
+      not:
+        - ${randomise_ad} 
   ssh_pub_key:
     type: oci:core:ssh:publickey
     title: "Public SSH key"

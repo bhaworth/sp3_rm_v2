@@ -14,6 +14,7 @@ variable "bastion_boot_size" { default = 50 }
 variable "hn_boot_size" { default = 120 }
 variable "hn_data_size" { default = 1024 }
 variable "hn_work_size" { default = 1024 }
+variable "randomise_ad" { default = true }
 variable "ad" {}
 variable "name_prefix" { default = "" }
 variable "env_name" { default = "sp3" }

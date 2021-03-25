@@ -71,7 +71,7 @@ data "template_file" "stack_info" {
     load_balancer_id   = local.Sp3_lb_id
     sp3_url            = local.Sp3_lb_url
     priv_subnet_id     = local.Privsn001_id
-    ad                 = var.ad
+    ad                 = local.Sp3_ad
     worker_shape       = var.worker_shape
     worker_image       = var.worker_image
     worker_ocpus       = local.is_flexible_worker_shape ? var.worker_ocpus : 0
@@ -107,4 +107,18 @@ data "template_file" "install_nginx" {
 
 locals {
   is_flexible_worker_shape = contains(local.compute_flexible_shapes, var.worker_shape)
+}
+
+data "oci_identity_availability_domains" "ads" {
+  compartment_id = var.tenancy_ocid
+}
+
+resource "random_shuffle" "compute_ad" {
+  input        = data.oci_identity_availability_domains.ads.availability_domains[*].name
+  result_count = length(data.oci_identity_availability_domains.ads.availability_domains[*].name)
+}
+
+locals {
+  ad_random = random_shuffle.compute_ad.result[0]
+  Sp3_ad = randomise_ad ? ad_random : var.ad
 }
