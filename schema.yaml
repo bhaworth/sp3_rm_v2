@@ -172,6 +172,7 @@ variables:
     title: "Specify a custom image ID for worker node?"
     description: "Check this box to specify an image ID rather than select from the image list"
     type: boolean
+    visible: true
   custom_worker_img:
     title: "Custom image OCID"
     description: "Specify an image OCID here to use, for example, a custom image for the worker nodes in this cluster"
