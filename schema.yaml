@@ -32,6 +32,8 @@ variableGroups:
       - ${headnode_ram}
   - title: "Worker Config"
     variables:
+      - ${select_cust_worker_img}
+      - ${custom_worker_img}
       - ${worker_image}
       - ${worker_shape}
       - ${worker_ocpus}
@@ -166,6 +168,15 @@ variables:
         - eq:
           - headnode_shape 
           - "VM.Standard.E3.Flex"
+  select_cust_worker_img:
+    title: "Specify a custom image ID for worker node?"
+    description: "Check this box to specify an image ID rather than select from the image list"
+    type: boolean
+  custom_worker_img:
+    title: "Custom image OCID"
+    description: "Specify an image OCID here to use, for example, a custom image for the worker nodes in this cluster"
+    type: string
+    visible: ${select_cust_worker_img}
   worker_image:
     type: oci:core:image:id
     dependsOn:
@@ -175,6 +186,9 @@ variables:
     required: true
     description: "Compute image for the Worker Nodes"
     title: "Worker Nodes Image"
+    visible:
+      - not:
+        ${select_cust_worker_img}
   worker_shape:
     type: oci:core:instanceshape:name
     dependsOn:

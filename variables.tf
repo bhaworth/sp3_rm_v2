@@ -31,7 +31,8 @@ variable "worker_use_scratch" { default = false }
 variable "create_child_comp" { default = true }
 variable "install_certs" { default = true }
 variable "create_dns" { default = true }
-
+variable "custom_worker_img" { default = "" }
+variable "select_cust_worker_img" { default = false }
 
 locals {
   compute_flexible_shapes  = ["VM.Standard.E3.Flex"]
