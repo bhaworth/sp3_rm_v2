@@ -79,6 +79,8 @@ variables:
     type: oci:core:image:id
     dependsOn:
       compartmentId: ${compartment_ocid}
+      operatingSystem: "Canonical Ubuntu"
+      operatingSystemVersion: "18.04"
     required: true
     description: "Compute image for the Bastion server"
     title: "Bastion Server Image"
