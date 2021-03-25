@@ -173,11 +173,14 @@ variables:
     description: "Check this box to specify an image ID rather than select from the image list"
     type: boolean
     visible: true
+    default: false
   custom_worker_img:
     title: "Custom image OCID"
     description: "Specify an image OCID here to use, for example, a custom image for the worker nodes in this cluster"
     type: string
-    visible: ${select_cust_worker_img}
+    visible: 
+      eq:
+        - ${select_cust_worker_img}
   worker_image:
     type: oci:core:image:id
     dependsOn:
