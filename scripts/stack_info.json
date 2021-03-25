@@ -5,6 +5,7 @@
     "subnet_id" : "${priv_subnet_id}",
     "load_balancer_id" : "${load_balancer_id}",
     "sp3_url" : "${sp3_url}",
+    "availability_domain" : "${ad}",
     "worker_node" : {
         "worker_shape" : "${worker_shape}",    
         "worker_image" : "${worker_image}",  
