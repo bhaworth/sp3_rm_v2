@@ -46,10 +46,12 @@ runcmd:
  - mv /tmp/stack_info.json /home/ubuntu/stack_info.json
  - echo "Running inject pub keys script..."
  - sudo -i -H -u ubuntu bash /tmp/inject_pub_keys.sh
+ - echo "Running install_nginx certs..."
+ - sudo -i -H -u ubuntu bash /tmp/install_nginx.sh
  - echo "Running install SP3 script..."
  - sudo -i -H -u ubuntu bash /tmp/install_sp3.sh
  - echo "Finished SP3 install script."
- - sudo -i -H -u ubuntu bash /tmp/install_nginx.sh
+ 
 
 final_message: "The system is finally up, after $UPTIME seconds"
 output: {all: '| tee -a /root/cloud-init-output.log'}
