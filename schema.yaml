@@ -120,6 +120,8 @@ variables:
     type: oci:core:image:id
     dependsOn:
       compartmentId: ${compartment_ocid}
+      operatingSystem: "Canonical Ubuntu"
+      operatingSystemVersion: "18.04"
     required: true
     description: "Compute image for the Head Node server"
     title: "Head Node Server Image"
@@ -159,6 +161,8 @@ variables:
     type: oci:core:image:id
     dependsOn:
       compartmentId: ${compartment_ocid}
+      operatingSystem: "Canonical Ubuntu"
+      operatingSystemVersion: "18.04"
     required: true
     description: "Compute image for the Worker Nodes"
     title: "Worker Nodes Image"
