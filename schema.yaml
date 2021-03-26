@@ -187,7 +187,11 @@ variables:
     required: true
     description: "Compute image for the Worker Nodes"
     title: "Worker Nodes Image"
-    visible: ${select_cust_worker_img}
+    visible:
+      and:
+        - eq:
+          - select_cust_worker_img
+          - false
   worker_shape:
     type: oci:core:instanceshape:name
     dependsOn:
