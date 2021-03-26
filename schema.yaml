@@ -301,11 +301,11 @@ variables:
     visible: false
 outputs:
   sp3_bastion:
-    title: "Bastion DNS / Public IP Address"
+    title: "Bastion Address"
     type: copyableString
     visible: true
   sp3headnodePrivateIP:
-    title: "Head Node Private IP Address"
+    title: "Head Node IP"
     type: copyableString
     visible: true
   sp3_loadbalancer_public_ip:
@@ -315,6 +315,6 @@ outputs:
     type: string
     visible: true
   sp3_loadbalancer_url:
-    title: "Load Balancer URL"
+    title: "URL"
     type: link
     visible: true
