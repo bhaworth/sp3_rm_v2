@@ -178,9 +178,7 @@ variables:
     title: "Custom image OCID"
     description: "Specify an image OCID here to use, for example, a custom image for the worker nodes in this cluster"
     type: string
-    visible: 
-      eq:
-        - ${select_cust_worker_img}
+    visible: ${select_cust_worker_img}
   worker_image:
     type: oci:core:image:id
     dependsOn:
