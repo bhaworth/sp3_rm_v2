@@ -31,7 +31,7 @@ resource "oci_identity_policy" "HeadNode_Secrets_Policy" {
 }
 
 resource "oci_identity_policy" "HeadNode_Sandbox_Object_Policy" {
-  compartment_id = 
+  compartment_id = local.Sp3dev_sandox_cid
 
   description = "Policy for Head Node secrets in deployment ${local.Sp3_env_name}"
 
