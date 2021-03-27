@@ -36,7 +36,7 @@ resource "oci_identity_policy" "HeadNode_Sandbox_Object_Policy" {
   description = "Policy for Head Node secrets in deployment ${local.Sp3_env_name}"
 
   statements = [
-    "Allow dynamic-group ${oci_identity_dynamic_group.HeadNode_DG.name} to read objects in compartment sandbox",
+    "Allow dynamic-group ${oci_identity_dynamic_group.HeadNode_DG.name} to read objects in compartment id ${local.Sp3dev_sandox_cid}",
   ]
   name = "${local.Sp3_env_name}_HeadNode_Object"
 }
