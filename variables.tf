@@ -42,4 +42,5 @@ locals {
   Sp3dev_ml_priv_secret_id = "ocid1.vaultsecret.oc1.uk-london-1.amaaaaaahe4ejdiazs7ixckx2efzk7ew6xttvaglh3t2itzpxsmadrzx5qjq"
   Sp3dev_ml_dns_zone_id    = "ocid1.dns-zone.oc1..a17008280ea14d00bda53f8202a3ed5c"
   Sp3dev_ml_vault_comp_id  = "ocid1.compartment.oc1..aaaaaaaayofh5ai4y3ff7vz7k6zecsd5ehv4vyujjx44ezpd67xrnzgwgxca"
+  Sp3dev_sandboc_cid       = "ocid1.compartment.oc1..aaaaaaaao4kpjckz2pjmlict2ssrnx45ims7ttvxghlluo2tcwv6pgfdlepq"
 }

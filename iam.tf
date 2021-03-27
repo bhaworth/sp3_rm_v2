@@ -6,7 +6,7 @@ resource "oci_identity_dynamic_group" "HeadNode_DG" {
   name          = "${local.Sp3_env_name}_HeadNode"
 }
 
-resource "oci_identity_policy" "HeadNode_Policy" {
+resource "oci_identity_policy" "HeadNode_Comp_Policy" {
   compartment_id = var.compartment_ocid
 
   description = "Policy for Head Node in deployment ${local.Sp3_env_name}"
@@ -16,21 +16,29 @@ resource "oci_identity_policy" "HeadNode_Policy" {
   statements = [
     "Allow dynamic-group ${oci_identity_dynamic_group.HeadNode_DG.name} to manage all-resources in compartment id ${var.compartment_ocid}",
   ]
-  name = "${local.Sp3_env_name}_HeadNode"
+  name = "${local.Sp3_env_name}_HeadNode_Comp"
 }
 
 resource "oci_identity_policy" "HeadNode_Secrets_Policy" {
-  compartment_id = local.Sp3dev_ml_vault_comp_id
+  compartment_id = local.Sp3dev_vault_comp_id
 
   description = "Policy for Head Node secrets in deployment ${local.Sp3_env_name}"
 
-  # Need to know what the correct permissions required are  <<CHANGE_ME>>
-
   statements = [
-    "Allow dynamic-group ${oci_identity_dynamic_group.HeadNode_DG.name} to use secret-family in compartment sandbox",
-    "Allow dynamic-group ${oci_identity_dynamic_group.HeadNode_DG.name} to read objects in compartment sandbox",
+    "Allow dynamic-group ${oci_identity_dynamic_group.HeadNode_DG.name} to use secret-family in compartment id ${local.Sp3dev_vault_comp_id}",
   ]
   name = "${local.Sp3_env_name}_HeadNode_Secrets"
+}
+
+resource "oci_identity_policy" "HeadNode_Sandbox_Object_Policy" {
+  compartment_id = 
+
+  description = "Policy for Head Node secrets in deployment ${local.Sp3_env_name}"
+
+  statements = [
+    "Allow dynamic-group ${oci_identity_dynamic_group.HeadNode_DG.name} to read objects in compartment sandbox",
+  ]
+  name = "${local.Sp3_env_name}_HeadNode_Object"
 }
 
 resource "oci_identity_compartment" "sp3_child_comp" {
