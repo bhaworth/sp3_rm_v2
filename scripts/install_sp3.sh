@@ -34,6 +34,7 @@ sudo mkdir -p /data/inputs/uploads/oxforduni/
 oci os object get -bn artic_images --name artic-ncov2019-illumina.sif --file /tmp/artic-ncov2019-illumina.sif --auth instance_principal
 oci os object get -bn artic_images --name artic-ncov2019-nanopore.sif --file /tmp/artic-ncov2019-nanopore.sif --auth instance_principal
 oci os object get -bn upload_samples --name 210204_M01746_0015_000000000-JHB5M.tar --file /tmp/210204_M01746_0015_000000000-JHB5M.tar  --auth instance_principal
+oci os object get -bn upload_samples --name 2021-04-06-1000_samples.tar --file /tmp/2021-04-06-1000_samples.tar --auth instance_principal
 
 # Move images to /data
 
@@ -44,6 +45,8 @@ sudo chown root:root /data/images/*.sif
 echo "---Extracting sample data"
 sudo tar -xf /tmp/210204_M01746_0015_000000000-JHB5M.tar --directory /data/inputs/uploads/oxforduni/
 rm /tmp/210204_M01746_0015_000000000-JHB5M.tar
+sudo tar -xf /tmp/2021-04-06-1000_samples.tar --directory /data/inputs/uploads/oxforduni/
+rm /tmp/2021-04-06-1000_samples.tar.tar
 
 # Run second sp3 install script
 echo "---Running /home/ubuntu/sp3/sp3doc/install-oci.sh"
