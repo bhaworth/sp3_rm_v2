@@ -24,13 +24,13 @@ apt install -y jq
 
 # Partition and Format Block Volumes
 
-echo 'type=83' | sfdisk /dev/oracleoci/oraclevdb
-echo 'type=83' | sfdisk /dev/oracleoci/oraclevdc
+# echo 'type=83' | sfdisk /dev/oracleoci/oraclevdb
+# echo 'type=83' | sfdisk /dev/oracleoci/oraclevdc
 
-sleep 10
+# sleep 10
 
-mkfs -t ext4 /dev/oracleoci/oraclevdb1
-mkfs -t ext4 /dev/oracleoci/oraclevdc1
+# mkfs -t ext4 /dev/oracleoci/oraclevdb1
+# mkfs -t ext4 /dev/oracleoci/oraclevdc1
 
 # Mount the volumes
 
@@ -38,11 +38,11 @@ mkdir /data /work
 
 # Add to fstab
 
-echo '/dev/oracleoci/oraclevdb1 /work ext4 defaults 0 0' >> /etc/fstab
-echo '/dev/oracleoci/oraclevdc1 /data ext4 defaults 0 0' >> /etc/fstab
+# echo '/dev/oracleoci/oraclevdb1 /work ext4 defaults 0 0' >> /etc/fstab
+# echo '/dev/oracleoci/oraclevdc1 /data ext4 defaults 0 0' >> /etc/fstab
 
-mount /data
-mount /work
+# mount /data
+# mount /work
 
 # Install NFS Server
 
