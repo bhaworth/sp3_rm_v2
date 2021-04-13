@@ -38,6 +38,10 @@ oci os object get -bn artic_images --name artic-ncov2019-nanopore.sif --file /tm
 sudo mv /tmp/*.sif /data/images/
 sudo chown root:root /data/images/*.sif
 
+# Create samples directory
+
+sudo mkdir /data/inputs/uploads/oxforduni
+
 # Get 50 sample data from Object Storage
 echo "---Downloading 50 samples from object storage"
 
