@@ -51,7 +51,7 @@ oci os object get -bn upload_samples --name 210204_M01746_0015_000000000-JHB5M.t
 # Extract 50 sample data
 echo "---Extracting sample data"
 sudo tar -xf /data/210204_M01746_0015_000000000-JHB5M.tar --directory /data/inputs/uploads/oxforduni/
-rm /data/210204_M01746_0015_000000000-JHB5M.tar
+sudo rm /data/210204_M01746_0015_000000000-JHB5M.tar
 
 # Get / extract 1000 samples from Object Storage
 if [ ${Sp3_deploy_1k} ]
