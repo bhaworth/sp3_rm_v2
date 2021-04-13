@@ -46,7 +46,7 @@ variableGroups:
       - ${hn_boot_size}
       - ${hn_data_size}
       - ${hn_work_size}
-      - ${use_hp_vols}
+      - ${use_hp_vol}
       - ${create_child_comp}
       - ${deploy_1k}
       - ${install_certs}
@@ -278,7 +278,7 @@ variables:
     description: "Size in GB.  Size must be between 50 GB and 32,768 GB (32 TB)."
     minimum: 50
     maximum: 32768
-  use_hp_vols:
+  use_hp_vol:
     type: boolean
     title: "Use High Performance Block Volumes for /work and /data?"
     description: "Leave this setting ticked to use High Performance Block Volumes.  If unset, Balanced Performance Volumes will be used."
