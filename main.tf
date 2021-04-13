@@ -137,7 +137,7 @@ resource "oci_core_volume" "Data" {
   # Optional
   display_name = "${local.Sp3_env_name}-data"
   size_in_gbs  = var.hn_data_size
-  vpus_per_gb  = var.use_hp_vols ? "20" : "10"
+  vpus_per_gb  = var.use_hp_vol ? "20" : "10"
 }
 
 locals {
@@ -152,7 +152,7 @@ resource "oci_core_volume" "Work" {
   # Optional
   display_name = "${local.Sp3_env_name}-work"
   size_in_gbs  = var.hn_work_size
-  vpus_per_gb  = var.use_hp_vols ? "20" : "10"
+  vpus_per_gb  = var.use_hp_vol ? "20" : "10"
 }
 
 locals {
