@@ -56,8 +56,8 @@ rm /tmp/210204_M01746_0015_000000000-JHB5M.tar
 if [ ${Sp3_deploy_1k} ]
 then
     echo "---Downloading and extracting 1000 samples from object storage"
-    oci os object get -bn upload_samples --name 2021-04-06-1000_samples.tar --file /tmp/2021-04-06-1000_samples.tar --auth instance_principal
-    sudo tar -xf /tmp/2021-04-06-1000_samples.tar --directory /data/inputs/uploads/oxforduni/
+    time oci os object get -bn upload_samples --name 2021-04-06-1000_samples.tar --file /tmp/2021-04-06-1000_samples.tar --auth instance_principal
+    time sudo tar -xf /tmp/2021-04-06-1000_samples.tar --directory /data/inputs/uploads/oxforduni/
     rm /tmp/2021-04-06-1000_samples.tar.tar
 fi
 
