@@ -44,7 +44,8 @@ sudo mkdir /data/inputs/uploads/oxforduni
 
 # Get 50 sample data from Object Storage
 echo "---Downloading 50 samples from object storage"
-
+sudo touch /data/210204_M01746_0015_000000000-JHB5M.tar
+sudo chown ubuntu:ubuntu /data/210204_M01746_0015_000000000-JHB5M.tar
 oci os object get -bn upload_samples --name 210204_M01746_0015_000000000-JHB5M.tar --file /data/210204_M01746_0015_000000000-JHB5M.tar  --auth instance_principal
 
 # Extract 50 sample data
@@ -56,6 +57,8 @@ rm /data/210204_M01746_0015_000000000-JHB5M.tar
 if [ ${Sp3_deploy_1k} ]
 then
     echo "---Downloading and extracting 1000 samples from object storage"
+    sudo touch /data/2021-04-06-1000_samples.tar
+    sudo chown ubuntu:ubuntu /data/2021-04-06-1000_samples.tar
     time oci os object get -bn upload_samples --name 2021-04-06-1000_samples.tar --file /data/2021-04-06-1000_samples.tar --auth instance_principal
     time sudo tar -xf /data/2021-04-06-1000_samples.tar --directory /data/inputs/uploads/oxforduni/
     rm /data/2021-04-06-1000_samples.tar
@@ -68,10 +71,12 @@ cat << EOF | tee -a /home/ubuntu/deploy_1k_samples.sh
 # if you did not do this during the initial head node build process
 
 echo "---Downloading 1000 samples from object storage"
+sudo touch /data/2021-04-06-1000_samples.tar
+sudo chown ubuntu:ubuntu /data/2021-04-06-1000_samples.tar
 oci os object get -bn upload_samples --name 2021-04-06-1000_samples.tar --file /data/2021-04-06-1000_samples.tar --auth instance_principal
 echo "---Extracting 1000 samples to /data/inputs/uploads/oxforduni/"   
 sudo tar -xf /data/2021-04-06-1000_samples.tar --directory /data/inputs/uploads/oxforduni/
-rm /data/2021-04-06-1000_samples.tar.tar
+rm /data/2021-04-06-1000_samples.tar
 EOF
 
 chmod 755 /home/ubuntu/deploy_1k_samples.sh
