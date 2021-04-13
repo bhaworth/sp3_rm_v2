@@ -27,26 +27,35 @@ echo "---Running /home/ubuntu/sp3/sp3doc/install-basic.bash"
 ssh -i /home/ubuntu/.ssh/self_id_rsa -o StrictHostKeyChecking=no ubuntu@localhost bash /home/ubuntu/sp3/sp3doc/install-basic.bash
 echo "---Finished /home/ubuntu/sp3/sp3doc/install-basic.bash"
 
-# Get data from Object Storage
-echo "---Downloading data from object storage"
-sudo mkdir -p /data/inputs/uploads/oxforduni/
+# Get pipelines from Object Storage
+echo "---Downloading pipelines from object storage"
 
 oci os object get -bn artic_images --name artic-ncov2019-illumina.sif --file /tmp/artic-ncov2019-illumina.sif --auth instance_principal
 oci os object get -bn artic_images --name artic-ncov2019-nanopore.sif --file /tmp/artic-ncov2019-nanopore.sif --auth instance_principal
-oci os object get -bn upload_samples --name 210204_M01746_0015_000000000-JHB5M.tar --file /tmp/210204_M01746_0015_000000000-JHB5M.tar  --auth instance_principal
-oci os object get -bn upload_samples --name 2021-04-06-1000_samples.tar --file /tmp/2021-04-06-1000_samples.tar --auth instance_principal
 
-# Move images to /data
+# Move pipeline images to /data
 
 sudo mv /tmp/*.sif /data/images/
 sudo chown root:root /data/images/*.sif
 
-# Extract sample data
+# Get 50 sample data from Object Storage
+echo "---Downloading 50 samples from object storage"
+
+oci os object get -bn upload_samples --name 210204_M01746_0015_000000000-JHB5M.tar --file /tmp/210204_M01746_0015_000000000-JHB5M.tar  --auth instance_principal
+
+# Extract 50 sample data
 echo "---Extracting sample data"
 sudo tar -xf /tmp/210204_M01746_0015_000000000-JHB5M.tar --directory /data/inputs/uploads/oxforduni/
 rm /tmp/210204_M01746_0015_000000000-JHB5M.tar
-sudo tar -xf /tmp/2021-04-06-1000_samples.tar --directory /data/inputs/uploads/oxforduni/
-rm /tmp/2021-04-06-1000_samples.tar.tar
+
+# Get / extract 1000 samples from Object Storage
+if [ ${Sp3_deploy_1k} ]
+then
+    echo "---Downloading and extracting 1000 samples from object storage"
+    oci os object get -bn upload_samples --name 2021-04-06-1000_samples.tar --file /tmp/2021-04-06-1000_samples.tar --auth instance_principal
+    sudo tar -xf /tmp/2021-04-06-1000_samples.tar --directory /data/inputs/uploads/oxforduni/
+    rm /tmp/2021-04-06-1000_samples.tar.tar
+fi
 
 # Run second sp3 install script
 echo "---Running /home/ubuntu/sp3/sp3doc/install-oci.sh"

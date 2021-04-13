@@ -87,6 +87,7 @@ data "template_file" "install_sp3" {
 
   vars = {
     Sp3_gitrepo_secret_id = local.Sp3_gitrepo_secret_id
+    Sp3_deploy_1k         = var.deploy_1k
   }
 }
 
@@ -120,5 +121,5 @@ resource "random_shuffle" "compute_ad" {
 
 locals {
   ad_random = random_shuffle.compute_ad.result[0]
-  Sp3_ad = var.randomise_ad ? local.ad_random : var.ad
+  Sp3_ad    = var.randomise_ad ? local.ad_random : var.ad
 }

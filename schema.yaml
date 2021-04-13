@@ -50,6 +50,7 @@ variableGroups:
       - ${install_certs}
       - ${create_dns}
       - ${show_testing_others}
+      - ${deploy_1k}
   - title: "Testing / Other Settings"
     variables:
       - ${bastion_boot_size}
@@ -287,6 +288,11 @@ variables:
     title: "Create DNS record in oci.sp3dev.ml?"
     type: boolean
     default: true
+  deploy_1k:
+    title: "Deploy the 1000 samples to head node on build?"
+    description: "Deploying the 1000 samples to the head node takes 20+ minutes.  This can be done once the head node is built using the script ~ubuntu/deploy_1k_samples.sh"
+    type: boolean
+    default: false
   show_testing_others:
     title: "Display all other settings / testing options?"
     type: boolean
