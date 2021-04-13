@@ -45,20 +45,20 @@ sudo mkdir /data/inputs/uploads/oxforduni
 # Get 50 sample data from Object Storage
 echo "---Downloading 50 samples from object storage"
 
-oci os object get -bn upload_samples --name 210204_M01746_0015_000000000-JHB5M.tar --file /tmp/210204_M01746_0015_000000000-JHB5M.tar  --auth instance_principal
+oci os object get -bn upload_samples --name 210204_M01746_0015_000000000-JHB5M.tar --file /data/210204_M01746_0015_000000000-JHB5M.tar  --auth instance_principal
 
 # Extract 50 sample data
 echo "---Extracting sample data"
-sudo tar -xf /tmp/210204_M01746_0015_000000000-JHB5M.tar --directory /data/inputs/uploads/oxforduni/
-rm /tmp/210204_M01746_0015_000000000-JHB5M.tar
+sudo tar -xf /data/210204_M01746_0015_000000000-JHB5M.tar --directory /data/inputs/uploads/oxforduni/
+rm /data/210204_M01746_0015_000000000-JHB5M.tar
 
 # Get / extract 1000 samples from Object Storage
 if [ ${Sp3_deploy_1k} ]
 then
     echo "---Downloading and extracting 1000 samples from object storage"
-    time oci os object get -bn upload_samples --name 2021-04-06-1000_samples.tar --file /tmp/2021-04-06-1000_samples.tar --auth instance_principal
-    time sudo tar -xf /tmp/2021-04-06-1000_samples.tar --directory /data/inputs/uploads/oxforduni/
-    rm /tmp/2021-04-06-1000_samples.tar.tar
+    time oci os object get -bn upload_samples --name 2021-04-06-1000_samples.tar --file /data/2021-04-06-1000_samples.tar --auth instance_principal
+    time sudo tar -xf /data/2021-04-06-1000_samples.tar --directory /data/inputs/uploads/oxforduni/
+    rm /data/2021-04-06-1000_samples.tar
 fi
 
 # Deploy script to download and extract 1000 samples post build, if required (user initiated)
@@ -68,10 +68,10 @@ cat << EOF | tee -a /home/ubuntu/deploy_1k_samples.sh
 # if you did not do this during the initial head node build process
 
 echo "---Downloading 1000 samples from object storage"
-oci os object get -bn upload_samples --name 2021-04-06-1000_samples.tar --file /tmp/2021-04-06-1000_samples.tar --auth instance_principal
+oci os object get -bn upload_samples --name 2021-04-06-1000_samples.tar --file /data/2021-04-06-1000_samples.tar --auth instance_principal
 echo "---Extracting 1000 samples to /data/inputs/uploads/oxforduni/"   
-sudo tar -xf /tmp/2021-04-06-1000_samples.tar --directory /data/inputs/uploads/oxforduni/
-rm /tmp/2021-04-06-1000_samples.tar.tar
+sudo tar -xf /data/2021-04-06-1000_samples.tar --directory /data/inputs/uploads/oxforduni/
+rm /data/2021-04-06-1000_samples.tar.tar
 EOF
 
 chmod 755 /home/ubuntu/deploy_1k_samples.sh
