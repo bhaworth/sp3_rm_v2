@@ -90,6 +90,7 @@ resource "oci_core_instance" "Sp3Headnode" {
     hostname_label         = "${local.Sp3_env_name}-headnode"
     skip_source_dest_check = "false"
     nsg_ids                = [local.hn_nsg_id]
+    private_ip             = "10.0.1.2"
   }
   metadata = {
     ssh_authorized_keys = local.Sp3_ssh_key
