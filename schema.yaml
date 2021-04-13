@@ -59,6 +59,7 @@ variableGroups:
 variables:
   tenancy_ocid:
     visible: false
+    type: string
   region:
     title: "Region"
     type: oci:identity:region:name
@@ -100,7 +101,7 @@ variables:
     type: oci:core:instanceshape:name
     dependsOn:
       compartmentId: ${compartment_ocid}
-      imageID: ${bastion_image}
+      imageId: ${bastion_image}
     required: true
     description: "Compute shape for the Bastion server"
     title: "Bastion Server Shape"
@@ -141,7 +142,7 @@ variables:
     type: oci:core:instanceshape:name
     dependsOn:
       compartmentId: ${compartment_ocid}
-      imageID: ${headnode_image}
+      imageId: ${headnode_image}
     required: true
     description: "Compute shape for the Head Node"
     title: "Head Node Server Shape"
@@ -195,7 +196,7 @@ variables:
     type: oci:core:instanceshape:name
     dependsOn:
       compartmentId: ${compartment_ocid}
-      imageID: ${worker_image}
+      imageId: ${worker_image}
     required: true
     description: "Compute shape for the Worker Node"
     title: "Worker Node Server Shape"
@@ -304,6 +305,7 @@ variables:
     minimum: 50
     maximum: 32768
   deploy_test:
+    type: boolean
     visible: false
 outputs:
   sp3_bastion:
@@ -315,6 +317,7 @@ outputs:
     type: copyableString
     visible: true
   sp3_loadbalancer_public_ip:
+    type: copyableString
     visible: false
   sp3_deploy_id:
     title: "Deployment ID"
