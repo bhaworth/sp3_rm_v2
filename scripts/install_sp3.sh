@@ -57,6 +57,21 @@ then
     rm /tmp/2021-04-06-1000_samples.tar.tar
 fi
 
+# Deploy script to download and extract 1000 samples post build, if required (user initiated)
+
+cat << EOF | tee -a /home/ubuntu/deploy_1k_samples.sh
+# Use this script to download and extract the 1000 samples stored in Object Storage
+# if you did not do this during the initial head node build process
+
+echo "---Downloading 1000 samples from object storage"
+oci os object get -bn upload_samples --name 2021-04-06-1000_samples.tar --file /tmp/2021-04-06-1000_samples.tar --auth instance_principal
+echo "---Extracting 1000 samples to /data/inputs/uploads/oxforduni/"   
+sudo tar -xf /tmp/2021-04-06-1000_samples.tar --directory /data/inputs/uploads/oxforduni/
+rm /tmp/2021-04-06-1000_samples.tar.tar
+EOF
+
+chmod 755 /home/ubuntu/deploy_1k_samples.sh
+
 # Run second sp3 install script
 echo "---Running /home/ubuntu/sp3/sp3doc/install-oci.sh"
 ssh -i /home/ubuntu/.ssh/self_id_rsa -o StrictHostKeyChecking=no ubuntu@localhost bash /home/ubuntu/sp3/sp3doc/install-oci.sh
