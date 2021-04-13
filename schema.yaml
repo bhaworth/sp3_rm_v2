@@ -46,11 +46,12 @@ variableGroups:
       - ${hn_boot_size}
       - ${hn_data_size}
       - ${hn_work_size}
+      - ${use_hp_vols}
       - ${create_child_comp}
+      - ${deploy_1k}
       - ${install_certs}
       - ${create_dns}
       - ${show_testing_others}
-      - ${deploy_1k}
   - title: "Testing / Other Settings"
     variables:
       - ${bastion_boot_size}
@@ -277,6 +278,11 @@ variables:
     description: "Size in GB.  Size must be between 50 GB and 32,768 GB (32 TB)."
     minimum: 50
     maximum: 32768
+  use_hp_vols:
+    type: boolean
+    title: "Use High Performance Block Volumes for /work and /data?"
+    description: "Leave this setting ticked to use High Performance Block Volumes.  If unset, Balanced Performance Volumes will be used."
+    default: true
   create_child_comp:
     title: "Create a child compartment for the stack"
     type: boolean
@@ -291,7 +297,7 @@ variables:
     default: true
   deploy_1k:
     title: "Deploy the 1000 samples to head node on build?"
-    description: "Deploying the 1000 samples to the head node takes 20+ minutes.  This can be done once the head node is built using the script ~ubuntu/deploy_1k_samples.sh"
+    description: "Deploying the 1000 samples to the head node takes 35-40 minutes.  This can be done once the head node is built using the script ~ubuntu/deploy_1k_samples.sh"
     type: boolean
     default: false
   show_testing_others:
