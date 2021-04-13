@@ -297,9 +297,9 @@ variables:
     default: true
   deploy_1k:
     title: "Deploy the 1000 samples to head node on build?"
-    description: "Deploying the 1000 samples to the head node takes 35-40 minutes.  This can be done once the head node is built using the script ~ubuntu/deploy_1k_samples.sh"
+    description: "Deploying the 1000 samples to the head node takes an additional 5 minutes.  This can be done once the head node is built using the script ~ubuntu/deploy_1k_samples.sh"
     type: boolean
-    default: false
+    default: true
   show_testing_others:
     title: "Display all other settings / testing options?"
     type: boolean

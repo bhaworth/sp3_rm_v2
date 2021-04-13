@@ -56,12 +56,11 @@ rm /data/210204_M01746_0015_000000000-JHB5M.tar
 # Get / extract 1000 samples from Object Storage
 if [ ${Sp3_deploy_1k} ]
 then
-    echo "---Downloading and extracting 1000 samples from object storage"
-    sudo touch /data/2021-04-06-1000_samples.tar
-    sudo chown ubuntu:ubuntu /data/2021-04-06-1000_samples.tar
-    time oci os object get -bn upload_samples --name 2021-04-06-1000_samples.tar --file /data/2021-04-06-1000_samples.tar --auth instance_principal
-    time sudo tar -xf /data/2021-04-06-1000_samples.tar --directory /data/inputs/uploads/oxforduni/
-    rm /data/2021-04-06-1000_samples.tar
+    echo "---Downloading 1000 samples from object storage"
+    sudo mkdir /data/inputs/uploads/oxforduni/2021-04-06-1000_samples
+    sudo chown ubuntu:ubuntu /data/inputs/uploads/oxforduni/2021-04-06-1000_samples
+    oci os object bulk-download -bn 1000_samples --download-dir /data/inputs/uploads/oxforduni/2021-04-06-1000_samples --overwrite --auth instance_principal
+    sudo chown -R root:root /data/inputs/uploads/oxforduni/2021-04-06-1000_samples
 fi
 
 # Deploy script to download and extract 1000 samples post build, if required (user initiated)
@@ -71,12 +70,10 @@ cat << EOF | tee -a /home/ubuntu/deploy_1k_samples.sh
 # if you did not do this during the initial head node build process
 
 echo "---Downloading 1000 samples from object storage"
-sudo touch /data/2021-04-06-1000_samples.tar
-sudo chown ubuntu:ubuntu /data/2021-04-06-1000_samples.tar
-oci os object get -bn upload_samples --name 2021-04-06-1000_samples.tar --file /data/2021-04-06-1000_samples.tar --auth instance_principal
-echo "---Extracting 1000 samples to /data/inputs/uploads/oxforduni/"   
-sudo tar -xf /data/2021-04-06-1000_samples.tar --directory /data/inputs/uploads/oxforduni/
-rm /data/2021-04-06-1000_samples.tar
+sudo mkdir /data/inputs/uploads/oxforduni/2021-04-06-1000_samples
+sudo chown ubuntu:ubuntu /data/inputs/uploads/oxforduni/2021-04-06-1000_samples
+oci os object bulk-download -bn 1000_samples --download-dir /data/inputs/uploads/oxforduni/2021-04-06-1000_samples --overwrite --auth instance_principal
+sudo chown -R root:root /data/inputs/uploads/oxforduni/2021-04-06-1000_samples
 EOF
 
 chmod 755 /home/ubuntu/deploy_1k_samples.sh
