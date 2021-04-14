@@ -47,7 +47,7 @@ oci os object get -bn artic_images --name artic-ncov2019-nanopore.sif --file /tm
 # sudo mkdir /data/inputs/uploads/oxforduni/210204_M01746_0015_000000000-JHB5M
 # sudo chown ubuntu:ubuntu /data/inputs/uploads/oxforduni/210204_M01746_0015_000000000-JHB5M
 # oci os object bulk-download -bn 48_samples --download-dir /data/inputs/uploads/oxforduni/210204_M01746_0015_000000000-JHB5M --overwrite --auth instance_principal
-# sudo chown -R root:root /data/inputs/uploads/oxforduni/2021-04-06-1000_samples
+# sudo chown -R root:root /data/inputs/uploads/oxforduni/210204_M01746_0015_000000000-JHB5M
 
 # # Get / extract 1000 samples from Object Storage
 # if [ ${Sp3_deploy_1k} ]
