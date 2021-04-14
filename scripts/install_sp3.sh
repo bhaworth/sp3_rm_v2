@@ -43,7 +43,7 @@ sudo chown root:root /data/images/*.sif
 sudo mkdir /data/inputs/uploads/oxforduni
 
 # Get 48 sample data from Object Storage
-echo "---Downloading 50 samples from object storage"
+echo "---Downloading 48 samples from object storage"
 sudo mkdir /data/inputs/uploads/oxforduni/210204_M01746_0015_000000000-JHB5M
 sudo chown ubuntu:ubuntu /data/inputs/uploads/oxforduni/210204_M01746_0015_000000000-JHB5M
 oci os object bulk-download -bn 48_samples --download-dir /data/inputs/uploads/oxforduni/210204_M01746_0015_000000000-JHB5M --overwrite --auth instance_principal
