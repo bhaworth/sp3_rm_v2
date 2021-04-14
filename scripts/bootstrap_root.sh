@@ -22,6 +22,12 @@ apt update -y
 
 apt install -y jq
 
+# Set sshd settings
+
+sed -i 's/#MaxStartups.*/MaxStartups 50:100:300/g' /etc/ssh/sshd_config
+sed -i 's/#MaxSessions.*/MaxSessions 300/g' /etc/ssh/sshd_config
+systemctl restart sshd ssh
+
 # Partition and Format Block Volumes
 
 echo 'type=83' | sfdisk /dev/oracleoci/oraclevdb
