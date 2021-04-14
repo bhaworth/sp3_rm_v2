@@ -1,6 +1,7 @@
 # ------ Provider
 provider "oci" {
-  region = var.region
+  region  = var.region
+  version = "4.20.0"
 }
 
 locals {
