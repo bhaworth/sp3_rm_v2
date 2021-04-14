@@ -42,18 +42,14 @@ oci os object get -bn artic_images --name artic-ncov2019-nanopore.sif --file /tm
 
 # sudo mkdir /data/inputs/uploads/oxforduni
 
-# Get 50 sample data from Object Storage
-# echo "---Downloading 50 samples from object storage"
-# sudo touch /data/210204_M01746_0015_000000000-JHB5M.tar
-# sudo chown ubuntu:ubuntu /data/210204_M01746_0015_000000000-JHB5M.tar
-# oci os object get -bn upload_samples --name 210204_M01746_0015_000000000-JHB5M.tar --file /data/210204_M01746_0015_000000000-JHB5M.tar  --auth instance_principal
+# Get 48 sample data from Object Storage
+# echo "---Downloading 48 samples from object storage"
+# sudo mkdir /data/inputs/uploads/oxforduni/210204_M01746_0015_000000000-JHB5M
+# sudo chown ubuntu:ubuntu /data/inputs/uploads/oxforduni/210204_M01746_0015_000000000-JHB5M
+# oci os object bulk-download -bn 48_samples --download-dir /data/inputs/uploads/oxforduni/210204_M01746_0015_000000000-JHB5M --overwrite --auth instance_principal
+# sudo chown -R root:root /data/inputs/uploads/oxforduni/2021-04-06-1000_samples
 
-# Extract 50 sample data
-# echo "---Extracting sample data"
-# sudo tar -xf /data/210204_M01746_0015_000000000-JHB5M.tar --directory /data/inputs/uploads/oxforduni/
-# sudo rm /data/210204_M01746_0015_000000000-JHB5M.tar
-
-# Get / extract 1000 samples from Object Storage
+# # Get / extract 1000 samples from Object Storage
 # if [ ${Sp3_deploy_1k} ]
 # then
 #     echo "---Downloading 1000 samples from object storage"
