@@ -62,6 +62,8 @@ oci os object get -bn artic_images --name artic-ncov2019-nanopore.sif --file /tm
 # Deploy script to download and extract 1000 samples post build, if required (user initiated)
 
 cat << EOF | tee -a /home/ubuntu/deploy_1k_samples.sh
+#!/bin/bash
+
 # Use this script to download and extract the 1000 samples stored in Object Storage
 # if you did not do this during the initial head node build process
 
