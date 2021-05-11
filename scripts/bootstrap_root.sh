@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -x
+
 cp /etc/motd /etc/motd.bkp
 cat << EOF > /etc/motd
  
