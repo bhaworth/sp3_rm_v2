@@ -123,3 +123,7 @@ locals {
   ad_random = random_shuffle.compute_ad.result[0]
   Sp3_ad    = var.randomise_ad ? local.ad_random : var.ad
 }
+
+output "ad" {
+  value = local.Sp3_ad
+}

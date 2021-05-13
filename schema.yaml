@@ -333,3 +333,6 @@ outputs:
     title: "URL"
     type: link
     visible: true
+  ad:
+    type: string
+    visible: false
