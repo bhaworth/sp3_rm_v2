@@ -40,11 +40,11 @@ resource "oci_network_load_balancer_backend_set" "sp3_backendset_443" {
 
 resource "oci_network_load_balancer_backend" "be_443" {
   backend_set_name         = oci_network_load_balancer_backend_set.sp3_backendset_443.name
-  backup                   = "false"
-  drain                    = "false"
+  is_backup                = "false"
+  is_drain                 = "false"
   ip_address               = "10.0.1.2"
   network_load_balancer_id = local.Sp3_nlb_id
-  offline                  = "false"
+  is_offline               = "false"
   port                     = "443"
   weight                   = "1"
 }
@@ -76,11 +76,11 @@ resource "oci_network_load_balancer_backend_set" "sp3_backendset_80" {
 
 resource "oci_network_load_balancer_backend" "be_80" {
   backend_set_name         = oci_network_load_balancer_backend_set.sp3_backendset_80.name
-  backup                   = "false"
-  drain                    = "false"
+  is_backup                = "false"
+  is_drain                 = "false"
   ip_address               = "10.0.1.2"
   network_load_balancer_id = local.Sp3_nlb_id
-  offline                  = "false"
+  is_offline               = "false"
   port                     = "80"
   weight                   = "1"
 }
