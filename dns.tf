@@ -7,7 +7,7 @@ resource "oci_dns_rrset" "lb_a_record" {
   items {
     domain = "${local.Sp3_env_name}.oci.sp3dev.ml"
     rtype  = "A"
-    rdata  = local.Sp3_lb_public_ip
+    rdata  = local.Sp3_nlb_public_ip
     ttl    = 30
 
   }

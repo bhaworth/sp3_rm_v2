@@ -136,7 +136,7 @@ resource "oci_core_network_security_group_security_rule" "hn-nsg-rule8" {
 
   direction   = "INGRESS"
   protocol    = "6"
-  source      = local.lb_nsg_id
+  source      = local.nlb_nsg_id
   source_type = "NETWORK_SECURITY_GROUP"
   stateless   = false
   description = "TCP/443 (HTTPS) for Web Service from Load Balancer"
@@ -153,7 +153,7 @@ resource "oci_core_network_security_group_security_rule" "hn-nsg-rule9" {
 
   direction   = "INGRESS"
   protocol    = "6"
-  source      = local.lb_nsg_id
+  source      = local.nlb_nsg_id
   source_type = "NETWORK_SECURITY_GROUP"
   stateless   = false
   description = "TCP/80 (HTTPS) for Web Service from Load Balancer"

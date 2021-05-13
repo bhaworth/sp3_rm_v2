@@ -68,8 +68,8 @@ data "template_file" "stack_info" {
     deployment_id      = local.Sp3_deploy_id
     compartment_id     = local.Sp3_cid
     tenancy_id         = var.tenancy_ocid
-    load_balancer_id   = local.Sp3_lb_id
-    sp3_url            = local.Sp3_lb_url
+    load_balancer_id   = local.Sp3_nlb_id
+    sp3_url            = local.Sp3_nlb_url
     priv_subnet_id     = local.Privsn001_id
     ad                 = local.Sp3_ad
     worker_shape       = var.worker_shape

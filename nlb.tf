@@ -24,7 +24,7 @@ locals { Sp3_nlb_id = oci_network_load_balancer_network_load_balancer.sp3_nlb.id
 
 resource "oci_network_load_balancer_backend_set" "sp3_backendset_443" {
   health_checker {
-    interval_ms         = "10000"
+    interval_in_millis  = "10000"
     port                = "443"
     protocol            = "TCP"
     response_body_regex = ""
@@ -39,7 +39,7 @@ resource "oci_network_load_balancer_backend_set" "sp3_backendset_443" {
 }
 
 resource "oci_network_load_balancer_backend" "be_443" {
-  backend_set_name          = oci_network_load_balancer_backend_set.sp3_backendset_443.name
+  backend_set_name         = oci_network_load_balancer_backend_set.sp3_backendset_443.name
   backup                   = "false"
   drain                    = "false"
   ip_address               = "10.0.1.2"
@@ -60,7 +60,7 @@ resource "oci_network_load_balancer_listener" "sp3_loadbalancer_listener_443" {
 
 resource "oci_network_load_balancer_backend_set" "sp3_backendset_80" {
   health_checker {
-    interval_ms         = "10000"
+    interval_in_millis  = "10000"
     port                = "80"
     protocol            = "TCP"
     response_body_regex = ""
@@ -75,7 +75,7 @@ resource "oci_network_load_balancer_backend_set" "sp3_backendset_80" {
 }
 
 resource "oci_network_load_balancer_backend" "be_80" {
-  backend_set_name          = oci_network_load_balancer_backend_set.sp3_backendset_80.name
+  backend_set_name         = oci_network_load_balancer_backend_set.sp3_backendset_80.name
   backup                   = "false"
   drain                    = "false"
   ip_address               = "10.0.1.2"
