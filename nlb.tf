@@ -36,6 +36,7 @@ resource "oci_network_load_balancer_backend_set" "sp3_backendset_443" {
   network_load_balancer_id = local.Sp3_nlb_id
   name                     = "${local.Sp3_deploy_id}-backendset_443"
   policy                   = "FIVE_TUPLE"
+  is_preserve_source       = "false"
 }
 
 resource "oci_network_load_balancer_backend" "be_443" {
@@ -72,6 +73,7 @@ resource "oci_network_load_balancer_backend_set" "sp3_backendset_80" {
   network_load_balancer_id = local.Sp3_nlb_id
   name                     = "${local.Sp3_deploy_id}-backendset_80"
   policy                   = "FIVE_TUPLE"
+  is_preserve_source       = "false"
 }
 
 resource "oci_network_load_balancer_backend" "be_80" {
