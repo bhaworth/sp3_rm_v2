@@ -114,10 +114,13 @@ variables:
     title: "Bastion number of CPUs (cores)"
     description: "You can customize the number of CPU cores to a flexible shape."
     visible:
-      and:
+      or:
         - eq:
             - bastion_shape
             - "VM.Standard.E3.Flex"
+        - eq:
+            - bastion_shape
+            - "VM.Standard.E4.Flex"
   bastion_ram:
     type: integer
     minimum: 1
@@ -126,10 +129,13 @@ variables:
     title: "Bastion Server memory (GB)"
     description: "You can customize the amount of memory allocated to a flexible shape."
     visible:
-      and:
+      or:
         - eq:
             - bastion_shape
             - "VM.Standard.E3.Flex"
+        - eq:
+            - bastion_shape
+            - "VM.Standard.E4.Flex"
   headnode_image:
     type: oci:core:image:id
     dependsOn:
@@ -155,10 +161,13 @@ variables:
     title: "Head Node number of CPUs (cores)"
     description: "You can customize the number of CPU cores to a flexible shape."
     visible:
-      and:
+      or:
         - eq:
             - headnode_shape
             - "VM.Standard.E3.Flex"
+        - eq:
+            - headnode_shape
+            - "VM.Standard.E4.Flex"
   headnode_ram:
     type: integer
     minimum: 1
@@ -167,10 +176,13 @@ variables:
     title: "Head Node memory (GB)"
     description: "You can customize the amount of memory allocated to a flexible shape."
     visible:
-      and:
+      or:
         - eq:
             - headnode_shape
             - "VM.Standard.E3.Flex"
+        - eq:
+            - headnode_shape
+            - "VM.Standard.E4.Flex"
   select_cust_worker_img:
     title: "Specify a custom image ID for worker node?"
     description: "Check this box to specify an image ID rather than select from the image list"
@@ -211,10 +223,10 @@ variables:
     visible:
       or:
         - eq:
-            - instance_shape
+            - worker_shape
             - "VM.Standard.E3.Flex"
         - eq:
-            - instance_shape
+            - worker_shape
             - "VM.Standard.E4.Flex"
   worker_ram:
     type: integer
@@ -226,10 +238,10 @@ variables:
     visible:
       or:
         - eq:
-            - instance_shape
+            - worker_shape
             - "VM.Standard.E3.Flex"
         - eq:
-            - instance_shape
+            - worker_shape
             - "VM.Standard.E4.Flex"
   worker_min:
     type: integer
