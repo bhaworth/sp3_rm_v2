@@ -216,9 +216,6 @@ variables:
         - eq:
             - instance_shape
             - "VM.Standard.E4.Flex"
-        - eq:
-            - instance_shape
-            - "VM.Optimized3.Flex"
   worker_ram:
     type: integer
     minimum: 1
@@ -234,9 +231,6 @@ variables:
         - eq:
             - instance_shape
             - "VM.Standard.E4.Flex"
-        - eq:
-            - instance_shape
-            - "VM.Optimized3.Flex"
   worker_min:
     type: integer
     minimum: 0
