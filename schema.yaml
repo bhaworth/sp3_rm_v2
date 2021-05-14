@@ -209,7 +209,7 @@ variables:
     title: "Worker Node number of CPUs (cores)"
     description: "You can customize the number of CPU cores to a flexible shape."
     visible:
-      - or:
+      or:
         - eq:
             - instance_shape
             - "VM.Standard.E3.Flex"
@@ -227,7 +227,7 @@ variables:
     title: "Worker Node memory (GB)"
     description: "You can customize the amount of memory allocated to a flexible shape."
     visible:
-      - or:
+      or:
         - eq:
             - instance_shape
             - "VM.Standard.E3.Flex"
