@@ -80,9 +80,9 @@ variables:
     required: true
     description: "Availability Domain"
     title: "Availability Domain"
-    visible: 
+    visible:
       not:
-        - ${randomise_ad} 
+        - ${randomise_ad}
   ssh_pub_key:
     type: oci:core:ssh:publickey
     title: "Public SSH key"
@@ -116,8 +116,8 @@ variables:
     visible:
       and:
         - eq:
-          - bastion_shape 
-          - "VM.Standard.E3.Flex"
+            - bastion_shape
+            - "VM.Standard.E3.Flex"
   bastion_ram:
     type: integer
     minimum: 1
@@ -128,8 +128,8 @@ variables:
     visible:
       and:
         - eq:
-          - bastion_shape 
-          - "VM.Standard.E3.Flex"
+            - bastion_shape
+            - "VM.Standard.E3.Flex"
   headnode_image:
     type: oci:core:image:id
     dependsOn:
@@ -157,8 +157,8 @@ variables:
     visible:
       and:
         - eq:
-          - headnode_shape 
-          - "VM.Standard.E3.Flex"
+            - headnode_shape
+            - "VM.Standard.E3.Flex"
   headnode_ram:
     type: integer
     minimum: 1
@@ -169,8 +169,8 @@ variables:
     visible:
       and:
         - eq:
-          - headnode_shape 
-          - "VM.Standard.E3.Flex"
+            - headnode_shape
+            - "VM.Standard.E3.Flex"
   select_cust_worker_img:
     title: "Specify a custom image ID for worker node?"
     description: "Check this box to specify an image ID rather than select from the image list"
@@ -191,7 +191,7 @@ variables:
     description: "Compute image for the Worker Nodes"
     title: "Worker Nodes Image"
     visible:
-      not: 
+      not:
         - select_cust_worker_img
   worker_shape:
     type: oci:core:instanceshape:name
@@ -209,10 +209,16 @@ variables:
     title: "Worker Node number of CPUs (cores)"
     description: "You can customize the number of CPU cores to a flexible shape."
     visible:
-      and:
+      - or:
         - eq:
-          - worker_shape 
-          - "VM.Standard.E3.Flex"
+            - instance_shape
+            - "VM.Standard.E3.Flex"
+        - eq:
+            - instance_shape
+            - "VM.Standard.E4.Flex"
+        - eq:
+            - instance_shape
+            - "VM.Optimized3.Flex"
   worker_ram:
     type: integer
     minimum: 1
@@ -221,10 +227,16 @@ variables:
     title: "Worker Node memory (GB)"
     description: "You can customize the amount of memory allocated to a flexible shape."
     visible:
-      and:
+      - or:
         - eq:
-          - worker_shape 
-          - "VM.Standard.E3.Flex"
+            - instance_shape
+            - "VM.Standard.E3.Flex"
+        - eq:
+            - instance_shape
+            - "VM.Standard.E4.Flex"
+        - eq:
+            - instance_shape
+            - "VM.Optimized3.Flex"
   worker_min:
     type: integer
     minimum: 0
@@ -242,7 +254,7 @@ variables:
   worker_use_scratch:
     title: "Worker Node use local scratch storage - choose DenseIO shape"
     type: boolean
-    default: false    
+    default: false
   env_name:
     type: string
     title: "Environment Name"
