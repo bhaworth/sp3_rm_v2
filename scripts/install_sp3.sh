@@ -43,6 +43,7 @@ sudo chown root:root /data/images/*.img
 
 # Get kraken DB
 
+sudo mkdir -p /data/databases/kraken2
 tar -xavf /tmp/minikraken2_v2_8GB_201904.tgz -C /data/databases/kraken2
 sudo chown -R root:root /data/databases/kraken2/*
 rm /tmp/minikraken2_v2_8GB_201904.tgz
