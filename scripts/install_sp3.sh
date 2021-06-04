@@ -30,13 +30,22 @@ echo "---Finished /home/ubuntu/sp3/sp3doc/install-basic.bash"
 # Get pipelines from Object Storage
 echo "---Downloading pipelines from object storage"
 
-oci os object get -bn artic_images --name artic-ncov2019-illumina.sif --file /tmp/artic-ncov2019-illumina.sif --auth instance_principal
-oci os object get -bn artic_images --name artic-ncov2019-nanopore.sif --file /tmp/artic-ncov2019-nanopore.sif --auth instance_principal
+oci os object bulk-download -bn artic_images --download-dir /tmp --overwrite --auth instance_principal
 
 # Move pipeline images to /data
 
 sudo mv /tmp/*.sif /data/images/
+sudo mv /tmp/*.simg /data/images/
+sudo mv /tmp/*.img /data/images/
 sudo chown root:root /data/images/*.sif
+sudo chown root:root /data/images/*.simg
+sudo chown root:root /data/images/*.img
+
+# Get kraken DB
+
+tar -xavf minikraken2_v2_8GB_201904.tgz -C /data/databases/kraken2
+sudo chown -R root:root /data/databases/kraken2/*
+rm minikraken2_v2_8GB_201904.tgz
 
 # Create samples directory
 
