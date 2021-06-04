@@ -50,9 +50,9 @@ oci os object bulk-download -bn 48_samples --download-dir /data/inputs/uploads/o
 sudo chown -R root:root /data/inputs/uploads/oxforduni/210204_M01746_0015_000000000-JHB5M
 
 # Get / extract 1000 samples from Object Storage
-if [[ ${Sp3_deploy_1k} ]];
+if ${Sp3_deploy_1k}
 then
-    echo "---Downloading 1000 samples from object storage"
+    echo "---Sp3_deploy_1k was ${Sp3_deploy_1k}.... downloading 1000 samples from object storage"
     sudo mkdir /data/inputs/uploads/oxforduni/2021-04-06-1000_samples
     sudo chown ubuntu:ubuntu /data/inputs/uploads/oxforduni/2021-04-06-1000_samples
     oci os object bulk-download -bn 1000_samples --download-dir /data/inputs/uploads/oxforduni/2021-04-06-1000_samples --overwrite --auth instance_principal
