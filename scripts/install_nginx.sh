@@ -82,12 +82,14 @@ oci secrets secret-bundle get \
  --raw-output \
  --auth instance_principal \
  --secret-id ${Sp3dev_ml_ssl_secret_id} \
+--version-number 2 \
  --query "data.\"secret-bundle-content\".content" | base64 --decode > /home/ubuntu/.ssh/letsencrypt_fullchain.pem
 
 oci secrets secret-bundle get \
  --raw-output \
  --auth instance_principal \
  --secret-id ${Sp3dev_ml_priv_secret_id} \
+ --version-number 2 \
  --query "data.\"secret-bundle-content\".content" | base64 --decode > /home/ubuntu/.ssh/letsencrypt_privkey.pem
 
 # Put Let's Encrypt certs in place
