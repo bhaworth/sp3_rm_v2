@@ -288,11 +288,11 @@ variables:
     type: boolean
     default: true
   install_certs:
-    title: "Install sp3dev.ml certificates?"
+    title: "Install dev.gpas.world certificates?"
     type: boolean
     default: true
   create_dns:
-    title: "Create DNS record in oci.sp3dev.ml?"
+    title: "Create DNS record in dev.gpas.world?"
     type: boolean
     default: true
   deploy_1k:
