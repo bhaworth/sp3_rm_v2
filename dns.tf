@@ -3,7 +3,7 @@ resource "oci_dns_rrset" "lb_a_record" {
 
   domain          = "${local.Sp3_env_name}.${local.Sp3_dns_suffix}"
   rtype           = "A"
-  zone_name_or_id = local.Sp3dev_ml_dns_zone_id
+  zone_name_or_id = local.Gpas_world_dns_zone_id
   items {
     domain = "${local.Sp3_env_name}.${local.Sp3_dns_suffix}"
     rtype  = "A"
@@ -19,7 +19,7 @@ resource "oci_dns_rrset" "bastion_a_record" {
 
   domain          = "bastion.${local.Sp3_env_name}.${local.Sp3_dns_suffix}"
   rtype           = "A"
-  zone_name_or_id = local.Sp3dev_ml_dns_zone_id
+  zone_name_or_id = local.Gpas_world_dns_zone_id
   items {
     domain = "bastion.${local.Sp3_env_name}.${local.Sp3_dns_suffix}"
     rtype  = "A"
