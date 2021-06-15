@@ -1,53 +1,15 @@
 #!/bin/bash
 
-if [[ ${install_certs} ]]; then
+if ${install_certs}; then
     echo "Installing certs..."
 else
     echo "Exiting - certs not to be installed"
     exit
 fi
 
-
-# sudo apt install nginx -y
-
-# sudo mkdir -p /var/www/oci.sp3dev.ml/html
-# sudo chown -R ubuntu:ubuntu /var/www/oci.sp3dev.ml/html
-# sudo chmod 755 /var/www/oci.sp3dev.ml/html
-
-# cat << EOF | sudo tee -a /var/www/oci.sp3dev.ml/html/index.html
-# <html>
-#     <head>
-#         <title>Welcome to ${Sp3_env_name}.oci.sp3dev.ml!</title>
-#     </head>
-#     <body>
-#         <h1>Success!  The ${Sp3_env_name}.oci.sp3dev.ml server block is working!</h1>
-#     </body>
-# </html>
-# EOF
-
-# cat << EOF | sudo tee -a /etc/nginx/sites-available/oci.sp3dev.ml
-# server {
-#   listen 443 ssl;
-#   server_name *.oci.sp3dev.ml;
-
-#   ssl_certificate /etc/letsencrypt/live/oci.sp3dev.ml/fullchain.pem;
-#   ssl_certificate_key /etc/letsencrypt/live/oci.sp3dev.ml/privkey.pem;
-#   include /etc/letsencrypt/options-ssl-nginx.conf;
-#   ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
-
-#   root /var/www/oci.sp3dev.ml/html;
-#   index index.html;
-#   location / {
-#     try_files \$uri \$uri/ =404;
-#   }
-# }
-# EOF
-
-# sudo ln -s /etc/nginx/sites-available/oci.sp3dev.ml /etc/nginx/sites-enabled/
-
 # Let's encrypt
 
-sudo mkdir -p /etc/letsencrypt/live/oci.sp3dev.ml
+sudo mkdir -p /etc/letsencrypt/live/dev.gpas.world
 
 cat << EOF | sudo tee -a /etc/letsencrypt/options-ssl-nginx.conf
 # This file contains important security parameters. If you modify this file
@@ -76,25 +38,25 @@ ssbzSibBsu/6iGtCOGEoXJf//////////wIBAg==
 -----END DH PARAMETERS-----
 EOF
 
-# Pull the Let's Encrypt certificates for *.oci.sp3dev.ml from Vault
+# Pull the Let's Encrypt certificates for *.dev.gpas.world from Vault
 
 oci secrets secret-bundle get \
  --raw-output \
  --auth instance_principal \
- --secret-id ${Sp3dev_ml_ssl_secret_id} \
+ --secret-id ${Gpas_world_ssl_secret_id} \
  --query "data.\"secret-bundle-content\".content" | base64 --decode > /home/ubuntu/.ssh/letsencrypt_fullchain.pem
 
 oci secrets secret-bundle get \
  --raw-output \
  --auth instance_principal \
- --secret-id ${Sp3dev_ml_priv_secret_id} \
+ --secret-id ${Gpas_world_priv_secret_id} \
  --query "data.\"secret-bundle-content\".content" | base64 --decode > /home/ubuntu/.ssh/letsencrypt_privkey.pem
 
 # Put Let's Encrypt certs in place
-sudo cp /home/ubuntu/.ssh/letsencrypt_*.pem /etc/letsencrypt/live/oci.sp3dev.ml/
-sudo chown root:root /etc/letsencrypt/live/oci.sp3dev.ml/*
-sudo chmod 644 /etc/letsencrypt/live/oci.sp3dev.ml/*
-sudo mv /etc/letsencrypt/live/oci.sp3dev.ml/letsencrypt_fullchain.pem /etc/letsencrypt/live/oci.sp3dev.ml/fullchain.pem
-sudo mv /etc/letsencrypt/live/oci.sp3dev.ml/letsencrypt_privkey.pem /etc/letsencrypt/live/oci.sp3dev.ml/privkey.pem
+sudo cp /home/ubuntu/.ssh/letsencrypt_*.pem /etc/letsencrypt/live/dev.gpas.world/
+sudo chown root:root /etc/letsencrypt/live/dev.gpas.world/*
+sudo chmod 644 /etc/letsencrypt/live/dev.gpas.world/*
+sudo mv /etc/letsencrypt/live/dev.gpas.world/letsencrypt_fullchain.pem /etc/letsencrypt/live/dev.gpas.world/fullchain.pem
+sudo mv /etc/letsencrypt/live/dev.gpas.world/letsencrypt_privkey.pem /etc/letsencrypt/live/dev.gpas.world/privkey.pem
 
 # sudo systemctl restart nginx.service

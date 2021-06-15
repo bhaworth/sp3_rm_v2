@@ -19,7 +19,7 @@ resource "oci_load_balancer_load_balancer" "sp3_loadbalancer" {
 
 locals {
   Sp3_lb_public_ip = lookup(oci_load_balancer_load_balancer.sp3_loadbalancer.ip_address_details[0], "ip_address")
-  Sp3_lb_url = var.create_dns ? "https://${local.Sp3_env_name}.oci.sp3dev.ml" : format("http://%s", local.Sp3_lb_public_ip)
+  Sp3_lb_url = var.create_dns ? "https://${local.Sp3_env_name}.${local.Sp3_dns_suffix}" : format("http://%s", local.Sp3_lb_public_ip)
 }
 output "sp3_loadbalancer_url" {
   value = local.Sp3_lb_url

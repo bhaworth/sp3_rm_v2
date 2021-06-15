@@ -40,8 +40,9 @@ locals {
   compute_flexible_shapes  = ["VM.Standard.E3.Flex"]
   Sp3_deploy_id            = random_string.deploy_id.result
   Sp3_gitrepo_secret_id    = "ocid1.vaultsecret.oc1.uk-london-1.amaaaaaahe4ejdia3ejrsbqkv6iz2ipwngjmteeduitufuu7u35sgxrx7wna"
-  Sp3dev_ml_ssl_secret_id  = "ocid1.vaultsecret.oc1.uk-london-1.amaaaaaahe4ejdiae2k77jlwnvi4h2fh4siah7xmvp724ljzhliireq4xyua"
-  Sp3dev_ml_priv_secret_id = "ocid1.vaultsecret.oc1.uk-london-1.amaaaaaahe4ejdiazs7ixckx2efzk7ew6xttvaglh3t2itzpxsmadrzx5qjq"
-  Sp3dev_ml_dns_zone_id    = "ocid1.dns-zone.oc1..a17008280ea14d00bda53f8202a3ed5c"
+  Gpas_world_ssl_secret_id  = "ocid1.vaultsecret.oc1.uk-london-1.amaaaaaahe4ejdiaepnu52uznkweta4bkiqqdptincfh3zw5uubmfgxynxdq"
+  Gpas_world_priv_secret_id = "ocid1.vaultsecret.oc1.uk-london-1.amaaaaaahe4ejdiap77sz5c6bx4eiremliirileqdpzs4neizp5buxprsu3a"
+  Gpas_world_dns_zone_id    = "ocid1.dns-zone.oc1..0543d2fb4ca04efebe6d9f2d97e63c9b"
   Sp3dev_sandbox_cid       = "ocid1.compartment.oc1..aaaaaaaao4kpjckz2pjmlict2ssrnx45ims7ttvxghlluo2tcwv6pgfdlepq"
+  Sp3_dns_suffix           = "dev.gpas.world"
 }

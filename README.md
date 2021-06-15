@@ -4,7 +4,7 @@ The Terraform and Shell scripts within this repository facilitate the build out 
 ## Resource Manager Files
 The `schema.yaml` file defines the Variable Input/Capture screen within the Resource Manager stack.  It is used to allow dropdown selection of compartments, shapes, ADs and so on.  It also applies verification of inputs and optional variables to be set. The file also allows for capture of information for the worker nodes that the head node will build out.  These details are not used by Terraform other than to input in to the stack_info.json file that is injected in to the head node, together with other details about the stack.
 
-The stack also gives the user the option to disable the default behaviour of creating a dedicated compartment for all resources within the deployment.  This compartment is created under the compartment selected within the stack config.  Other options include deploying a sample nginx HTTPS server with DNS name in oci.sp3dev.ml.
+The stack also gives the user the option to disable the default behaviour of creating a dedicated compartment for all resources within the deployment.  This compartment is created under the compartment selected within the stack config.  Other options include deploying a sample nginx HTTPS server with DNS name in dev.gpas.world.
 
 Upon completion of the deployment, an Application Information tab will be shown within the Stack.  The Public IP of the Bastion as well as the Private IP of the Head Node will be displayed here.  The deployment ID will also be shown - this is included in almost all resource names and is a random 5 character lower case string to help people identify differing stack deployments, beyond the optional environment name and user defined name prefix.
 ## Terraform Files
@@ -16,7 +16,7 @@ Upon completion of the deployment, an Application Information tab will be shown 
 - `hn_nsg.tf` creates the Network Security Group for the Head Node
 - `datasources.tf` is used for specific functions and data sources within Terraform
 - `iam.tf` creates a dynamic group and policy to allow OCI CLI operations from the Head Node.  Optionally (default = true) creates a new compartment to house all the stack resources
-- `dns.tf` creates an entry in the test domain oci.sp3dev.ml for the load balancer public IP
+- `dns.tf` creates an entry in the test domain `dev.gpas.world` for the load balancer public IP
 
 ## Cloud Init Files
 The `scripts` directory contains the scripts and configuration for Cloud Init.
@@ -62,4 +62,4 @@ The `scripts` directory contains the scripts and configuration for Cloud Init.
 - Load Balancer OCID
 - Worker Node details captured in Stack Variables screen
 
-`install_nginx.sh` will, if the option is selected in the stack, pull the wildcard certificate for .oci.sp3dev.ml from the OCI vault secret store and deploy to the Head Node
+`install_nginx.sh` will, if the option is selected in the stack, pull the wildcard certificate for .dev.gpas.world from the OCI vault secret store and deploy to the Head Node
