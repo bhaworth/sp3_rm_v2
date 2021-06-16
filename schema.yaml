@@ -41,6 +41,8 @@ variableGroups:
       - ${worker_min}
       - ${worker_max}
       - ${worker_use_scratch}
+      - ${worker_timeout}
+      - ${worker_max_create}
   - title: "Optional Settings"
     variables:
       - ${hn_boot_size}
@@ -250,6 +252,7 @@ variables:
     default: 4
     title: "Worker co-creation rate"
     description: "Maximum number of worker nodes to be created simultaneously"
+    required: true
   worker_use_scratch:
     title: "Worker Node use local scratch storage - choose DenseIO shape"
     type: boolean
