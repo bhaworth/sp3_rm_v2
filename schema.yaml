@@ -239,6 +239,17 @@ variables:
     required: true
     title: "Maximum number of worker nodes"
     description: "Maximum is 100 (Minimum 0 - Max must be >= Min"
+  worker_timeout:
+    type: integer
+    default: 30
+    title: "Timeout for worker nodes (minutes)"
+    description: "The time, in minutes, that a node must be idle for before being terminated"
+    required: true
+  worker_max_create:
+    type: integer
+    default: 4
+    title: "Worker co-creation rate"
+    description: "Maximum number of worker nodes to be created simultaneously"
   worker_use_scratch:
     title: "Worker Node use local scratch storage - choose DenseIO shape"
     type: boolean

@@ -13,6 +13,8 @@
         "worker_ram" : ${worker_ram},  
         "worker_min" : ${worker_min},
         "worker_max" : ${worker_max},
-        "worker_use_scratch" : ${worker_use_scratch}
+        "worker_use_scratch" : ${worker_use_scratch},
+        "worker_timeout" : ${worker_timeout},
+        "worker_max_create" : ${worker_max_create}
     }
 }
