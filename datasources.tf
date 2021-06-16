@@ -79,6 +79,8 @@ data "template_file" "stack_info" {
     worker_min         = var.worker_min
     worker_max         = var.worker_max
     worker_use_scratch = var.worker_use_scratch
+    worker_timeout     = var.worker_timeout
+    worker_max_create  = var.worker_max_create
   }
 }
 
