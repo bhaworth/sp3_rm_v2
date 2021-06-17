@@ -22,11 +22,11 @@ write_files:
     encoding: "gzip+base64"
     content: |
       ${install_sp3_sh_content}
-  - path: "/tmp/inject_pub_keys.sh"
-    permissions: "0777"
-    encoding: "gzip+base64"
-    content: |
-      ${inject_pub_keys_sh_content}
+  # - path: "/tmp/inject_pub_keys.sh"
+  #   permissions: "0777"
+  #   encoding: "gzip+base64"
+  #   content: |
+  #     ${inject_pub_keys_sh_content}
   - path: "/tmp/install_nginx.sh"
     permissions: "0777"
     encoding: "gzip+base64"
@@ -44,8 +44,8 @@ runcmd:
  - echo "Finished ubuntu user script."
  - echo "Move stack_info.json..."
  - mv /tmp/stack_info.json /home/ubuntu/stack_info.json
- - echo "Running inject pub keys script..."
- - sudo -i -H -u ubuntu bash /tmp/inject_pub_keys.sh
+#  - echo "Running inject pub keys script..."
+#  - sudo -i -H -u ubuntu bash /tmp/inject_pub_keys.sh
  - echo "Running install_nginx certs..."
  - sudo -i -H -u ubuntu bash /tmp/install_nginx.sh
  - echo "Running install SP3 script..."
