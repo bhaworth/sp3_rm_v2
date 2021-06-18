@@ -37,7 +37,7 @@ resource "oci_core_instance" "Sp3Bastion" {
   }
   metadata = {
     ssh_authorized_keys = local.Sp3_ssh_key
-    user_data           = data.template_cloudinit_config.bastion.rendered
+    # user_data           = data.template_cloudinit_config.bastion.rendered
   }
 
   extended_metadata = {
