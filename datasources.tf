@@ -29,23 +29,24 @@ data "template_file" "headnode_cloud_init" {
   }
 }
 
-data "template_cloudinit_config" "bastion" {
-  gzip          = true
-  base64_encode = true
+# data "template_cloudinit_config" "bastion" {
+#   gzip          = true
+#   base64_encode = true
 
-  part {
-    filename     = "cloud-config.yaml"
-    content_type = "text/cloud-config"
-    content      = data.template_file.bastion_cloud_init.rendered
-  }
-}
-data "template_file" "bastion_cloud_init" {
-  template = file("${path.module}/scripts/bastion-cloud-config.template.yaml")
+#   part {
+#     filename     = "cloud-config.yaml"
+#     content_type = "text/cloud-config"
+#     content      = data.template_file.bastion_cloud_init.rendered
+#   }
+# }
 
-  vars = {
+# data "template_file" "bastion_cloud_init" {
+#   template = file("${path.module}/scripts/bastion-cloud-config.template.yaml")
+
+#   vars = {
    
-  }
-}
+#   }
+# }
 
 data "template_file" "bootstrap_root" {
   template = file("${path.module}/scripts/bootstrap_root.sh")
