@@ -93,9 +93,9 @@ data "template_file" "install_sp3" {
   }
 }
 
-data "template_file" "inject_pub_keys" {
-  template = file("${path.module}/scripts/inject_pub_keys.sh")
-}
+# data "template_file" "inject_pub_keys" {
+#   template = file("${path.module}/scripts/inject_pub_keys.sh")
+# }
 
 data "template_file" "install_nginx" {
   template = file("${path.module}/scripts/install_nginx.sh")
