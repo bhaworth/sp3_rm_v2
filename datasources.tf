@@ -24,7 +24,7 @@ data "template_file" "headnode_cloud_init" {
     bootstrap_ubuntu_sh_content = base64gzip(data.template_file.bootstrap_ubuntu.rendered)
     stack_info_content          = base64gzip(data.template_file.stack_info.rendered)
     install_sp3_sh_content      = base64gzip(data.template_file.install_sp3.rendered)
-    inject_pub_keys_sh_content  = base64gzip(data.template_file.inject_pub_keys.rendered)
+    # inject_pub_keys_sh_content  = base64gzip(data.template_file.inject_pub_keys.rendered)
     install_nginx_sh_content    = base64gzip(data.template_file.install_nginx.rendered)
   }
 }
@@ -42,9 +42,9 @@ data "template_cloudinit_config" "bastion" {
 data "template_file" "bastion_cloud_init" {
   template = file("${path.module}/scripts/bastion-cloud-config.template.yaml")
 
-  vars = {
-    inject_pub_keys_sh_content = base64gzip(data.template_file.inject_pub_keys.rendered)
-  }
+  # vars = {
+  #   inject_pub_keys_sh_content = base64gzip(data.template_file.inject_pub_keys.rendered)
+  # }
 }
 
 data "template_file" "bootstrap_root" {
