@@ -42,9 +42,9 @@ data "template_cloudinit_config" "bastion" {
 data "template_file" "bastion_cloud_init" {
   template = file("${path.module}/scripts/bastion-cloud-config.template.yaml")
 
-  # vars = {
-  #   inject_pub_keys_sh_content = base64gzip(data.template_file.inject_pub_keys.rendered)
-  # }
+  vars = {
+   
+  }
 }
 
 data "template_file" "bootstrap_root" {

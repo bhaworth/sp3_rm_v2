@@ -1,6 +1,6 @@
 #cloud-config
 
-# write_files:
+write_files:
 # # setup scripts
 #   - path: "/tmp/inject_pub_keys.sh"
 #     permissions: "0777"
@@ -8,7 +8,7 @@
 #     content: |
 #       ${inject_pub_keys_sh_content}
 
-# runcmd:
+runcmd:
 #  - echo "Set permissions on scripts to run as ubuntu user."
 #  - chown ubuntu:ubuntu /tmp/inject_pub_keys.sh
 #  - echo "Running inject pub keys script..."
