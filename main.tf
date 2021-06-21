@@ -40,6 +40,7 @@ resource "oci_core_instance" "Sp3Bastion" {
     # user_data           = data.template_cloudinit_config.bastion.rendered
   }
 
+  defined_tags = { "workload.server-type" = "Bastion" }
   extended_metadata = {
     tenancy_id    = var.tenancy_ocid
     deployment_id = local.Sp3_deploy_id
@@ -97,6 +98,8 @@ resource "oci_core_instance" "Sp3Headnode" {
     ssh_authorized_keys = local.Sp3_ssh_key
     user_data           = data.template_cloudinit_config.headnode.rendered
   }
+
+  defined_tags = { "workload.server-type" = "Headnode" }
   extended_metadata = {
     tenancy_id    = var.tenancy_ocid
     deployment_id = local.Sp3_deploy_id
