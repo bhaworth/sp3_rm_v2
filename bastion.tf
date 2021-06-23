@@ -27,5 +27,5 @@ resource "oci_bastion_session" "sp3_hn_session" {
 }
 
 output "bastion_connect_string" {
-    value = oci_bastion_session.sp3_hn_session.ssh_metadata
+    value = oci_bastion_session.sp3_hn_session.ssh_metadata["command"]
 }
