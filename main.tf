@@ -137,7 +137,7 @@ locals {
 
 resource time_sleep wait_headnode_plugins {
   depends_on        = [oci_core_instance.Sp3Headnode]
-  create_duration   = "600s"
+  create_duration   = "5m"
 }
 
 output "sp3headnodePrivateIP" {
