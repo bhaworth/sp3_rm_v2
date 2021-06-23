@@ -1,6 +1,6 @@
 # ------ Provider
 provider "oci" {
-  region  = var.region
+  region = var.region
   # version = "4.20.0"
 }
 
@@ -15,64 +15,65 @@ locals {
   is_flexible_headnode_shape = contains(local.compute_flexible_shapes, local.Sp3_headnode_shape)
 }
 
-/* # ------ Create Bastion Instance
-resource "oci_core_instance" "Sp3Bastion" {
-  # Required
-  compartment_id = local.Sp3_cid
-  shape          = local.Sp3_bastion_shape
-  # Optional
-  display_name        = "${local.Sp3_env_name}-bastion"
-  availability_domain = local.Sp3_ad
-  agent_config {
-    # Optional
-  }
-  create_vnic_details {
-    # Required
-    subnet_id = local.Pubsn001_id
-    # Optional
-    assign_public_ip       = true
-    display_name           = "${local.Sp3_env_name}-bastion vnic 00"
-    hostname_label         = "${local.Sp3_env_name}-bastion"
-    skip_source_dest_check = "false"
-  }
-  metadata = {
-    ssh_authorized_keys = local.Sp3_ssh_key
-    # user_data           = data.template_cloudinit_config.bastion.rendered
-  }
+# # ------ Create Bastion Instance
+# resource "oci_core_instance" "Sp3Bastion" {
+#   # Required
+#   compartment_id = local.Sp3_cid
+#   shape          = local.Sp3_bastion_shape
+#   # Optional
+#   display_name        = "${local.Sp3_env_name}-bastion"
+#   availability_domain = local.Sp3_ad
+#   agent_config {
+#     # Optional
+#   }
+#   create_vnic_details {
+#     # Required
+#     subnet_id = local.Pubsn001_id
+#     # Optional
+#     assign_public_ip       = true
+#     display_name           = "${local.Sp3_env_name}-bastion vnic 00"
+#     hostname_label         = "${local.Sp3_env_name}-bastion"
+#     skip_source_dest_check = "false"
+#   }
+#   metadata = {
+#     ssh_authorized_keys = local.Sp3_ssh_key
+#     # user_data           = data.template_cloudinit_config.bastion.rendered
+#   }
 
-  extended_metadata = {
-    tenancy_id    = var.tenancy_ocid
-    deployment_id = local.Sp3_deploy_id
-  }
+#   defined_tags = { "workload.server-type" = "Bastion" }
+#   extended_metadata = {
+#     tenancy_id    = var.tenancy_ocid
+#     deployment_id = local.Sp3_deploy_id
+#   }
 
-  dynamic "shape_config" {
-    for_each = local.is_flexible_bastion_shape ? [1] : []
-    content {
-      ocpus         = var.bastion_ocpus
-      memory_in_gbs = var.bastion_ram
-    }
-  }
+#   dynamic "shape_config" {
+#     for_each = local.is_flexible_bastion_shape ? [1] : []
+#     content {
+#       ocpus         = var.bastion_ocpus
+#       memory_in_gbs = var.bastion_ram
+#     }
+#   }
 
-  source_details {
-    source_id   = local.Sp3_bastion_image
-    source_type = "image"
-    # Optional
-    boot_volume_size_in_gbs = var.bastion_boot_size
-    #        kms_key_id              = 
-  }
-  preserve_boot_volume = false
-}
+#   source_details {
+#     source_id   = local.Sp3_bastion_image
+#     source_type = "image"
+#     # Optional
+#     boot_volume_size_in_gbs = var.bastion_boot_size
+#     #        kms_key_id              = 
+#   }
+#   preserve_boot_volume = false
+# }
 
-locals {
-  Sp3Bastion_id         = oci_core_instance.Sp3Bastion.id
-  Sp3Bastion_public_ip  = oci_core_instance.Sp3Bastion.public_ip
-  Sp3Bastion_private_ip = oci_core_instance.Sp3Bastion.private_ip
-  sp3_bastion_connect   = var.create_dns ? "bastion.${local.Sp3_env_name}.${local.Sp3_dns_suffix}" : local.Sp3Bastion_public_ip
-}
+# locals {
+#   Sp3Bastion_id         = oci_core_instance.Sp3Bastion.id
+#   Sp3Bastion_public_ip  = oci_core_instance.Sp3Bastion.public_ip
+#   Sp3Bastion_private_ip = oci_core_instance.Sp3Bastion.private_ip
+#   sp3_bastion_connect   = var.create_dns ? "bastion.${local.Sp3_env_name}.${local.Sp3_dns_suffix}" : local.Sp3Bastion_public_ip
+# }
 
-output "sp3_bastion" {
-  value = local.sp3_bastion_connect
-} */
+# output "sp3_bastion" {
+#   value = local.sp3_bastion_connect
+# }
 
 # ------ Create Head Node Instance
 resource "oci_core_instance" "Sp3Headnode" {
@@ -105,6 +106,8 @@ resource "oci_core_instance" "Sp3Headnode" {
     ssh_authorized_keys = local.Sp3_ssh_key
     user_data           = data.template_cloudinit_config.headnode.rendered
   }
+
+  defined_tags = { "workload.server-type" = "Headnode" }
   extended_metadata = {
     tenancy_id    = var.tenancy_ocid
     deployment_id = local.Sp3_deploy_id
@@ -153,6 +156,7 @@ resource "oci_core_volume" "Data" {
   display_name = "${local.Sp3_env_name}-data"
   size_in_gbs  = var.hn_data_size
   vpus_per_gb  = var.use_hp_vol ? "20" : "10"
+  depends_on   = [time_sleep.wait_compartment]
 }
 
 locals {
@@ -168,6 +172,7 @@ resource "oci_core_volume" "Work" {
   display_name = "${local.Sp3_env_name}-work"
   size_in_gbs  = var.hn_work_size
   vpus_per_gb  = var.use_hp_vol ? "20" : "10"
+  depends_on   = [time_sleep.wait_compartment]
 }
 
 locals {
