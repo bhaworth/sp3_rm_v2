@@ -96,6 +96,7 @@ variables:
     type: string
     title: "Allowed CIDR List for access to Bastion"
     description: "The IP addresses or address ranges that you want to allow to connect to target resources through SSH connections created through sessions hosted by this bastion."
+    required: true
   # bastion_image:
   #   type: oci:core:image:id
   #   dependsOn:
