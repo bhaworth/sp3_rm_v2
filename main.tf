@@ -93,6 +93,14 @@ resource "oci_core_instance" "Sp3Headnode" {
     nsg_ids                = [local.hn_nsg_id]
     private_ip             = "10.0.1.2"
   }
+  agent_config {
+		is_management_disabled = "false"
+		is_monitoring_disabled = "false"
+		plugins_config {
+			desired_state = "ENABLED"
+			name = "Bastion"
+		}
+	}
   metadata = {
     ssh_authorized_keys = local.Sp3_ssh_key
     user_data           = data.template_cloudinit_config.headnode.rendered
@@ -125,6 +133,11 @@ locals {
   Sp3Headnode_id         = oci_core_instance.Sp3Headnode.id
   Sp3Headnode_public_ip  = oci_core_instance.Sp3Headnode.public_ip
   Sp3Headnode_private_ip = oci_core_instance.Sp3Headnode.private_ip
+}
+
+resource time_sleep wait_headnode_plugins {
+  depends_on        = [oci_core_instance.Sp3Headnode]
+  create_duration   = "600s"
 }
 
 output "sp3headnodePrivateIP" {
