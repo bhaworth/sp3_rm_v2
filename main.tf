@@ -1,7 +1,7 @@
 # ------ Provider
 provider "oci" {
-  region  = var.region
-  version = "4.20.0"
+  region = var.region
+  # version = "4.20.0"
 }
 
 locals {
@@ -143,6 +143,7 @@ resource "oci_core_volume" "Data" {
   display_name = "${local.Sp3_env_name}-data"
   size_in_gbs  = var.hn_data_size
   vpus_per_gb  = var.use_hp_vol ? "20" : "10"
+  depends_on   = [time_sleep.wait_compartment]
 }
 
 locals {
@@ -158,6 +159,7 @@ resource "oci_core_volume" "Work" {
   display_name = "${local.Sp3_env_name}-work"
   size_in_gbs  = var.hn_work_size
   vpus_per_gb  = var.use_hp_vol ? "20" : "10"
+  depends_on   = [time_sleep.wait_compartment]
 }
 
 locals {

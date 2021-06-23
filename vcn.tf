@@ -15,6 +15,7 @@ resource "oci_core_vcn" "Sp3_VCN" {
   # Optional
   dns_label    = local.Sp3_deploy_id
   display_name = local.Sp3_env_name
+  depends_on   = [time_sleep.wait_compartment]
 }
 
 # ------ Create Internet Gateway
