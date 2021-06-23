@@ -18,9 +18,9 @@ variableGroups:
       - ${env_name}
       - ${specify_prefix}
       - ${name_prefix}
-   - title: "Bastion Config"
-     variables:
-        - $(bastion_client_cidr_block_allow_list)
+  - title: "Bastion Config"
+    variables:
+      - $(bastion_client_cidr_block_allow_list)
   #     - ${bastion_image}
   #     - ${bastion_shape}
   #     - ${bastion_ocpus}
