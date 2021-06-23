@@ -50,6 +50,11 @@ resource "oci_identity_compartment" "sp3_child_comp" {
   name           = "deployment_${local.Sp3_env_name}"
 }
 
+resource time_sleep wait_compartment {
+  depends_on        = [oci_identity_compartment.sp3_child_comp]
+  create_duration   = "30s"
+}
+
 locals { 
   # If 'create child compartment' is true, use the new compartment otherwise use the parent
   Sp3_cid = var.create_child_comp ? oci_identity_compartment.sp3_child_comp[0].id : var.compartment_ocid
