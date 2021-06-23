@@ -5,7 +5,7 @@ resource "oci_bastion_bastion" "sp3_bastion" {
   compartment_id               = local.Sp3_cid
   target_subnet_id             = local.Privsn001_id
   name                         = "${local.Sp3_deploy_id}Bastion"
-  client_cidr_block_allow_list = var.bastion_client_cidr_block_allow_list
+  client_cidr_block_allow_list = ["0.0.0.0/0"]
 }
 
 resource "oci_bastion_session" "sp3_hn_session" {
