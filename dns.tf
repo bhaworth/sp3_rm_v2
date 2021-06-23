@@ -14,7 +14,7 @@ resource "oci_dns_rrset" "lb_a_record" {
 
 }
 
-resource "oci_dns_rrset" "bastion_a_record" {
+/* resource "oci_dns_rrset" "bastion_a_record" {
   count = var.create_dns ? 1 : 0
 
   domain          = "bastion.${local.Sp3_env_name}.${local.Sp3_dns_suffix}"
@@ -29,3 +29,4 @@ resource "oci_dns_rrset" "bastion_a_record" {
   }
 
 }
+ */
