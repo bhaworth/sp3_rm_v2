@@ -4,7 +4,7 @@ resource "oci_bastion_bastion" "sp3_bastion" {
   bastion_type                 = "STANDARD"
   compartment_id               = local.Sp3_cid
   target_subnet_id             = local.Privsn001_id
-  name                         = "${local.Sp3_env_name}-bastion"
+  name                         = "${local.Sp3_deploy_id}Bastion"
   # client_cidr_block_allow_list = var.bastion_client_cidr_block_allow_list
 }
 
