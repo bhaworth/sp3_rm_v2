@@ -355,7 +355,7 @@ outputs:
     title: "URL"
     type: link
     visible: true
-  sp3_bastionbastion_connect_string:
+  bastion_connect_string:
     title: "Headnode Connection"
     type: copyableString
     visible: true
