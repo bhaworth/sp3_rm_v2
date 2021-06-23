@@ -18,12 +18,13 @@ variableGroups:
       - ${env_name}
       - ${specify_prefix}
       - ${name_prefix}
-  - title: "Bastion Config"
-    variables:
-      - ${bastion_image}
-      - ${bastion_shape}
-      - ${bastion_ocpus}
-      - ${bastion_ram}
+   - title: "Bastion Config"
+     variables:
+        - $(bastion_client_cidr_block_allow_list)
+  #     - ${bastion_image}
+  #     - ${bastion_shape}
+  #     - ${bastion_ocpus}
+  #     - ${bastion_ram}
   - title: "Head Node Config"
     variables:
       - ${headnode_image}
@@ -91,47 +92,51 @@ variables:
     required: true
     additionalProps:
       allowMultiple: true
-  bastion_image:
-    type: oci:core:image:id
-    dependsOn:
-      compartmentId: ${compartment_ocid}
-      operatingSystem: "Canonical Ubuntu"
-      operatingSystemVersion: "18.04"
-    required: true
-    description: "Compute image for the Bastion server"
-    title: "Bastion Server Image"
-  bastion_shape:
-    type: oci:core:instanceshape:name
-    dependsOn:
-      compartmentId: ${compartment_ocid}
-      imageId: ${bastion_image}
-    required: true
-    description: "Compute shape for the Bastion server"
-    title: "Bastion Server Shape"
-  bastion_ocpus:
-    type: integer
-    minimum: 1
-    maximum: 64
-    required: true
-    title: "Bastion number of CPUs (cores)"
-    description: "You can customize the number of CPU cores to a flexible shape."
-    visible:
-      and:
-        - eq:
-          - bastion_shape 
-          - "VM.Standard.E3.Flex"
-  bastion_ram:
-    type: integer
-    minimum: 1
-    maximum: 1024
-    required: true
-    title: "Bastion Server memory (GB)"
-    description: "You can customize the amount of memory allocated to a flexible shape."
-    visible:
-      and:
-        - eq:
-          - bastion_shape 
-          - "VM.Standard.E3.Flex"
+  bastion_client_cidr_block_allow_list:
+    type: string
+    title: "Allowed CIDR List for access to Bastion"
+    description: "The IP addresses or address ranges that you want to allow to connect to target resources through SSH connections created through sessions hosted by this bastion."
+  # bastion_image:
+  #   type: oci:core:image:id
+  #   dependsOn:
+  #     compartmentId: ${compartment_ocid}
+  #     operatingSystem: "Canonical Ubuntu"
+  #     operatingSystemVersion: "18.04"
+  #   required: true
+  #   description: "Compute image for the Bastion server"
+  #   title: "Bastion Server Image"
+  # bastion_shape:
+  #   type: oci:core:instanceshape:name
+  #   dependsOn:
+  #     compartmentId: ${compartment_ocid}
+  #     imageId: ${bastion_image}
+  #   required: true
+  #   description: "Compute shape for the Bastion server"
+  #   title: "Bastion Server Shape"
+  # bastion_ocpus:
+  #   type: integer
+  #   minimum: 1
+  #   maximum: 64
+  #   required: true
+  #   title: "Bastion number of CPUs (cores)"
+  #   description: "You can customize the number of CPU cores to a flexible shape."
+  #   visible:
+  #     and:
+  #       - eq:
+  #         - bastion_shape 
+  #         - "VM.Standard.E3.Flex"
+  # bastion_ram:
+  #   type: integer
+  #   minimum: 1
+  #   maximum: 1024
+  #   required: true
+  #   title: "Bastion Server memory (GB)"
+  #   description: "You can customize the amount of memory allocated to a flexible shape."
+  #   visible:
+  #     and:
+  #       - eq:
+  #         - bastion_shape 
+  #         - "VM.Standard.E3.Flex"
   headnode_image:
     type: oci:core:image:id
     dependsOn:
@@ -328,10 +333,6 @@ variables:
     type: boolean
     visible: false
 outputs:
-  sp3_bastion:
-    title: "Bastion Address"
-    type: copyableString
-    visible: true
   sp3headnodePrivateIP:
     title: "Head Node IP"
     type: copyableString
@@ -346,4 +347,8 @@ outputs:
   sp3_loadbalancer_url:
     title: "URL"
     type: link
+    visible: true
+  sp3_bastionbastion_connect_string:
+    title: "Headnode Connection"
+    type: copyableString
     visible: true

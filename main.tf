@@ -15,7 +15,7 @@ locals {
   is_flexible_headnode_shape = contains(local.compute_flexible_shapes, local.Sp3_headnode_shape)
 }
 
-# ------ Create Instance
+/* # ------ Create Bastion Instance
 resource "oci_core_instance" "Sp3Bastion" {
   # Required
   compartment_id = local.Sp3_cid
@@ -72,7 +72,7 @@ locals {
 
 output "sp3_bastion" {
   value = local.sp3_bastion_connect
-}
+} */
 
 # ------ Create Head Node Instance
 resource "oci_core_instance" "Sp3Headnode" {

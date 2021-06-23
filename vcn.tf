@@ -7,6 +7,14 @@ locals {
   Sp3_VCN_default_route_table_id   = oci_core_vcn.Sp3_VCN.default_route_table_id
 }
 
+data "oci_core_services" "sgw_services" {
+  filter {
+    name   = "name"
+    values = ["All LHR Services In Oracle Services Network"]
+    regex  = true
+  }
+}
+
 # ------ Create Virtual Cloud Network
 resource "oci_core_vcn" "Sp3_VCN" {
   # Required
@@ -43,6 +51,22 @@ resource "oci_core_nat_gateway" "Sp3Ng001" {
 
 locals {
   Sp3Ng001_id = oci_core_nat_gateway.Sp3Ng001.id
+}
+
+# ------ Create Service Gateway
+resource "oci_core_service_gateway" "Sp3_Sgw" {
+  # Required
+  compartment_id = local.Sp3_cid
+  services {
+    service_id = data.oci_core_services.sgw_services.services[0]["id"]
+  }
+  vcn_id         = local.Sp3_vcn_id
+  # Optional
+  display_name = "${local.Sp3_env_name}-sgw"
+}
+
+locals {
+  Sp3_Sgw_id = oci_core_service_gateway.Sp3_Sgw.id
 }
 
 # ------ Create Security List
@@ -141,6 +165,11 @@ resource "oci_core_route_table" "Privrt001" {
     destination       = "0.0.0.0/0"
     network_entity_id = local.Sp3Ng001_id
     description       = ""
+  }
+  route_rules {
+    destination_type  = "SERVICE_CIDR_BLOCK"
+    destination       = data.oci_core_services.sgw_services.services[0]["cidr_block"]
+    network_entity_id = oci_core_service_gateway.Sp3_Sgw.id
   }
   # Optional
   display_name = "${local.Sp3_env_name}-privrt001"
