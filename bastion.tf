@@ -24,8 +24,11 @@ resource "oci_bastion_session" "sp3_hn_session" {
   display_name           = local.Sp3_env_name
   key_type               = "PUB"
   session_ttl_in_seconds = 3600
+  depends_on = [
+    time_sleep.wait_headnode_plugins
+  ]
 }
 
 output "bastion_connect_string" {
-    value = oci_bastion_session.sp3_hn_session.ssh_metadata["command"]
+  value = oci_bastion_session.sp3_hn_session.ssh_metadata["command"]
 }
