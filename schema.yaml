@@ -93,7 +93,7 @@ variables:
     additionalProps:
       allowMultiple: true
   bastion_client_cidr_block_allow_list:
-    type: string
+    type: array
     title: "Allowed CIDR List for access to Bastion"
     description: "The IP addresses or address ranges that you want to allow to connect to target resources through SSH connections created through sessions hosted by this bastion."
     required: true
