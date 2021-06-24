@@ -21,10 +21,10 @@ variableGroups:
   - title: "Bastion Config"
     variables:
       - $(bastion_client_cidr_block_allow_list)
-  #     - ${bastion_image}
-  #     - ${bastion_shape}
-  #     - ${bastion_ocpus}
-  #     - ${bastion_ram}
+      - ${bastion_image}
+      - ${bastion_shape}
+      - ${bastion_ocpus}
+      - ${bastion_ram}
   - title: "Head Node Config"
     variables:
       - ${headnode_image}
@@ -92,58 +92,61 @@ variables:
     required: true
     additionalProps:
       allowMultiple: true
-  # bastion_client_cidr_block_allow_list:
-  #   type: array
-  #   title: "Allowed CIDR List for access to Bastion"
-  #   description: "The IP addresses or address ranges that you want to allow to connect to target resources through SSH connections created through sessions hosted by this bastion."
-  #   required: true
-  #   items:
-  #     type: string
-  #     pattern: "^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(\/([0-9]|[1-2][0-9]|3[0-2]))?$"
-  #   minItems: 1
-  #   uniqueItems: true
-  #   default: [ "0.0.0.0/0" ]
-  # bastion_image:
-  #   type: oci:core:image:id
-  #   dependsOn:
-  #     compartmentId: ${compartment_ocid}
-  #     operatingSystem: "Canonical Ubuntu"
-  #     operatingSystemVersion: "18.04"
-  #   required: true
-  #   description: "Compute image for the Bastion server"
-  #   title: "Bastion Server Image"
-  # bastion_shape:
-  #   type: oci:core:instanceshape:name
-  #   dependsOn:
-  #     compartmentId: ${compartment_ocid}
-  #     imageId: ${bastion_image}
-  #   required: true
-  #   description: "Compute shape for the Bastion server"
-  #   title: "Bastion Server Shape"
-  # bastion_ocpus:
-  #   type: integer
-  #   minimum: 1
-  #   maximum: 64
-  #   required: true
-  #   title: "Bastion number of CPUs (cores)"
-  #   description: "You can customize the number of CPU cores to a flexible shape."
-  #   visible:
-  #     and:
-  #       - eq:
-  #         - bastion_shape 
-  #         - "VM.Standard.E3.Flex"
-  # bastion_ram:
-  #   type: integer
-  #   minimum: 1
-  #   maximum: 1024
-  #   required: true
-  #   title: "Bastion Server memory (GB)"
-  #   description: "You can customize the amount of memory allocated to a flexible shape."
-  #   visible:
-  #     and:
-  #       - eq:
-  #         - bastion_shape 
-  #         - "VM.Standard.E3.Flex"
+  bastion_client_cidr_block_allow_list:
+    type: array
+    title: "Allowed CIDR List for access to Bastion"
+    description: "The IP addresses or address ranges that you want to allow to connect to target resources through SSH connections created through sessions hosted by this bastion."
+    required: false
+    visible: false
+    items:
+      type: string
+      pattern: "^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(\/([0-9]|[1-2][0-9]|3[0-2]))?$"
+    minItems: 1
+    uniqueItems: true
+    default: [ "0.0.0.0/0" ]
+  bastion_image:
+    type: oci:core:image:id
+    dependsOn:
+      compartmentId: ${compartment_ocid}
+      operatingSystem: "Canonical Ubuntu"
+      operatingSystemVersion: "18.04"
+    required: false
+    visible: false
+    description: "Compute image for the Bastion server"
+    title: "Bastion Server Image"
+  bastion_shape:
+    type: oci:core:instanceshape:name
+    dependsOn:
+      compartmentId: ${compartment_ocid}
+      imageId: ${bastion_image}
+    required: false
+    visible: false
+    description: "Compute shape for the Bastion server"
+    title: "Bastion Server Shape"
+  bastion_ocpus:
+    type: integer
+    minimum: 1
+    maximum: 64
+    required: false
+    title: "Bastion number of CPUs (cores)"
+    description: "You can customize the number of CPU cores to a flexible shape."
+    visible: false
+      # and:
+      #   - eq:
+      #     - bastion_shape 
+      #     - "VM.Standard.E3.Flex"
+  bastion_ram:
+    type: integer
+    minimum: 1
+    maximum: 1024
+    required: false
+    title: "Bastion Server memory (GB)"
+    description: "You can customize the amount of memory allocated to a flexible shape."
+    visible: false
+      # and:
+      #   - eq:
+      #     - bastion_shape 
+      #     - "VM.Standard.E3.Flex"
   headnode_image:
     type: oci:core:image:id
     dependsOn:
