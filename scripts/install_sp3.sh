@@ -29,8 +29,18 @@ echo "---Finished /home/ubuntu/sp3/sp3doc/install-basic.bash"
 
 # Get pipelines from Object Storage
 echo "---Downloading pipelines from object storage"
+COVID_ENV_VERSION=$(curl -s -L -I -o /dev/null -w '%{url_effective}' https://github.com/GenomePathogenAnalysisService/SARS-COV-2_environments/releases/latest | xargs basename)
+oci os object bulk-download -bn artic_images --download-dir /tmp --overwrite --auth instance_principal --prefix ${COVID_ENV_VERSION}
+VIRIDIAN_VERSION=$(basename /tmp/viridian* .img)
+VIRIDIAN_VERSION=${VIRIDIAN_VERSION##*_}
+cat << EOF >> /home/ubuntu/.bashrc
+ 
+# Set what version of the COVID pipeline environment we are using
+export COVID_ENV_VERSION=${COVID_ENV_VERSION}
 
-oci os object bulk-download -bn artic_images --download-dir /tmp --overwrite --auth instance_principal
+# Set what version of the viridian pipeline we are using
+export VIRIDIAN_VERSION=${VIRIDIAN_VERSION}
+EOF
 
 # Move pipeline images to /data
 
