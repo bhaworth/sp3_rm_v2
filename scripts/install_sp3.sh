@@ -42,9 +42,9 @@ EOF
 
 # Move pipeline images to /data
 
-sudo mv /tmp/*.sif /data/images/
-sudo mv /tmp/*.simg /data/images/
-sudo mv /tmp/*.img /data/images/
+sudo mv /tmp/*/*.sif /data/images/
+sudo mv /tmp/*/*.simg /data/images/
+sudo mv /tmp/*/*.img /data/images/
 sudo chown root:root /data/images/*.sif
 sudo chown root:root /data/images/*.simg
 sudo chown root:root /data/images/*.img
