@@ -34,7 +34,6 @@ oci os object bulk-download -bn artic_images --download-dir /tmp --overwrite --a
 VIRIDIAN_VERSION=$(basename /tmp/viridian* .img)
 VIRIDIAN_VERSION=${VIRIDIAN_VERSION##*_}
 cat << EOF >> /home/ubuntu/.bashrc
- 
 # Set what version of the COVID pipeline environment we are using
 export COVID_ENV_VERSION=${COVID_ENV_VERSION}
 
