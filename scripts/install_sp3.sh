@@ -29,6 +29,7 @@ echo "---Finished /home/ubuntu/sp3/sp3doc/install-basic.bash"
 
 # Get pipelines from Object Storage
 echo "---Downloading pipelines from object storage"
+oci os object bulk-download -bn artic_images --download-dir /tmp --overwrite --auth instance_principal --prefix artic-ncov2019
 COVID_ENV_VERSION=$(curl -s -L -I -o /dev/null -w '%%{url_effective}' https://github.com/GenomePathogenAnalysisService/SARS-COV-2_environments/releases/latest | xargs basename)
 oci os object bulk-download -bn artic_images --download-dir /tmp --overwrite --auth instance_principal --prefix $${COVID_ENV_VERSION}
 VIRIDIAN_VERSION=$(basename /tmp/$${COVID_ENV_VERSION}/viridian* .img | rev | cut -d '_' -f 1 | rev)
@@ -50,7 +51,7 @@ sudo chown root:root /data/images/*.simg
 sudo chown root:root /data/images/*.img
 
 # Get kraken DB
-
+oci os object get -bn artic_images --auth instance_principal --name minikraken2_v2_8GB_201904.tgz --file /tmp/minikraken2_v2_8GB_201904.tgz
 sudo mkdir -p /data/databases/kraken2
 sudo tar -xavf /tmp/minikraken2_v2_8GB_201904.tgz -C /data/databases/kraken2
 sudo chown -R root:root /data/databases/kraken2/*
