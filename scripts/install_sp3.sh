@@ -42,7 +42,7 @@ cat << EOF >> /home/ubuntu/sp3_versions.json
 EOF
 
 # Move pipeline images to /data
-
+sudo mv /tmp/artic-*.sif /data/images/
 sudo mv /tmp/*/*.sif /data/images/
 sudo mv /tmp/*/*.simg /data/images/
 sudo mv /tmp/*/*.img /data/images/
