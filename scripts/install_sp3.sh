@@ -29,7 +29,6 @@ echo "---Finished /home/ubuntu/sp3/sp3doc/install-basic.bash"
 
 # Get pipelines from Object Storage
 echo "---Downloading pipelines from object storage"
-oci os object bulk-download -bn artic_images --download-dir /tmp --overwrite --auth instance_principal --prefix artic-ncov2019
 COVID_ENV_VERSION=$(curl -s -L -I -o /dev/null -w '%%{url_effective}' https://github.com/GenomePathogenAnalysisService/SARS-COV-2_environments/releases/latest | xargs basename)
 oci os object bulk-download -bn artic_images --download-dir /tmp --overwrite --auth instance_principal --prefix $${COVID_ENV_VERSION}
 VIRIDIAN_VERSION=$(basename /tmp/$${COVID_ENV_VERSION}/viridian* .img | rev | cut -d '_' -f 1 | rev)
@@ -42,7 +41,6 @@ cat << EOF >> /home/ubuntu/sp3_versions.json
 EOF
 
 # Move pipeline images to /data
-sudo mv /tmp/artic-*.sif /data/images/
 sudo mv /tmp/*/*.sif /data/images/
 sudo mv /tmp/*/*.simg /data/images/
 sudo mv /tmp/*/*.img /data/images/
