@@ -24,6 +24,15 @@ apt update -y
 
 apt install -y jq
 
+# install docker for WTSS
+
+apt-get remove docker docker-engine docker.io
+apt install docker.io
+systemctl start docker
+systemctl enable docker
+
+usermod -aG docker ubuntu
+
 # Set sshd settings
 
 sed -i 's/#MaxStartups.*/MaxStartups 50:100:300/g' /etc/ssh/sshd_config
