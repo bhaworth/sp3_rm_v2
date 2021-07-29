@@ -143,6 +143,11 @@ resource "oci_core_route_table" "Privrt001" {
     network_entity_id = local.Sp3Ng001_id
     description       = ""
   }
+  route_rules {
+    destination       = "all-lhr-services-in-oracle-services-network"
+    destination_type  = "SERVICE_CIDR_BLOCK"
+    network_entity_id = local.sgw_id
+  }
   # Optional
   display_name = "${local.Sp3_env_name}-privrt001"
 }
@@ -193,3 +198,19 @@ locals {
   Privsn001_id          = oci_core_subnet.Privsn001.id
   Privsn001_domain_name = oci_core_subnet.Privsn001.subnet_domain_name
 }
+resource oci_core_service_gateway sgw001 {
+  compartment_id = local.Sp3_cid
+  
+  display_name = "sgw001"
+  freeform_tags = {
+  }
+  services {
+    service_id = "ocid1.service.oc1.uk-london-1.aaaaaaaatwg7f5mnzoapfunl66n2qkp4ormiykqk3hiwksum63gcyjk7ysla"
+  }
+  vcn_id = local.Sp3_vcn_id
+}
+locals {
+  sgw_id          = oci_core_service_gateway.sgw001.id
+}
+
+
